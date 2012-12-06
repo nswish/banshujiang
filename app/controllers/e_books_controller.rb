@@ -1,12 +1,12 @@
+#-*- encoding: utf-8 -*-
 class EBooksController < ApplicationController
   # GET /e_books
-  # GET /e_books.json
   def index
+		@title = '电子书(EBook)下载'
     @e_books = EBook.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @e_books }
     end
   end
 
