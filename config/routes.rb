@@ -1,4 +1,6 @@
 RailsApp::Application.routes.draw do
+  get "configinfo/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

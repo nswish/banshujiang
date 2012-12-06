@@ -1,0 +1,14 @@
+<h1>production:</h1>
+<ul>
+	<li>adapter: mysql2</li>
+	<li>encoding: utf8</li>
+	<li>reconnect: false</li>
+	<li>pool: 5</li>
+	<li>database: <%=ENV['OPENSHIFT_APP_NAME']%></li>
+	<li>username: <%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%></li>
+	<li>password: <%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%></li>
+	<li># socket:   <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%></li>
+	<li>host:     <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%></li>
+	<li>port:     <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%></li>
+</ul>
+
