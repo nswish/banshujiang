@@ -2,7 +2,7 @@
 class EBooksController < ApplicationController
   # GET /e_books
   def index
-		@title = '电子书(EBook)下载'
+    @title = '电子书(EBook)下载'
     @e_books = EBook.all
 
     respond_to do |format|
