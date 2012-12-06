@@ -1,4 +1,6 @@
 RailsApp::Application.routes.draw do
+  resources :e_books
+
   get "configinfo/index"
 
   # The priority is based upon order of creation:

@@ -1,0 +1,41 @@
+<h1>Listing e_books</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Publish data</th>
+    <th>Language</th>
+    <th>Author</th>
+    <th>Publisher</th>
+    <th>Format</th>
+    <th>Image large</th>
+    <th>Image small</th>
+    <th>Download url</th>
+    <th>Download name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @e_books.each do |e_book| %>
+  <tr>
+    <td><%= e_book.name %></td>
+    <td><%= e_book.publish_data %></td>
+    <td><%= e_book.language %></td>
+    <td><%= e_book.author %></td>
+    <td><%= e_book.publisher %></td>
+    <td><%= e_book.format %></td>
+    <td><%= e_book.image_large %></td>
+    <td><%= e_book.image_small %></td>
+    <td><%= e_book.download_url %></td>
+    <td><%= e_book.download_name %></td>
+    <td><%= link_to 'Show', e_book %></td>
+    <td><%= link_to 'Edit', edit_e_book_path(e_book) %></td>
+    <td><%= link_to 'Destroy', e_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New E book', new_e_book_path %>

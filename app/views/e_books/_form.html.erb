@@ -1,0 +1,57 @@
+<%= form_for(@e_book) do |f| %>
+  <% if @e_book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@e_book.errors.count, "error") %> prohibited this e_book from being saved:</h2>
+
+      <ul>
+      <% @e_book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :publish_data %><br />
+    <%= f.date_select :publish_data %>
+  </div>
+  <div class="field">
+    <%= f.label :language %><br />
+    <%= f.text_field :language %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </div>
+  <div class="field">
+    <%= f.label :publisher %><br />
+    <%= f.text_field :publisher %>
+  </div>
+  <div class="field">
+    <%= f.label :format %><br />
+    <%= f.text_field :format %>
+  </div>
+  <div class="field">
+    <%= f.label :image_large %><br />
+    <%= f.text_field :image_large %>
+  </div>
+  <div class="field">
+    <%= f.label :image_small %><br />
+    <%= f.text_field :image_small %>
+  </div>
+  <div class="field">
+    <%= f.label :download_url %><br />
+    <%= f.text_field :download_url %>
+  </div>
+  <div class="field">
+    <%= f.label :download_name %><br />
+    <%= f.text_field :download_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
