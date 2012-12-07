@@ -1,55 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @e_book.name %>
-</p>
-
-<p>
-  <b>Publish date:</b>
-  <%= @e_book.publish_date %>
-</p>
-
-<p>
-  <b>Language:</b>
-  <%= @e_book.language %>
-</p>
-
-<p>
-  <b>Author:</b>
-  <%= @e_book.author %>
-</p>
-
-<p>
-  <b>Publisher:</b>
-  <%= @e_book.publisher %>
-</p>
-
-<p>
-  <b>Format:</b>
-  <%= @e_book.format %>
-</p>
-
-<p>
-  <b>Image large:</b>
-  <%= @e_book.image_large %>
-</p>
-
-<p>
-  <b>Image small:</b>
-  <%= @e_book.image_small %>
-</p>
-
-<p>
-  <b>Download url:</b>
-  <%= @e_book.download_url %>
-</p>
-
-<p>
-  <b>Download name:</b>
-  <%= @e_book.download_name %>
-</p>
-
+<%=render :partial => 'single', :locals => {:e_book => @e_book} %>
 
 <%= link_to 'Edit', edit_e_book_path(@e_book) %> |
 <%= link_to 'Back', e_books_path %>
