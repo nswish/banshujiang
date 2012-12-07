@@ -1,3 +1,4 @@
+ssh 6888be2848954217bdf057055acf841f@ebook-nswish.rhcloud.com
 # Rails Sample App on OpenShift #
 Quickstart rails application for openshift.
 
