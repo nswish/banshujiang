@@ -1,4 +1,4 @@
-<%= form_for(@e_book) do |f| %>
+<%= form_for(@e_book, :html=>{:multipart=>true}) do |f| %>
   <% if @e_book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@e_book.errors.count, "error") %> prohibited this e_book from being saved:</h2>
@@ -16,8 +16,8 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :publish_data %><br />
-    <%= f.date_select :publish_data %>
+    <%= f.label :publish_year %><br />
+    <%= f.number_field :publish_year %>
   </div>
   <div class="field">
     <%= f.label :language %><br />
@@ -36,8 +36,8 @@
     <%= f.text_field :format %>
   </div>
   <div class="field">
-    <%= f.label :image_large %><br />
-    <%= f.text_field :image_large %>
+    <%= f.label :image_large_file %><br />
+    <%= f.file_field :image_large_file %>
   </div>
   <div class="field">
     <%= f.label :image_small %><br />
