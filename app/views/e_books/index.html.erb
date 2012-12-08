@@ -1,11 +1,3 @@
-<style>
-        .fontsize18 {
-                font-size:18px;
-        }
-        a {
-                font-size:14px;color:blue;
-        }
-</style>
 <% @e_books.each do |e_book| %>
 	<%= render :partial => 'single', :locals => {:e_book => e_book} %>
 <% end %>

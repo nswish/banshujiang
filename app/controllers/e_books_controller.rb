@@ -51,7 +51,7 @@ class EBooksController < ApplicationController
     @e_book = EBook.find(params[:id])
 
     respond_to do |format|
-      if @params[:token]=='zwyxyz' and e_book.update_attributes(params[:e_book])
+      if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
         format.html { redirect_to @e_book, notice: 'E book was successfully updated.' }
       else
         format.html { render action: "edit" }

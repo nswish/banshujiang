@@ -5,7 +5,7 @@
 	</div>
 	<div class="span6" style="font-size:18px;">
 		<br />
-		<p class="fontsize18">书名：《<%= e_book.name %>》</p>
+		<p class="fontsize18">书名：<%=link_to "《#{e_book.name}》", e_book_url(e_book), :class=>"fontsize18" %></p>
 		<p class="fontsize18">作者：<%= e_book.author %></p>
 		<p class="fontsize18">语言：<%= e_book.language %></p>
 		<p class="fontsize18">格式：<%= e_book.format %></p>
