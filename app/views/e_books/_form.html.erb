@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :language %><br />
-    <%= f.text_field :language %>
+    <%= f.select(:language, [["英文", "英文"], ["中文", "中文"]]) %>
   </div>
   <div class="field">
     <%= f.label :author %><br />
@@ -29,19 +29,15 @@
   </div>
   <div class="field">
     <%= f.label :publisher %><br />
-    <%= f.text_field :publisher %>
+    <%= f.select(:publisher, [["O'Reilly", "O'Reilly"]]) %>
   </div>
   <div class="field">
     <%= f.label :format %><br />
-    <%= f.text_field :format %>
+    <%= f.select(:format, [["PDF", "PDF"], ["CHM", "CHM"]]) %>
   </div>
   <div class="field">
     <%= f.label :image_large_file %><br />
     <%= f.file_field :image_large_file %>
-  </div>
-  <div class="field">
-    <%= f.label :image_small %><br />
-    <%= f.text_field :image_small %>
   </div>
   <div class="field">
     <%= f.label :download_url %><br />
@@ -49,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :download_name %><br />
-    <%= f.text_field :download_name %>
+    <%= f.select(:download_name, [["华硕网盘", "华硕网盘"]]) %>
   </div>
   <div class="field">
     <%= label_tag :token %><br />
