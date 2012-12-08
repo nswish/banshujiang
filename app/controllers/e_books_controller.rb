@@ -2,8 +2,8 @@
 class EBooksController < ApplicationController
   # GET /e_books
   def index
-    @title = '电子书(EBook)下载'
     @e_books = EBook.all
+    @title = '电子书(EBook)下载'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +13,7 @@ class EBooksController < ApplicationController
   # GET /e_books/1
   def show
     @e_book = EBook.find(params[:id])
+    @title = "[#{@e_book.name}].#{@e_book.publish_year}.#{@e_book.language}版.#{@e_book.format}"
 
     respond_to do |format|
       format.html # show.html.erb
