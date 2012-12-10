@@ -5,13 +5,46 @@
 	</div>
 	<div class="span6" style="font-size:18px;">
 		<br />
-		<p class="fontsize18">书名：<%=link_to "《#{e_book.name}》", e_book_url(e_book), :class=>"fontsize18" %></p>
-		<p class="fontsize18">作者：<%= e_book.author %></p>
-		<p class="fontsize18">语言：<%= e_book.language %></p>
-		<p class="fontsize18">格式：<%= e_book.format %></p>
-		<p class="fontsize18">出版社：<%= e_book.publisher %></p>
-		<p class="fontsize18">出版年份：<%= e_book.publish_year %></p>
+		<style>
+			.tablex * {
+				font-size: 18px;
+			}
+			.tablex td, .table th {
+				border-width: 0px;
+			}
+			
+		</style>
+		<table class="table tablex">
+			<tr>
+				<th colspan="2" style="text-align:center;"><%=link_to "《#{e_book.name}》", e_book_url(e_book), :style=>"font-size:30px;" %></th>
+			</tr>
+			<tr>
+				<td style="text-align:right">作者：</td>
+				<td><%= e_book.author %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right">语言：</td>
+				<td><%= e_book.language %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right">格式：</td>
+				<td><%= e_book.format %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right">出版社：</td>
+				<td><%= e_book.publisher %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right">出版年份：</td>
+				<td><%= e_book.publish_year %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right">下载链接：</td>
+				<td><%=link_to e_book.download_name, e_book.download_url, :target=>"_blank" %></td>
+			</tr>
+		</table>
+		</table>
 		<br />
-		<p>下载链接：<%=link_to e_book.download_name, e_book.download_url, :target=>"_blank" %></p>
+		<p></p>
 	</div>
 </div>
