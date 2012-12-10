@@ -6,32 +6,43 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-<% if ENV['OPENSHIFT_GEAR_NAME'] %>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc7bd33987a7db78b0a49281e580a214b' type='text/javascript'%3E%3C/script%3E"));
-</script>
+	<% if ENV['OPENSHIFT_GEAR_NAME'] %>
+	<script type="text/javascript">
 
-<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-6334871-7']);
+		_gaq.push(['_setDomainName', 'jiani.info']);
+		_gaq.push(['_trackPageview']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-6334871-7']);
-  _gaq.push(['_setDomainName', 'jiani.info']);
-  _gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	</script>
+	<% end %>
+	<style>
+		.fontsize18 {
+			font-size:18px;
+		}
+		.tablex * {
+			font-size: 18px;
+		}
+		.tablex td, .table th {
+			border-width: 0px;
+		}
+		.tablex th a {
+			font-size: 30px;
+			color: black;
+		}
+		.tablex a:hover {
+			color: black;
+			background-color: white;
+			text-decoration: none;
+		}
+	</style>
 
-</script>
-<% end %>
-<style>
-	.fontsize18 {
-		font-size:18px;
-	}
-</style>
 
 </head>
 <body>
@@ -43,5 +54,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <div style="margin-left:auto;margin-right:auto;width:960px;">
 <%= yield %>
 </div>
+<% if ENV['OPENSHIFT_GEAR_NAME'] %>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc7bd33987a7db78b0a49281e580a214b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<% end %>
 </body>
 </html>
