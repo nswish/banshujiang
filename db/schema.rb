@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207091754) do
+ActiveRecord::Schema.define(:version => 20121210094209) do
 
   create_table "e_books", :force => true do |t|
     t.string   "name"
@@ -24,10 +24,12 @@ ActiveRecord::Schema.define(:version => 20121207091754) do
     t.string   "image_small"
     t.string   "download_url"
     t.string   "download_name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.date     "publish_date"
     t.integer  "publish_year"
+    t.string   "download_name_2"
+    t.string   "download_url_2"
   end
 
 end

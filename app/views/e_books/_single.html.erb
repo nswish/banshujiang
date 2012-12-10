@@ -40,7 +40,14 @@
 			</tr>
 			<tr>
 				<td style="text-align:right;width:100px;">下载链接：</td>
-				<td><%=link_to e_book.download_name, e_book.download_url, :target=>"_blank" %></td>
+				<td>
+					<% unless e_book.download_url.blank? %>
+						<%=link_to e_book.download_name, e_book.download_url, :target=>"_blank" %>
+					<% end %>
+					<% unless e_book.download_url_2.blank? %>
+						| <%=link_to e_book.download_name_2, e_book.download_url_2, :target=>"_blank" %>
+					<% end %>
+				</td>
 			</tr>
 		</table>
 		</table>
