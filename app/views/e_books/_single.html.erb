@@ -16,30 +16,30 @@
 		</style>
 		<table class="table tablex">
 			<tr>
-				<th colspan="2" style="text-align:center;"><%=link_to "《#{e_book.name}》", e_book_url(e_book), :style=>"font-size:30px;" %></th>
+				<th colspan="2"><%=link_to "《#{e_book.name}》", e_book_url(e_book), :style=>"font-size:30px;color:black;" %></th>
 			</tr>
 			<tr>
-				<td style="text-align:right">作者：</td>
+				<td style="text-align:right;width:100px;">作者：</td>
 				<td><%= e_book.author %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right">语言：</td>
+				<td style="text-align:right;width:100px;">语言：</td>
 				<td><%= e_book.language %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right">格式：</td>
+				<td style="text-align:right;width:100px;">格式：</td>
 				<td><%= e_book.format %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right">出版社：</td>
+				<td style="text-align:right;width:100px;">出版社：</td>
 				<td><%= e_book.publisher %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right">出版年份：</td>
+				<td style="text-align:right;width:100px;">出版年份：</td>
 				<td><%= e_book.publish_year %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right">下载链接：</td>
+				<td style="text-align:right;width:100px;">下载链接：</td>
 				<td><%=link_to e_book.download_name, e_book.download_url, :target=>"_blank" %></td>
 			</tr>
 		</table>
