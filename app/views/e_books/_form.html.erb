@@ -1,4 +1,4 @@
-<%= form_for(@e_book, :html=>{:multipart=>true}, :builder=>WebstorageFormBuilder) do |f| %>
+<%= form_for(@e_book, :html=>{:multipart=>true}, :builder=>EbookFormBuilder) do |f| %>
   <% if @e_book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@e_book.errors.count, "error") %> prohibited this e_book from being saved:</h2>
@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :publisher %><br />
-    <%= f.select(:publisher, [["O'Reilly", "O'Reilly"], ["Manning", "Manning"], ["Addison Wesley", "Addison Wesley"]]) %>
+    <%= f.publisher_select(:publisher) %>
   </div>
   <div class="field">
     <%= f.label :format %><br />
