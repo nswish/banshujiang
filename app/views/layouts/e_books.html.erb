@@ -6,22 +6,6 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-	<% if ENV['OPENSHIFT_GEAR_NAME'] %>
-	<script type="text/javascript">
-
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-6334871-7']);
-		_gaq.push(['_setDomainName', 'jiani.info']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-
-	</script>
-	<% end %>
 	<style>
 		.fontsize18 {
 			font-size:18px;
@@ -46,15 +30,18 @@
 
 </head>
 <body>
+
 <div style="width:100%;height:44px;background-color:black;opacity: 0.7;">
 	<div style="margin-left:auto;margin-right:auto;width:960px;padding-top:12px;">
 		<a href="/" style="font-size:24px;color:white;text-decoration:none;">电子书下载</span></a>
 	</div>
 </div>
+
 <div style="margin-left:auto;margin-right:auto;width:960px;">
 <%= yield %>
 </div>
-<% if ENV['OPENSHIFT_GEAR_NAME'] %>
+
+<% if ENV['OPENSHIFT_GEAR_NAME'] and ['index', 'show'].index(params['action']) %>
 <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc7bd33987a7db78b0a49281e580a214b' type='text/javascript'%3E%3C/script%3E"));
