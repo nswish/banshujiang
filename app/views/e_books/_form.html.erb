@@ -20,6 +20,10 @@
     <%= f.text_field :author %>
   </div>
   <div class="field">
+    <%= f.label :programming_language %><br />
+    <%= f.programming_language_select :programming_language %>
+  </div>
+  <div class="field">
     <%= f.label :publish_year %><br />
     <%= f.number_field :publish_year %>
   </div>

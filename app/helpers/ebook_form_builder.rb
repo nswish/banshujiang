@@ -19,4 +19,16 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
                           ],
                   options, html_options)
   end
+
+  def programming_language_select(method, options={}, html_options={})
+    return select(method, [
+														["Ruby", "Ruby"],
+														["Python", "Python"],
+														["JavaScript", "JavaScript"],
+														["Java", "Java"],
+														["PHP", "PHP"],
+														["Objective-C", "Objective-C"],
+                          ],
+                  options, html_options)
+  end
 end
