@@ -1,23 +1,29 @@
 #-*- encoding: utf-8 -*-
 class EBooksController < ApplicationController
+  LIMIT_PER_PAGE = 7 
+
   # GET /e_books
   def index
-    @e_books = EBook.all
+    self.page
+  end
+
+  # GET /e_books/page/1
+  def page
     @title = '电子书(EBook)下载'
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
+    @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
+    @page_count = (EBook.count / LIMIT_PER_PAGE.to_f).ceil
+
+    offset = (@page_id - 1) * LIMIT_PER_PAGE
+    @e_books = EBook.order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset).all
+
+    render 'index.html.erb'
   end
 
   # GET /e_books/1
   def show
     @e_book = EBook.find(params[:id])
     @title = "[#{@e_book.name}].#{@e_book.publish_year}.#{@e_book.language}版.#{@e_book.format}"
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
 
   # GET /e_books/new

@@ -1,5 +1,6 @@
 RailsApp::Application.routes.draw do
   resources :e_books
+  match 'e_books/page/:id' => 'e_books#page'
 
   get "configinfo/index"
 

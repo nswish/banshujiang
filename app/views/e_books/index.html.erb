@@ -1,4 +1,13 @@
 <% @e_books.each do |e_book| %>
 	<%= render :partial => 'single', :locals => {:e_book => e_book} %>
 <% end %>
+<div class="pagination pagination-right">
+  <ul>
+    <% (1..@page_count).each do |index| %>
+      <li <%if index == @page_id then %>class="active"<% end %>>
+        <%= link_to index.to_s, :controller=>'e_books', :action=>'page', :id=>index %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 <br />
