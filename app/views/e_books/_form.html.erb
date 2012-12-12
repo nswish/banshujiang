@@ -61,7 +61,7 @@
   </div>
  <div class="field">
     <%= label_tag :token %><br />
-    <%= text_field_tag :token %>
+    <%= text_field_tag :token, cookies[:token] %>
   </div>
   <div class="actions">
     <%= f.submit %>

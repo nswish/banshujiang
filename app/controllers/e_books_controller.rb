@@ -23,10 +23,6 @@ class EBooksController < ApplicationController
   # GET /e_books/new
   def new
     @e_book = EBook.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   # GET /e_books/1/edit
@@ -37,6 +33,7 @@ class EBooksController < ApplicationController
   # POST /e_books
   def create
     @e_book = EBook.new(params[:e_book])
+    cookies[:token] = params[:token]
 
     respond_to do |format|
       if params[:token]=='zwyxyz' and @e_book.save
@@ -50,6 +47,7 @@ class EBooksController < ApplicationController
   # PUT /e_books/1
   def update
     @e_book = EBook.find(params[:id])
+    cookies[:token] = params[:token]
 
     respond_to do |format|
       if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
