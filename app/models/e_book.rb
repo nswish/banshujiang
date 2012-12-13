@@ -2,6 +2,8 @@ class EBook < ActiveRecord::Base
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :publisher, :programming_language
 	attr_accessible :download_name, :download_url, :download_name_2, :download_url_2
 
+  has_many :webstorage_links
+
 	IMAGE_DIR = 'data_images'
 
 	def image_large_file=(file_data)

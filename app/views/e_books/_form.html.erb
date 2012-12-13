@@ -59,7 +59,14 @@
     <%= f.label :download_name_2 %><br />
     <%= f.webstorage_select(:download_name_2) %>
   </div>
- <div class="field">
+  <div class="field">
+    link_1: <%= text_field_tag :"webstorage_links[][name]" %>
+  </div>
+  <div class="field">
+    link_2: <%= text_field_tag :"webstorage_links[][name]" %>
+  </div>
+  
+  <div class="field">
     <%= label_tag :token %><br />
     <%= text_field_tag :token, cookies[:token] %>
   </div>

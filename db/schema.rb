@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211092438) do
+ActiveRecord::Schema.define(:version => 20121213073752) do
 
   create_table "e_books", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(:version => 20121211092438) do
     t.string   "download_name_2"
     t.string   "download_url_2"
     t.string   "programming_language"
+  end
+
+  create_table "webstorage_links", :force => true do |t|
+    t.integer  "e_book_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
