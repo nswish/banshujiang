@@ -1,6 +1,9 @@
 RailsApp::Application.routes.draw do
-  resources :e_books
-  match 'e_books/page/:id' => 'e_books#page'
+  resources :e_books do
+    member do
+      get :page
+    end
+  end
 
   get "configinfo/index"
 
