@@ -15,7 +15,8 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
                             ["O'Reilly", "O'Reilly"],
                             ["Manning", "Manning"],
                             ["Addison Wesley", "Addison Wesley"],
-                            ["Wiley", "Wiley"]
+                            ["Wiley", "Wiley"],
+                            ["Pragmatic Bookshelf", "Pragmatic Bookshelf"]
                           ],
                   options, html_options)
   end

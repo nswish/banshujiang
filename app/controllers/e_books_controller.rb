@@ -42,7 +42,7 @@ class EBooksController < ApplicationController
     cookies[:token] = params[:token]
 
     if params[:token]=='zwyxyz' and @e_book.save
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>1), notice: '新增成功！'
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end
