@@ -1,0 +1,2 @@
+module WebstorageLinksHelper
+end

@@ -3,6 +3,8 @@ RailsApp::Application.routes.draw do
     member do
       get :page
     end
+    
+    resources :webstorage_links
   end
 
   get "configinfo/index"
