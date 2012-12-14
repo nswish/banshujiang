@@ -15,21 +15,15 @@ ActiveRecord::Schema.define(:version => 20121213073752) do
 
   create_table "e_books", :force => true do |t|
     t.string   "name"
-    t.date     "publish_data"
     t.string   "language"
     t.string   "author"
     t.string   "publisher"
     t.string   "format"
     t.string   "image_large"
     t.string   "image_small"
-    t.string   "download_url"
-    t.string   "download_name"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.date     "publish_date"
     t.integer  "publish_year"
-    t.string   "download_name_2"
-    t.string   "download_url_2"
     t.string   "programming_language"
   end
 

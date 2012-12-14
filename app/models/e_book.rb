@@ -1,19 +1,29 @@
+#-*- encoding: utf-8 -*-
 class EBook < ActiveRecord::Base
+  ### attributes
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :publisher, :programming_language
-	attr_accessible :download_name, :download_url, :download_name_2, :download_url_2
 
+  ### relation
   has_many :webstorage_links
 
+  ### constants
 	IMAGE_DIR = 'data_images'
 
+  ### trigger
+	after_save :save_upload_image_large
+
+  ### public methods
 	def image_large_file=(file_data)
 		unless file_data.blank?
 			@file_data = file_data
 		end
 	end
 
-	after_save :save_upload_image_large
+  def export
+    
+  end
 
+  ### private methods
 	private
 	def save_upload_image_large
 		if @file_data
