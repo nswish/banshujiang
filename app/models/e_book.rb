@@ -19,8 +19,8 @@ class EBook < ActiveRecord::Base
 		end
 	end
 
-  def export
-    
+  def EBook.export
+    YAML.dump(EBook.all)
   end
 
   ### private methods
