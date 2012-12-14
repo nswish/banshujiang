@@ -45,23 +45,7 @@
       <%= f.label :image_large_file %>
       <%= f.file_field :image_large_file %>
     </div>
-    <div class="field">
-      <%= f.label :download_url %>
-      <%= f.text_field :download_url, :style=>"width:550px;" %>
-    </div>
-    <div class="field">
-      <%= f.label :download_name %>
-      <%= f.webstorage_select :download_name %>
-    </div>
-    <div class="field">
-      <%= f.label :download_url_2 %>
-      <%= f.text_field :download_url_2, :style=>"width:550px;" %>
-    </div>
-    <div class="field">
-      <%= f.label :download_name_2 %>
-      <%= f.webstorage_select(:download_name_2) %>
-    </div>
-    
+   
     <div class="field">
       <%= label_tag :token %>
       <%= text_field_tag :token, cookies[:token] %>
@@ -71,6 +55,7 @@
     </div>
   <% end %>
   </div>
+  <% if @e_book.id  %>
   <div class="span6">
     <div class="field">
       <%=label_tag '下载链接列表'%>
@@ -97,4 +82,5 @@
     </div>
     <% end %>
   </div>
+  <%end%>
 </div>
