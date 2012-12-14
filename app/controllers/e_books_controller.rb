@@ -41,13 +41,10 @@ class EBooksController < ApplicationController
     @e_book = EBook.new(params[:e_book])
     cookies[:token] = params[:token]
 
-    respond_to do |format|
-      if params[:token]=='zwyxyz' and @e_book.save
-        #format.html { redirect_to @e_book, notice: 'E book was successfully created.' }
-        format.html { render :edit }
-      else
-        format.html { render action: "new" }
-      end
+    if params[:token]=='zwyxyz' and @e_book.save
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>1), notice: '新增成功！'
+    else
+      redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end
   end
 
@@ -56,13 +53,11 @@ class EBooksController < ApplicationController
     @e_book = EBook.find(params[:id])
     cookies[:token] = params[:token]
 
-    respond_to do |format|
       if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
-        #format.html { redirect_to @e_book, notice: 'E book was successfully updated.' }
-      #else
-        format.html { render action: "edit" }
+        redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新成功！'
+      else
+        redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新失败！'
       end
-    end
   end
 
   # DELETE /e_books/1
