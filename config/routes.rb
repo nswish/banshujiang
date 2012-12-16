@@ -1,7 +1,8 @@
 RailsApp::Application.routes.draw do
   resources :e_books do
-    member do
-      get :page
+    collection do
+      get 'page/:id', :action => :page
+      get 'export.:format', :action => :export
     end
     
     resources :webstorage_links

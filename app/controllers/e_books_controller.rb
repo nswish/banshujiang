@@ -71,4 +71,14 @@ class EBooksController < ApplicationController
     end
 =end
   end
+
+	def export
+		result = { :e_books => EBook.export }
+
+		respond_to do |format|
+			format.json do
+				render json: result
+			end
+		end
+	end
 end
