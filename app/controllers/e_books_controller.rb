@@ -76,9 +76,8 @@ class EBooksController < ApplicationController
 		result = { :e_books => EBook.export }
 
 		respond_to do |format|
-			format.json do
-				render json: result
-			end
+			format.json { render json: result }
+			format.html
 		end
 	end
 

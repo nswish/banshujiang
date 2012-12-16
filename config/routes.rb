@@ -2,7 +2,7 @@ RailsApp::Application.routes.draw do
   resources :e_books do
     collection do
       get 'page/:id', :action => :page
-      get 'export.:format', :action => :export
+      get 'export(.:format)', :action => :export
 			match :import
     end
     
