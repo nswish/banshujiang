@@ -23,6 +23,16 @@ class EBook < ActiveRecord::Base
     YAML.dump(EBook.all)
   end
 
+	def EBook.import(doc)
+		result = YAML.load doc
+		result.each do |item|
+			ebook = EBook.new
+			ebook.initialize_dup item 
+			ebook.id = item.id
+			ebook.save
+		end
+  end
+
   ### private methods
 	private
 	def save_upload_image_large

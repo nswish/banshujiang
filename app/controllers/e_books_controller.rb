@@ -81,4 +81,9 @@ class EBooksController < ApplicationController
 			end
 		end
 	end
+
+	def import
+		docs = JSON.load params['import_file'].read
+		EBook.import docs['e_books']
+	end
 end

@@ -1,0 +1,7 @@
+<h2>导入数据：</h2>
+<%= form_tag nil, :multipart=>true do %>
+<div class="field">
+	<%=file_field_tag :import_file %> <br />
+	<%=submit_tag '导入'%>
+</div>
+<% end %>

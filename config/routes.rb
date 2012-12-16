@@ -3,6 +3,7 @@ RailsApp::Application.routes.draw do
     collection do
       get 'page/:id', :action => :page
       get 'export.:format', :action => :export
+			match :import
     end
     
     resources :webstorage_links
