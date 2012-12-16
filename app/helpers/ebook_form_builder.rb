@@ -4,7 +4,8 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
 		return select(method, [
 														["", ""],
 														["华硕网盘", "华硕网盘"],
-														["百度网盘", "百度网盘"]
+														["百度网盘", "百度网盘"],
+														["Box.com", "Box.com"]
 													],
 									options, html_options)
 	end
