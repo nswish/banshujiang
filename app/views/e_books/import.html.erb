@@ -1,7 +1,16 @@
 <h2>导入数据：</h2>
+<hr />
 <%= form_tag nil, :multipart=>true do %>
 <div class="field">
 	<%=file_field_tag :import_file %> <br />
+	<%=submit_tag '导入'%>
+</div>
+<% end %>
+<hr />
+<%= form_tag do %>
+<div class="field">
+  <%=label_tag :import_url, '导入文件URL' %>
+	<%=text_field_tag :import_url, 'http://ebook.jiani.info/e_books/export.json', :style=>"width:500px;" %> <br />
 	<%=submit_tag '导入'%>
 </div>
 <% end %>

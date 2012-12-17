@@ -82,7 +82,13 @@ class EBooksController < ApplicationController
 	end
 
 	def import
-		docs = JSON.load params['import_file'].read
-		EBook.import docs['e_books']
+    if params['import_file'] then
+      docs = JSON.load params['import_file'].read
+      EBook.import docs['e_books']
+    elsif params['import_url'] then
+      require 'net/http'
+      docs = JSON.load Net::HTTP.get(URI(params['import_url']))
+      EBook.import docs['e_books']
+    end
 	end
 end
