@@ -85,10 +85,12 @@ class EBooksController < ApplicationController
     if params['import_file'] then
       docs = JSON.load params['import_file'].read
       EBook.import docs['e_books']
+      WebstorageLink.import docs['webstorage_links ']
     elsif params['import_url'] then
       require 'net/http'
       docs = JSON.load Net::HTTP.get(URI(params['import_url']))
       EBook.import docs['e_books'], params['import_url']
+      WebstorageLink.import docs['webstorage_links']
     end
 	end
 end

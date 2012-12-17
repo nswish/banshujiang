@@ -12,6 +12,18 @@ class WebstorageLink < ActiveRecord::Base
   end
 
   def WebstorageLink.import(doc)
+    result = YAML.load doc
+    result.each do |item|
+      begin
+        WebstorageLink.find(item.id).delete
+      rescue ActiveRecord::RecordNotFound
+      end
+
+      link = WebstorageLink.new
+      link.initialize_dup item
+      link.id = item.id
+      link.save
+    end
   end
 
 end
