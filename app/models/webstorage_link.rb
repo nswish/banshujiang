@@ -7,11 +7,11 @@ class WebstorageLink < ActiveRecord::Base
 
   ### public methods
   public
-  def export
+  def WebstorageLink.export
     YAML.dump WebstorageLink.all
   end
 
-  def import(doc)
+  def WebstorageLink.import(doc)
   end
 
 end
