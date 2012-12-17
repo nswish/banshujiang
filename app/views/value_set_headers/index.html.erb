@@ -1,0 +1,23 @@
+<h1>Listing value_set_headers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @value_set_headers.each do |value_set_header| %>
+  <tr>
+    <td><%= value_set_header.name %></td>
+    <td><%= link_to 'Show', value_set_header %></td>
+    <td><%= link_to 'Edit', value_set_header_value_set_bodies_path(value_set_header) %></td>
+    <td><%= link_to 'Destroy', value_set_header, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '新增一个值集', new_value_set_header_path %>

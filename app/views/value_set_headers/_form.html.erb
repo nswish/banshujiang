@@ -1,0 +1,21 @@
+<%= form_for(@value_set_header) do |f| %>
+  <% if @value_set_header.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@value_set_header.errors.count, "error") %> prohibited this value_set_header from being saved:</h2>
+
+      <ul>
+      <% @value_set_header.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value_set_header_id: 1
+  name: MyString
+  value: MyString
+
+two:
+  value_set_header_id: 1
+  name: MyString
+  value: MyString

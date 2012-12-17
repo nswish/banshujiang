@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value set header:</b>
+  <%= @value_set_body.value_set_header_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @value_set_body.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @value_set_body.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_value_set_body_path(@value_set_body) %> |
+<%= link_to 'Back', value_set_header_value_set_bodies_path(@value_set_header) %>

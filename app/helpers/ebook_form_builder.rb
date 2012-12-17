@@ -1,12 +1,10 @@
 #-*- encoding: utf-8 -*-
 class EbookFormBuilder < ActionView::Helpers::FormBuilder
 	def webstorage_select(method, options={}, html_options={})
-		return select(method, [
-														["", ""],
-														["华硕网盘", "华硕网盘"],
-														["百度网盘", "百度网盘"],
-														["Box.com", "Box.com"]
-													],
+    header_id = ValueSetHeader.where(:name=>'webstorages')[0].id
+		return select(method, [["",""]] + ValueSetBody.where(:value_set_header_id=>header_id).collect { |item|
+                    [ item.name, item.value ]
+                  },
 									options, html_options)
 	end
 

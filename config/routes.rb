@@ -1,4 +1,8 @@
 RailsApp::Application.routes.draw do
+  resources :value_set_headers do
+    resources :value_set_bodies
+  end
+
   resources :e_books do
     collection do
       get 'page/:id', :action => :page
