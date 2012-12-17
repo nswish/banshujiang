@@ -3,6 +3,7 @@ RailsApp::Application.routes.draw do
     resources :value_set_bodies
     collection do
       get 'export(.:format)', :action => :export
+			match :import
     end
   end
 

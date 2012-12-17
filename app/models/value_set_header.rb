@@ -9,5 +9,21 @@ class ValueSetHeader < ActiveRecord::Base
   end
 
   def ValueSetHeader.import(doc)
+    ValueSetHeader.all.each do |header|
+      header.delete
+    end
+
+    YAML.load(doc).each do |item|
+      header = ValueSetHeader.new
+      header.initialize_dup item
+      header.id = item.id
+      header.save
+    end
+  end
+
+  def name_value_array
+    [["",""]] + self.value_set_bodies.collect do |item|
+      [ item.name, item.value ]
+    end
   end
 end

@@ -7,4 +7,17 @@ class ValueSetBody < ActiveRecord::Base
   def ValueSetBody.export
     YAML.dump ValueSetBody.all
   end
+
+  def ValueSetBody.import(doc)
+    ValueSetBody.all.each do |body|
+      body.delete
+    end
+
+    YAML.load(doc).each do |item|
+      body = ValueSetBody.new
+      body.initialize_dup item
+      body.id = item.id
+      body.save
+    end
+  end
 end

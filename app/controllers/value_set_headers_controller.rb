@@ -65,4 +65,17 @@ class ValueSetHeadersController < ApplicationController
       format.json { render json: result }
     end
   end
+
+  def import
+    if params['import_file'] then
+      docs = JSON.load params['import_file'].read
+      ValueSetHeader.import docs['value_set_headers']
+      ValueSetBody.import docs['value_set_bodies']
+    elsif params['import_url'] then
+      require 'net/http'
+      docs = JSON.load Net::HTTP.get(URI(params['import_url']))
+      ValueSetHeader.import docs['value_set_headers']
+      ValueSetBody.import docs['value_set_bodies']
+    end  
+  end
 end
