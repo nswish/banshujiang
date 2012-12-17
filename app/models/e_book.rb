@@ -23,14 +23,28 @@ class EBook < ActiveRecord::Base
     YAML.dump(EBook.all)
   end
 
-	def EBook.import(doc)
+	def EBook.import(doc, url)
 		result = YAML.load doc
 		result.each do |item|
-			ebook = EBook.new
-			ebook.initialize_dup item 
-			ebook.id = item.id
-			ebook.save
-		end
+      begin
+        EBook.find(item.id)
+      rescue ActiveRecord::RecordNotFound
+  			ebook = EBook.new
+        ebook.initialize_dup item 
+        ebook.id = item.id
+        ebook.save
+
+        if url and ebook.image_large then
+          require 'net/http'
+          uri = URI url
+          image_uri = uri.scheme+'://'+uri.host+':'+uri.port.to_s+ebook.image_large
+          file_path = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{ebook.image_large}"
+          File.open(file_path, 'wb') do |f|
+            f.write(Net::HTTP.get URI(image_uri))
+          end
+        end
+      end
+    end
   end
 
   ### private methods

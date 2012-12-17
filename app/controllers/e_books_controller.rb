@@ -73,7 +73,7 @@ class EBooksController < ApplicationController
   end
 
 	def export
-		result = { :e_books => EBook.export }
+		result = { :e_books => EBook.export, :webstorage_links => WebstorageLink.export }
 
 		respond_to do |format|
 			format.json { render json: result }
@@ -88,7 +88,7 @@ class EBooksController < ApplicationController
     elsif params['import_url'] then
       require 'net/http'
       docs = JSON.load Net::HTTP.get(URI(params['import_url']))
-      EBook.import docs['e_books']
+      EBook.import docs['e_books'], params['import_url']
     end
 	end
 end
