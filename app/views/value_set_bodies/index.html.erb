@@ -16,8 +16,8 @@
     <td><%= value_set_body.name %></td>
     <td><%= value_set_body.value %></td>
     <td><%= link_to 'Show', value_set_header_value_set_body_path(@value_set_header, value_set_body) %></td>
-    <td><%= link_to 'Edit', edit_value_set_body_path(value_set_body) %></td>
-    <td><%= link_to 'Destroy', value_set_body, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', edit_value_set_header_value_set_body_path(@value_set_header, value_set_body) %></td>
+    <td><%= link_to 'Destroy', url_for([@value_set_header, value_set_body]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

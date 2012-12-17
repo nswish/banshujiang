@@ -36,6 +36,7 @@ class ValueSetBodiesController < ApplicationController
 
   # GET /value_set_bodies/1/edit
   def edit
+    @value_set_header = ValueSetHeader.find params[:value_set_header_id]
     @value_set_body = ValueSetBody.find(params[:id])
   end
 
@@ -72,12 +73,12 @@ class ValueSetBodiesController < ApplicationController
   # DELETE /value_set_bodies/1
   # DELETE /value_set_bodies/1.json
   def destroy
+    @value_set_header = ValueSetHeader.find params[:value_set_header_id]
     @value_set_body = ValueSetBody.find(params[:id])
     @value_set_body.destroy
 
     respond_to do |format|
-      format.html { redirect_to value_set_bodies_url }
-      format.json { head :no_content }
+      format.html { redirect_to value_set_header_value_set_bodies_url(@value_set_header) }
     end
   end
 end

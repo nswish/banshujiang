@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @value_set_body %> |
-<%= link_to 'Back', value_set_bodies_path %>
+<%= link_to 'Show', url_for([@value_set_header, @value_set_body]) %> |
+<%= link_to 'Back', value_set_header_value_set_bodies_path(@value_set_header) %>
