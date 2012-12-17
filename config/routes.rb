@@ -1,6 +1,9 @@
 RailsApp::Application.routes.draw do
   resources :value_set_headers do
     resources :value_set_bodies
+    collection do
+      get 'export(.:format)', :action => :export
+    end
   end
 
   resources :e_books do

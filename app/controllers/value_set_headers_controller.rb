@@ -1,12 +1,10 @@
 class ValueSetHeadersController < ApplicationController
   # GET /value_set_headers
-  # GET /value_set_headers.json
   def index
     @value_set_headers = ValueSetHeader.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @value_set_headers }
     end
   end
 
@@ -57,6 +55,14 @@ class ValueSetHeadersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to value_set_headers_url }
       format.json { head :no_content }
+    end
+  end
+
+  def export
+    result = { :value_set_headers=>ValueSetHeader.export, :value_set_bodies=>ValueSetBody.export }
+    respond_to do |format|
+      #format.html { redirect_to value_set_headers_url }
+      format.json { render json: result }
     end
   end
 end
