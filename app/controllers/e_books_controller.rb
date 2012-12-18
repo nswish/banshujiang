@@ -1,10 +1,10 @@
 #-*- encoding: utf-8 -*-
 class EBooksController < ApplicationController
-  LIMIT_PER_PAGE = 7 
+  LIMIT_PER_PAGE = 10 
 
   # GET /e_books
   def index
-    self.page
+    page
   end
 
   # GET /e_books/page/1
@@ -42,6 +42,7 @@ class EBooksController < ApplicationController
     cookies[:token] = params[:token]
 
     if params[:token]=='zwyxyz' and @e_book.save
+      rss
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
@@ -53,11 +54,12 @@ class EBooksController < ApplicationController
     @e_book = EBook.find(params[:id])
     cookies[:token] = params[:token]
 
-      if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
-        redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新成功！'
-      else
-        redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新失败！'
-      end
+    if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
+      redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新成功！'
+      rss
+    else
+      redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新失败！'
+    end
   end
 
   # DELETE /e_books/1
@@ -93,4 +95,26 @@ class EBooksController < ApplicationController
       WebstorageLink.import docs['webstorage_links']
     end
 	end
+
+  private
+  def rss
+    require 'rss'
+    the_rss = RSS::Maker::RSS20.make do |maker|
+      maker.channel.title = '电子书(EBook)下载'
+      maker.channel.description = '最新发布的10本书籍'
+      maker.channel.link = 'http://ebook.jiani.info'
+
+      EBook.order('created_at desc').limit(LIMIT_PER_PAGE).all.each do |ebook|
+        maker.items.new_item do |item|
+          item.link = url_for(ebook) 
+          item.title = ebook.name
+          item.description = "<strong>作者</strong>#{ebook.author}"
+        end
+      end
+    end
+
+    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/rss.xml", 'wb') do |f|
+      f.write the_rss
+    end
+  end
 end
