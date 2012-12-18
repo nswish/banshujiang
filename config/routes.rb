@@ -1,4 +1,6 @@
 RailsApp::Application.routes.draw do
+  match '/auth/:provider/callback' => 'users#index'
+
   resources :value_set_headers do
     resources :value_set_bodies
     collection do
