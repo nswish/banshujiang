@@ -1,6 +1,6 @@
 <%=render :partial => 'single', :locals => {:e_book => @e_book} %>
 <div>
-<% unless ENV['OPENSHIFT_GEAR_NAME'] %>
+<% if ENV['OPENSHIFT_GEAR_NAME'] %>
 <!-- Baidu Button BEGIN -->
 <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right;">
 <span class="bds_more">分享到：</span>
