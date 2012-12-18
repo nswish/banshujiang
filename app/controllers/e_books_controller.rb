@@ -108,12 +108,12 @@ class EBooksController < ApplicationController
         maker.items.new_item do |item|
           item.link = url_for(ebook) 
           item.title = ebook.name
-          item.description = "<strong>作者</strong>#{ebook.author}"
+          item.description = "<p><strong>作者:</strong> #{ebook.author}</p><p><strong>下载地址:</strong></p> <a href='#{url_for(ebook)}'>#{url_for(ebook)}</a>"
         end
       end
     end
 
-    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/rss.xml", 'wb') do |f|
+    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/data_feeds/ebooks.rss.xml", 'wb') do |f|
       f.write the_rss
     end
   end
