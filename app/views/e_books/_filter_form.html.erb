@@ -1,0 +1,39 @@
+<style>
+  #filter_table td {
+    border-width: 0px;
+  }
+  #filter_table label {
+    display: inline;
+    margin: 0px 15px 0px 0px;
+  }
+  #filter_table input[type=checkbox]{
+    margin: 0px;
+  }
+</style>
+<div id="filter_div" class="row shadow-panel" style="display:none;margin-bottom:10px;">
+<%=form_tag url_for(:controller=>:e_books, :action=>:index), :method=>:get, :id=>:filter_form, :style=>"margin-bottom:0px;" do %>
+  <table id="filter_table" class="table" style="margin-bottom:0px;">
+    <tr>
+      <td style="width:100px;text-align:right;">编程语言:</td>
+      <td>       
+        <% ValueSetHeader.where(:name=>:programming_languages).first.value_array.each do |item| %>
+          <%=check_box_tag "programming_languages[#{item[0]}]", 1, params[:programming_languages] && params[:programming_languages][item[0]]%>
+          <%=label_tag "programming_languages[#{item[0]}]", item[0]%>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td style="width:100px;text-align:right;">出版社:</td>
+      <td>
+        <% ValueSetHeader.where(:name=>:publishers).first.value_array.each do |item| %>
+          <%=check_box_tag "publishers[#{item[0]}]", 1, params[:publishers] && params[:publishers][item[0]]%>
+          <%=label_tag "publishers[#{item[0]}]", item[0]%>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align:center"><a class="btn btn-small" href="javascript:$('#filter_form').submit();"><i class="icon-filter"></i> 筛选</a></td>
+    </tr>
+  </table>
+<% end %>
+</div>

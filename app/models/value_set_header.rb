@@ -26,4 +26,10 @@ class ValueSetHeader < ActiveRecord::Base
       [ item.name, item.value ]
     end
   end
+
+  def value_array
+    self.value_set_bodies.collect do |item|
+      [ item.value ]
+    end
+  end
 end

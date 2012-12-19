@@ -2,8 +2,13 @@
 class EBooksController < ApplicationController
   LIMIT_PER_PAGE = 10 
 
+  def root
+    redirect_to url_for(:controller=>:e_books, :action=>:index)
+  end
+
   # GET /e_books
   def index
+    puts params[:programming_languages]
     page
   end
 
@@ -12,10 +17,19 @@ class EBooksController < ApplicationController
     @title = '电子书(EBook)下载'
 
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
-    @page_count = (EBook.count / LIMIT_PER_PAGE.to_f).ceil
-
     offset = (@page_id - 1) * LIMIT_PER_PAGE
-    @e_books = EBook.order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset).all
+
+    condition = {}
+    if params[:programming_languages] then
+      condition[:programming_language] = params[:programming_languages].keys
+    end
+    if params[:publishers] then
+      condition[:publisher] = params[:publishers].keys
+    end
+
+    @e_books = EBook.where(condition).order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
+
+    @page_count = (EBook.where(condition).count / LIMIT_PER_PAGE.to_f).ceil
 
     render 'index.html.erb'
   end
@@ -23,16 +37,18 @@ class EBooksController < ApplicationController
   # GET /e_books/1
   def show
     @e_book = EBook.find(params[:id])
-    @title = "[#{@e_book.name}].#{@e_book.publish_year}.#{@e_book.language}版.#{@e_book.format}"
+    @title = "[#{@e_book.name}].#{@e_book.publish_year}.#{@e_book.language}版.#{@e_book.format.downcase}"
   end
 
   # GET /e_books/new
   def new
+    @title = "创建电子书"
     @e_book = EBook.new
   end
 
   # GET /e_books/1/edit
   def edit
+    @title = "编辑电子书"
     @e_book = EBook.find(params[:id])
   end
 

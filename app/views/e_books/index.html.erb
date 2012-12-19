@@ -1,13 +1,29 @@
-<% @e_books.each do |e_book| %>
-	<%= render :partial => 'single', :locals => {:e_book => e_book} %>
+<script>
+  var filter_form_show = function(){
+    $('#filter_toggle').hide();
+    $('#filter_div').fadeIn();
+  }
+</script>
+
+<div id="filter_toggle" style="text-align:center;" class="row">
+  <a style="color:black;" href="javascript:filter_form_show()"><i class="icon-filter iconx" style="margin"></i> 筛选</a>
+</div>
+
+<%=render :partial => 'filter_form' %>
+
+<% @e_books.each_with_index do |e_book, index| %>
+	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
+  <% if index < @e_books.size-1 then %>
+  <br />
+  <% end %>
 <% end %>
+
 <div class="pagination pagination-right">
   <ul>
     <% (1..@page_count).each do |index| %>
       <li <%if index == @page_id then %>class="active"<% end %>>
-        <%= link_to index.to_s, :controller=>'e_books', :action=>'page', :id=>index %>
+        <%= link_to index.to_s, url_for(:controller=>'e_books', :action=>'page', :id=>index)+"?"+request.env['QUERY_STRING'] %>
       </li>
     <% end %>
   </ul>
 </div>
-<br />
