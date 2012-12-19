@@ -14,8 +14,6 @@ class EBooksController < ApplicationController
 
   # GET /e_books/page/1
   def page
-    @title = ' - 分享我的电子书(EBook) 免费下载'
-
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
     offset = (@page_id - 1) * LIMIT_PER_PAGE
 
