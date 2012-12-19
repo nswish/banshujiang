@@ -14,7 +14,7 @@ class EBooksController < ApplicationController
 
   # GET /e_books/page/1
   def page
-    @title = '电子书(EBook)下载'
+    @title = ' - 分享我的电子书(EBook) 免费下载'
 
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
     offset = (@page_id - 1) * LIMIT_PER_PAGE
@@ -59,7 +59,7 @@ class EBooksController < ApplicationController
 
     if params[:token]=='zwyxyz' and @e_book.save
       rss
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！[藏书阁]'<<view_context.standard_file_name(@e_book)
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'<<view_context.site_name<<view_context.standard_file_name(@e_book)
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end
