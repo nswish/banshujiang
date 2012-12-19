@@ -37,7 +37,7 @@ class EBooksController < ApplicationController
   # GET /e_books/1
   def show
     @e_book = EBook.find(params[:id])
-    @title = "[#{@e_book.name}].#{@e_book.publish_year}.#{@e_book.language}版.#{@e_book.format.downcase}"
+    @title = view_context.standard_file_name @e_book
   end
 
   # GET /e_books/new
@@ -59,7 +59,7 @@ class EBooksController < ApplicationController
 
     if params[:token]=='zwyxyz' and @e_book.save
       rss
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！[藏书阁]'<<view_context.standard_file_name(@e_book)
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end
