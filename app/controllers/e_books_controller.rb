@@ -110,8 +110,34 @@ class EBooksController < ApplicationController
     end
 	end
 
-  private
   def rss
+    _sitemap_rss
+    _top10new_rss
+  end
+
+  private
+  def _sitemap_rss
+    require 'rss'
+    the_rss = RSS::Maker::RSS20.make do |maker|
+      maker.channel.title = "[#{view_context.site_name}] http://ebooks.jiani.info"
+      maker.channel.description = '所有书籍'
+      maker.channel.link = 'http://ebook.jiani.info'
+
+      EBook.all.each do |ebook|
+        maker.items.new_item do |item|
+          item.link = url_for(ebook) 
+          item.title = ebook.name
+          item.description = "<p><strong>作者:</strong> #{ebook.author}</p><p><strong>下载地址:</strong></p> <a href='#{url_for(ebook)}'>#{url_for(ebook)}</a>"
+        end
+      end
+    end
+
+    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/data_feeds/sitemap.rss.xml", 'wb') do |f|
+      f.write the_rss
+    end
+  end
+
+  def _top10new_rss
     require 'rss'
     the_rss = RSS::Maker::RSS20.make do |maker|
       maker.channel.title = '电子书(EBook)下载'
