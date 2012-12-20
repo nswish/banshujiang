@@ -45,8 +45,6 @@ class WebstorageLinksController < ApplicationController
     advert_type = 'int'
 
     ad_link = "http://api.adf.ly/api.php?key=34dd18483add2804990269bf458a83cf&uid=2960050&advert_type=#{advert_type}&domain=adf.ly&url=#{url}"
-    puts ad_link
-    puts url
 
     respond_to do |format|
       format.json do
