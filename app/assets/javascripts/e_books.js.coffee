@@ -6,4 +6,4 @@ adfly_shorten = (url) ->
 
 $(document).ready ->
   $('#webstorage_link_url').blur ->
-    adfly_shorten this.value
+    adfly_shorten this.value if $('#webstorage_link_ad_link').val().length == 0

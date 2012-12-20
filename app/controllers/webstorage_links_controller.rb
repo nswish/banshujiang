@@ -24,6 +24,22 @@ class WebstorageLinksController < ApplicationController
     redirect_to :back, notice: msg
   end
 
+  def edit
+#    raise Exception.new(params)
+    @e_book = EBook.find params[:e_book_id]
+    @webstorage_link = WebstorageLink.find params[:id]
+  end
+
+  def update
+    @webstorage_link = WebstorageLink.find params[:id]
+    
+    if cookies[:token]=='zwyxyz' and @webstorage_link.update_attributes(params[:webstorage_link])
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新成功！'
+    else
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新失败！'
+    end
+  end
+
   def adfly_shorten
     require 'net/http'
 
