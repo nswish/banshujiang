@@ -1,6 +1,6 @@
 class WebstorageLink < ActiveRecord::Base
   ### attributes
-  attr_accessible :e_book_id, :name, :url
+  attr_accessible :e_book_id, :name, :url, :ad_link
 
   ### relation
   belongs_to :e_book

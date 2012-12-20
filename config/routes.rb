@@ -1,5 +1,6 @@
 RailsApp::Application.routes.draw do
   match '/auth/:provider/callback' => 'users#index'
+  match '/webstorage_links/adfly_shorten.:format' => 'webstorage_links#adfly_shorten'
 
   resources :value_set_headers do
     resources :value_set_bodies
