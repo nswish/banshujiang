@@ -1,7 +1,5 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
-  ADFLY_PREFIX = 'http://api.adf.ly/api.php?key=34dd18483add2804990269bf458a83cf&uid=2960050&advert_type=int&domain=adf.ly&url='  
-  
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
@@ -44,12 +42,17 @@ class WebstorageLinksController < ApplicationController
     require 'net/http'
 
     url = params[:url]
+    advert_type = 'int'
+
+    ad_link = "http://api.adf.ly/api.php?key=34dd18483add2804990269bf458a83cf&uid=2960050&advert_type=#{advert_type}&domain=adf.ly&url=#{url}"
+    puts ad_link
+    puts url
 
     respond_to do |format|
       format.json do
         result = {}
         begin
-          result['ad_link'] = Net::HTTP.get(URI ADFLY_PREFIX+url)
+          result['ad_link'] = Net::HTTP.get(URI ad_link)
         rescue Exception => ex
           result['ad_link'] = ex.message
         end
