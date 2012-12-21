@@ -57,7 +57,7 @@ class EBooksController < ApplicationController
 
     if params[:token]=='zwyxyz' and @e_book.save
       rss
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'<<view_context.site_name<<view_context.standard_file_name(@e_book)
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'<<"["<<view_context.site_name<<"]"<<view_context.standard_file_name(@e_book)
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end

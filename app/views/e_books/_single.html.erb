@@ -37,7 +37,7 @@
 				<td>
           <ul class="inline">
           <% e_book.webstorage_links.each_with_index do |link, index|%>
-            <li>
+            <li style="padding-left:0px;">
             <%= 
               unless link.ad_link.blank? then
                 link_to link.name, link.ad_link, :target=>'_blank'
@@ -48,6 +48,9 @@
             </li>
           <% end %>
           </ul>
+          <div id="tip_<%=e_book.id%>">
+            <pre style="font-size:12px;">下载链接导向广告页面，5秒钟后，点击右上角“跳过广告”按钮，即可到达下载页面。广告是支撑本站长期运行的唯一收入来源。</pre>
+          </div>
 				</td>
 			</tr>
 		</table>
