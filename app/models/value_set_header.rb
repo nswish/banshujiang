@@ -22,7 +22,7 @@ class ValueSetHeader < ActiveRecord::Base
   end
 
   def name_value_array
-    [["",""]] + self.value_set_bodies.collect do |item|
+    self.value_set_bodies.collect do |item|
       [ item.name, item.value ]
     end
   end
@@ -30,6 +30,12 @@ class ValueSetHeader < ActiveRecord::Base
   def value_array
     self.value_set_bodies.collect do |item|
       [ item.value ]
+    end
+  end
+
+  def id_value_array
+    self.value_set_bodies.collect do |item|
+      [ item.id, item.value ]
     end
   end
 end

@@ -15,7 +15,7 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
   private
   def value_set_select(value_set, method, options={}, html_options={})
     header = ValueSetHeader.where(:name=>value_set).first
-		return select(method, header ? header.name_value_array : [],
+		return select(method, header ? [["", ""]] + header.name_value_array : [],
 									options, html_options)
   end
 end
