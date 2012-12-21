@@ -36,6 +36,10 @@ class EBooksController < ApplicationController
   def show
     @e_book = EBook.find(params[:id])
     @title = view_context.standard_file_name @e_book
+    respond_to do |format|
+      format.html
+      format.json { render json: @e_book}
+    end
   end
 
   # GET /e_books/new
@@ -57,7 +61,7 @@ class EBooksController < ApplicationController
 
     if params[:token]=='zwyxyz' and @e_book.save
       rss
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'<<"["<<view_context.site_name<<"]"<<view_context.standard_file_name(@e_book)
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
     else
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
     end
@@ -128,6 +132,7 @@ class EBooksController < ApplicationController
           item.link = url_for(ebook) 
           item.title = ebook.name
           item.description = "<p><strong>作者:</strong> #{ebook.author}</p><p><strong>下载地址:</strong></p> <a href='#{url_for(ebook)}'>#{url_for(ebook)}</a>"
+          item.pubDate = ebook.updated_at.to_s
         end
       end
     end
@@ -149,6 +154,7 @@ class EBooksController < ApplicationController
           item.link = url_for(ebook) 
           item.title = ebook.name
           item.description = "<p><strong>作者:</strong> #{ebook.author}</p><p><strong>下载地址:</strong></p> <a href='#{url_for(ebook)}'>#{url_for(ebook)}</a>"
+          item.pubDate = ebook.updated_at.to_s
         end
       end
     end
