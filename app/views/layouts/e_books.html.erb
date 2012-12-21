@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
   <title>[<%=site_name%>]<%=@title%> - 电子书(EBook) 免费下载</title>
   <meta property="wb:webmaster" content="919195fbd9f44369" />
@@ -9,6 +9,7 @@
   <%= javascript_include_tag "jquery_ujs" %>
   <%= javascript_include_tag "e_books" %>
   <%= csrf_meta_tags %>
+  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 	<style>
     body {
       background-color: #F4F4F4; 
@@ -47,6 +48,9 @@
       </ul>
       <ul class="nav pull-right">
         <li><a style="padding:3px;0px;3px;" href="/data_feeds/ebooks.rss.xml"><img src="/icons/rss.png" style="width:85px;" alt="RSS FEED"></img></a></li>
+      </ul>
+      <ul class="nav pull-right">
+        <li><div style="margin-top:8px;"><wb:follow-button uid="3198737743" type="gray_2" width="120" height="24" ></wb:follow-button></div></li>
       </ul>
     </div>
   </div>
