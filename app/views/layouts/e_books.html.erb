@@ -56,13 +56,13 @@
       </ul>
       <ul class="nav">
         <li>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book iconx"></i>分类</a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book iconx"></i> 分类</a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li class="dropdown-submenu" >
               <a class="category" tabindex="-1" href="javascript:void(0);">出版社</a>
               <ul class="dropdown-menu">
                 <% ValueSetHeader.find(2).id_value_array.each do |item|%>
-                  <li><a href="#"><%=item[1]%></a></li>
+                  <li><%=link_to item[1], "/category/publisher/#{item[1]}" %></a></li>
                 <% end %>
               </ul>
             </li>
@@ -70,7 +70,7 @@
               <a class="category" tabindex="-1" href="javascript:void(0);">编程语言</a>
               <ul class="dropdown-menu">
                 <% ValueSetHeader.find(3).id_value_array.each do |item|%>
-                  <li><a href="#"><%=item[1]%></a></li>
+                  <li><%=link_to item[1], "/category/programming_language/#{item[1]}" %></a></li>
                 <% end %>
               </ul>
             </li>

@@ -1,0 +1,59 @@
+<div class="row shadow-panel">
+	<div class="span6" style="">
+		<%= image_tag e_book.image_large, :style=>"width:420px;" %>
+	</div>
+	<div class="span6" style="font-size:18px;">
+		<br />
+		<table class="table tablex">
+			<tr>
+				<th colspan="2"><%=link_to "《#{e_book.name}》", e_book_url(e_book) %></th>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">作者：</td>
+				<td><%= e_book.author %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">语言：</td>
+				<td><%= e_book.language %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">格式：</td>
+				<td><%= e_book.format %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">编程语言：</td>
+				<td><%= e_book.programming_language %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">出版社：</td>
+				<td><%= e_book.publisher %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">出版年份：</td>
+				<td><%= e_book.publish_year %></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:100px;">下载链接：</td>
+				<td>
+          <ul class="inline">
+          <% e_book.webstorage_links.each_with_index do |link, index|%>
+            <li style="padding-left:0px;">
+            <%= 
+              unless link.ad_link.blank? then
+                link_to link.name, link.ad_link, :target=>'_blank'
+              else
+                link_to link.name, link.url, :target=>'_blank'
+              end
+            %>
+            </li>
+          <% end %>
+          </ul>
+          <div id="tip_<%=e_book.id%>">
+            <pre style="font-size:12px;">下载链接带有广告，广告出现5秒钟后，点击右上角“跳过广告”按钮，即可到达下载页面。广告是支撑本站长期运行的唯一收入来源。</pre>
+          </div>
+				</td>
+			</tr>
+		</table>
+		<br />
+	</div>
+</div>

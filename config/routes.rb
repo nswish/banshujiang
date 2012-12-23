@@ -1,4 +1,7 @@
 RailsApp::Application.routes.draw do
+  match 'category/:category/:name' => 'category#show'
+  match 'category/:category/:name/page/:id' => 'category#page'
+
   match '/auth/:provider/callback' => 'users#index'
   match '/webstorage_links/adfly_shorten.:format' => 'webstorage_links#adfly_shorten'
 
