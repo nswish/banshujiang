@@ -2,14 +2,14 @@
 	<div class="span6" style="">
 		<%= image_tag e_book.image_large, :style=>"width:420px;" %>
 	</div>
-	<div class="span6" style="font-size:18px;">
+	<div class="span6">
 		<br />
 		<table class="table tablex">
 			<tr>
-				<th colspan="2"><%=link_to "《#{e_book.name}》", e_book_url(e_book) %></th>
+				<th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", e_book_url(e_book) %></th>
 			</tr>
 			<tr>
-				<td style="text-align:right;width:100px;">作者：</td>
+				<td style="text-align:right;width:100px;border-top-width:1px;">作者：</td>
 				<td><%= e_book.author %></td>
 			</tr>
 			<tr>
