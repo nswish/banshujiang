@@ -10,7 +10,7 @@
   <ul>
     <% (1..@page_count).each do |index| %>
       <li <%if index == @page_id then %>class="active"<% end %>>
-        <%= link_to index.to_s, "/category/#{params[:category]}/#{params[:name]}/page/#{index.to_s}" %>
+        <%= link_to index.to_s, :controller=>:category, :action=>:page, :id=>index%>
       </li>
     <% end %>
   </ul>

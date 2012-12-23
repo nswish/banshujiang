@@ -71,16 +71,16 @@
             <li class="dropdown-submenu" >
               <a class="category" tabindex="-1" href="javascript:void(0);">出版社</a>
               <ul class="dropdown-menu">
-                <% ValueSetHeader.find(2).id_value_array.each do |item|%>
-                  <li><%=link_to item[1], "/category/publisher/#{item[1]}" %></a></li>
+                <% ValueSetHeader.find(2).name_value_array.each do |item|%>
+                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>:publisher, :name=>item[1] %></a></li>
                 <% end %>
               </ul>
             </li>
             <li class="dropdown-submenu" >
               <a class="category" tabindex="-1" href="javascript:void(0);">编程语言</a>
               <ul class="dropdown-menu">
-                <% ValueSetHeader.find(3).id_value_array.each do |item|%>
-                  <li><%=link_to item[1], "/category/programming_language/#{item[1]}" %></a></li>
+                <% ValueSetHeader.find(3).name_value_array.each do |item|%>
+                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>:programming_language, :name=>item[1] %></a></li>
                 <% end %>
               </ul>
             </li>
