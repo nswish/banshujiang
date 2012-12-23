@@ -46,6 +46,7 @@ class EBooksController < ApplicationController
   def new
     @title = "创建电子书"
     @e_book = EBook.new
+		@e_book.publish_year = Date.today.year
   end
 
   # GET /e_books/1/edit
