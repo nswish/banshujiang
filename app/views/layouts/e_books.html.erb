@@ -97,15 +97,16 @@
   </div>
 </div>
 
-<div style="margin-left:auto;margin-right:auto;width:960px;margin-top:44px;">
+<div style="margin-left:auto;margin-right:auto;width:980px;margin-top:44px;">
 <%= yield %>
 </div>
-
-<% if ENV['OPENSHIFT_GEAR_NAME'] and cookies[:token] != 'zwyxyz' %>
+<% if Rails.env == "production" && cookies[:token] != "zwyxyz" %>
+<div style="text-align:center;border-color:lightgrey;border-width:1px 0px 0px 0px;border-style:solid;padding-top:5px;margin-left:auto;margin-right:auto;width:980px;">
 <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc7bd33987a7db78b0a49281e580a214b' type='text/javascript'%3E%3C/script%3E"));
 </script>
+</div>
 <% end %>
 
 </body>
