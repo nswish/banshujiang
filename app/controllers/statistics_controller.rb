@@ -2,21 +2,25 @@ class StatisticsController < ApplicationController
   layout 'e_books'
 
   def index
-    @daily_increment = {
-      '12-01'=>5,
-      '12-02'=>5,
-      '12-03'=>5,
-      '12-04'=>5,
-      '12-05'=>5,
-      '12-06'=>5,
-      '12-07'=>5,
-      '12-08'=>5,
-      '12-09'=>5,
-      '12-10'=>5,
-      '12-11'=>5,
-      '12-12'=>5,
-      '12-13'=>5,
-      '12-14'=>5
-    }
+    @daily_increment = _daily_increment
   end
+
+	private
+	def _daily_increment
+		result = {}
+
+		to_date = Date.today
+		from_date = to_date - 13
+		
+		(from_date..to_date).each do |d|
+			result[d.strftime '%m-%d'] = 0
+		end
+
+		EBook.where(:created_at=>from_date..(to_date+1)).order(:created_at).each do |ebook|
+			index = ebook.created_at.strftime('%m-%d')
+			result[index] = result[index] + 1
+		end
+
+		result
+	end
 end

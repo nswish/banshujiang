@@ -6,31 +6,47 @@ $(document).ready(function() {
 
   chart1 = new Highcharts.Chart({
     chart: {
-      renderTo: 'container',
-        type: 'column'
-      },
-      title: {
-        text: '每日新增的书籍量'
-      },
-      xAxis: {
-        categories: category
-      },
-      plotOptions: {
-        column: {
-          dataLabels: {
-            enabled: true,
-            formatter: function(){
-              return this.y;
-            }
-          }
-        }
-      },
-      series: [{
-        name: '新增书籍',
-        'data': data
-      }]
-    });
-  }); 
+			width: 420,
+			height: 300,
+			renderTo: 'container',
+			type: 'column',
+			backgroundColor: '#FFFFFF',
+			shadow: true
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: '最近两周书籍增加情况(每日)'
+		},
+		xAxis: {
+			categories: category,
+			labels: {
+				formatter: function(){
+					return this.value.split('-')[1];
+				}
+			}
+		},
+		yAxis: {
+			title: null 
+		},
+		plotOptions: {
+			column: {
+				dataLabels: {
+					enabled: true,
+					formatter: function(){
+						return this.y+'本';
+					}
+				}
+			}
+		},
+		series: [{
+			name: '新增书籍',
+			'data': data
+  	}]
+  });
+}); 
 </script>
+<br />
 <div id="container">
 </div>
