@@ -68,22 +68,16 @@
         <li>
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book iconx"></i> 分类</a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <% [{:id=>2, :name=>'出版社', :value=>:publisher}, {:id=>3, :name=>'编程语言', :value=>:programming_language}].each do |category| %>
             <li class="dropdown-submenu" >
-              <a class="category" tabindex="-1" href="javascript:void(0);">出版社</a>
+              <a class="category" tabindex="-1" href="javascript:void(0);"><%=category[:name]%></a>
               <ul class="dropdown-menu">
-                <% ValueSetHeader.find(2).name_value_array.each do |item|%>
-                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>:publisher, :name=>item[1] %></a></li>
+                <% ValueSetHeader.find(category[:id]).name_value_array.each do |item|%>
+                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>category[:value], :name=>item[1] %></a></li>
                 <% end %>
               </ul>
             </li>
-            <li class="dropdown-submenu" >
-              <a class="category" tabindex="-1" href="javascript:void(0);">编程语言</a>
-              <ul class="dropdown-menu">
-                <% ValueSetHeader.find(3).name_value_array.each do |item|%>
-                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>:programming_language, :name=>item[1] %></a></li>
-                <% end %>
-              </ul>
-            </li>
+            <% end %>
           </ul>
         </li>
       </ul>
