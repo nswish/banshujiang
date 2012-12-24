@@ -1,0 +1,36 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script>
+$(document).ready(function() {
+  var category = <%=raw @daily_increment.keys %>;
+  var data = <%=raw @daily_increment.values %>;
+
+  chart1 = new Highcharts.Chart({
+    chart: {
+      renderTo: 'container',
+        type: 'column'
+      },
+      title: {
+        text: '每日新增的书籍量'
+      },
+      xAxis: {
+        categories: category
+      },
+      plotOptions: {
+        column: {
+          dataLabels: {
+            enabled: true,
+            formatter: function(){
+              return this.y;
+            }
+          }
+        }
+      },
+      series: [{
+        name: '新增书籍',
+        'data': data
+      }]
+    });
+  }); 
+</script>
+<div id="container">
+</div>

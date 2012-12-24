@@ -33,6 +33,9 @@ class EBook < ActiveRecord::Base
         ebook.initialize_dup item 
         ebook.id = item.id
         ebook.save
+        ebook.created_at = item.created_at
+        ebook.updated_at = item.updated_at
+        ebook.save
 
         if url and ebook.image_large then
           require 'net/http'

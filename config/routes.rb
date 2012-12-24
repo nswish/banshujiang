@@ -1,4 +1,6 @@
 RailsApp::Application.routes.draw do
+  get "statistics/index"
+
   match 'category/:category/:name' => 'category#show'
   match 'category/:category/:name/page/:id' => 'category#page'
 
