@@ -17,7 +17,7 @@ $(document).ready(function() {
 			enabled: false
 		},
 		title: {
-			text: '最近两周书籍增加情况(每日)'
+			text: '最近两周书籍增加统计(每日)'
 		},
 		xAxis: {
 			categories: category,
@@ -62,7 +62,7 @@ $(document).ready(function() {
 			enabled: false
 		},
 		title: {
-			text: '书籍出版年份统计情况'
+			text: '出版年份统计'
 		},
 		xAxis: {
 			categories: category_2,
@@ -91,6 +91,51 @@ $(document).ready(function() {
   	}]
   });
 
+  var category_3 = <%=raw @programming_language_count.keys %>;
+  var data_3 = <%=raw @programming_language_count.values %>;
+
+  var chart2 = new Highcharts.Chart({
+    chart: {
+			width: 920,
+			height: 300,
+			renderTo: 'container3',
+			type: 'column',
+			backgroundColor: '#FFFFFF',
+			shadow: true
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: '编程语言统计'
+		},
+		xAxis: {
+			categories: category_3,
+			labels: {
+				formatter: function(){
+					return this.value;
+				}
+			}
+		},
+		yAxis: {
+			title: null 
+		},
+		plotOptions: {
+			column: {
+				dataLabels: {
+					enabled: true,
+					formatter: function(){
+						return this.y+'本';
+					}
+				}
+			}
+		},
+		series: [{
+			name: '编程语言',
+			'data': data_3
+  	}]
+  });
+
 
 }); 
 </script>
@@ -99,5 +144,9 @@ $(document).ready(function() {
   <div class="span6" id="container1">
   </div>
   <div class="span6" id="container2">
+  </div>
+</div>
+<div class="row" style="margin-left:0px;margin-top:10px;margin-bottom:20px;">
+  <div id="container3" class="span12">
   </div>
 </div>

@@ -4,6 +4,7 @@ class StatisticsController < ApplicationController
   def index
     @daily_increment = _daily_increment
     @year_count = _year_count
+    @programming_language_count = _programming_language_count
   end
 
 	private
@@ -33,5 +34,19 @@ class StatisticsController < ApplicationController
     end
 
     return result
+  end
+
+  def _programming_language_count
+    result = {}
+
+    ValueSetHeader.find(3).value_array.collect do |item|
+      result[item[0]] = 0
+    end
+
+    EBook.select('programming_language, count(1) as counts').group('programming_language').order('programming_language').collect do |item|
+      result[item.programming_language] = item.counts
+    end
+
+    return result;
   end
 end
