@@ -10,7 +10,7 @@ class StatisticsController < ApplicationController
 	def _daily_increment
 		result = {}
 
-		to_date = Date.today
+		to_date = Date.today.to_time_in_current_zone.to_date
 		from_date = to_date - 13
 		
 		(from_date..to_date).each do |d|
