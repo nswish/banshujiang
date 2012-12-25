@@ -4,11 +4,11 @@ $(document).ready(function() {
   var category = <%=raw @daily_increment.keys %>;
   var data = <%=raw @daily_increment.values %>;
 
-  chart1 = new Highcharts.Chart({
+  var chart1 = new Highcharts.Chart({
     chart: {
-			width: 420,
+			width: 440,
 			height: 300,
-			renderTo: 'container',
+			renderTo: 'container1',
 			type: 'column',
 			backgroundColor: '#FFFFFF',
 			shadow: true
@@ -45,8 +45,59 @@ $(document).ready(function() {
 			'data': data
   	}]
   });
+
+  var category_2 = <%=raw @year_count.keys %>;
+  var data_2 = <%=raw @year_count.values %>;
+
+  var chart2 = new Highcharts.Chart({
+    chart: {
+			width: 440,
+			height: 300,
+			renderTo: 'container2',
+			type: 'column',
+			backgroundColor: '#FFFFFF',
+			shadow: true
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: '书籍出版年份统计情况'
+		},
+		xAxis: {
+			categories: category_2,
+			labels: {
+				formatter: function(){
+					return this.value;
+				}
+			}
+		},
+		yAxis: {
+			title: null 
+		},
+		plotOptions: {
+			column: {
+				dataLabels: {
+					enabled: true,
+					formatter: function(){
+						return this.y+'本';
+					}
+				}
+			}
+		},
+		series: [{
+			name: '出版年份',
+			'data': data_2
+  	}]
+  });
+
+
 }); 
 </script>
 <br />
-<div id="container">
+<div class="row" style="margin-left:0px;">
+  <div class="span6" id="container1">
+  </div>
+  <div class="span6" id="container2">
+  </div>
 </div>

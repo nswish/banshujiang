@@ -3,6 +3,7 @@ class StatisticsController < ApplicationController
 
   def index
     @daily_increment = _daily_increment
+    @year_count = _year_count
   end
 
 	private
@@ -21,6 +22,16 @@ class StatisticsController < ApplicationController
 			result[index] = result[index] + 1
 		end
 
-		result
+		return result
 	end
+
+  def _year_count
+		result = {}
+
+    EBook.select('publish_year, count(1) as counts').group('publish_year').order('publish_year').each do |item|
+      result[item.publish_year.to_s] = item.counts
+    end
+
+    return result
+  end
 end
