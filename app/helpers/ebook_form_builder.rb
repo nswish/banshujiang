@@ -12,6 +12,10 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
     value_set_select('programming_languages', method)
   end
 
+  def mobile_development_select(method, options={}, html_options={})
+    value_set_select('mobile_developments', method)
+  end
+
   private
   def value_set_select(value_set, method, options={}, html_options={})
     header = ValueSetHeader.where(:name=>value_set).first

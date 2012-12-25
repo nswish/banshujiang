@@ -14,35 +14,39 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :name %>
+      <%= f.label :name, '书籍名称'%>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label :author %>
+      <%= f.label :author, '作者' %>
       <%= f.text_field :author %>
     </div>
     <div class="field">
-      <%= f.label :programming_language %>
+      <%= f.label :programming_language, '编程语言' %>
       <%= f.programming_language_select :programming_language %>
     </div>
     <div class="field">
-      <%= f.label :publish_year %>
+      <%= f.label :publish_year, '出版年份' %>
       <%= f.number_field :publish_year %>
     </div>
     <div class="field">
-      <%= f.label :publisher %>
+      <%= f.label :publisher, '出版社' %>
       <%= f.publisher_select(:publisher) %>
     </div>
     <div class="field">
-      <%= f.label :format %>
+      <%= f.label :mobile_development, '移动开发' %>
+      <%= f.mobile_development_select(:mobile_development) %>
+    </div>
+    <div class="field">
+      <%= f.label :format, '格式' %>
       <%= f.select(:format, [["PDF", "PDF"], ["CHM", "CHM"]]) %>
     </div>
     <div class="field">
-      <%= f.label :language %>
+      <%= f.label :language, '语言' %>
       <%= f.select(:language, [["英文", "英文"], ["中文", "中文"]]) %>
     </div>
     <div class="field">
-      <%= f.label :image_large_file %>
+      <%= f.label :image_large_file, '书籍封面' %>
       <%= f.file_field :image_large_file %>
     </div>
    

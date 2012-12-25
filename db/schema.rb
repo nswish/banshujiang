@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220034400) do
+ActiveRecord::Schema.define(:version => 20121225080437) do
 
   create_table "e_books", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121220034400) do
     t.datetime "updated_at",           :null => false
     t.integer  "publish_year"
     t.string   "programming_language"
+    t.string   "mobile_development"
   end
 
   create_table "identities", :force => true do |t|
