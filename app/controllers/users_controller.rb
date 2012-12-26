@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-#    raise request.env['omniauth.auth'].to_yaml
     @users = User.all
 
     respond_to do |format|
@@ -81,4 +80,8 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def register
+		@user = User.new
+	end
 end
