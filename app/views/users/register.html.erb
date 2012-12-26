@@ -1,3 +1,19 @@
+<!--在验证码输入的onkeyup事件中进行验证，请按照以下提示进行-->   
+<!--定义名称为CustomDefinedAjaxOnkeyup的回调函数-->
+<script type="text/javascript">
+function CustomDefinedAjaxOnkeyup(result){
+	if(result){
+		//此处编写验证码正确后的处理代码
+		alert('correct');
+	}else{
+		//此处编写验证码错误后的处理代码
+		alert('not correct');
+	}
+}
+</script>
+<!--请将以下代码粘贴在您希望出现验证码的地方，请注意yucmedia目录的路径，以下都是以添加验证码的页面和yucmedia目录在同一个目录下做举例-->
+<script type="text/javascript" src="http://www.jiani.info/yucmedia/Action/load.php"></script>
+<input name="yucinput54962e688b" type="text" id="yucinput54962e688b" />
 <%= form_for @user do |f| %>
 <%= f.text_field :name %>
 <%= f.password_field :password %>
