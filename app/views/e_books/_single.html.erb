@@ -21,29 +21,17 @@
 				<td><%= e_book.format %></td>
 			</tr>
 			<tr>
-				<td style="text-align:right;width:100px;">编程语言：</td>
-				<td><%= e_book.programming_language %></td>
-			</tr>
-      <% unless e_book.mobile_development.blank? then %>
-			<tr>
-				<td style="text-align:right;width:100px;">移动开发：</td>
-				<td><%= e_book.mobile_development %></td>
-			</tr>
-      <% end %>
-      <% unless e_book.operation_system.blank? then %>
-			<tr>
-				<td style="text-align:right;width:100px;">操作系统：</td>
-				<td><%= e_book.operation_system %></td>
-			</tr>
-      <% end %>
-			<tr>
-				<td style="text-align:right;width:100px;">出版社：</td>
-				<td><%= e_book.publisher %></td>
-			</tr>
-			<tr>
 				<td style="text-align:right;width:100px;">出版年份：</td>
 				<td><%= e_book.publish_year %></td>
 			</tr>
+      <% ValueSetHeader.categories.each do |category| %>
+        <% unless e_book.send(ActiveSupport::Inflector.singularize(category.name)).blank? then %>
+        <tr>
+          <td style="text-align:right;width:100px;"><%=category.title%>：</td>
+          <td><%= e_book.send(ActiveSupport::Inflector.singularize(category.name)) %></td>
+        </tr>
+        <% end %>
+      <% end %>
 			<tr>
 				<td style="text-align:right;width:100px;">下载链接：</td>
 				<td>
