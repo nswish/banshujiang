@@ -19,29 +19,40 @@ class ValueSetHeadersController < ApplicationController
     end
   end
 
+  def edit
+    @value_set_header = ValueSetHeader.find(params[:id])
+  end
+
   # GET /value_set_headers/new
-  # GET /value_set_headers/new.json
   def new
     @value_set_header = ValueSetHeader.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @value_set_header }
     end
   end
 
   # POST /value_set_headers
-  # POST /value_set_headers.json
   def create
     @value_set_header = ValueSetHeader.new(params[:value_set_header])
 
     respond_to do |format|
       if @value_set_header.save
         format.html { redirect_to @value_set_header, notice: 'Value set header was successfully created.' }
-        format.json { render json: @value_set_header, status: :created, location: @value_set_header }
       else
         format.html { render action: "new" }
-        format.json { render json: @value_set_header.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @value_set_header = ValueSetHeader.find params[:id]
+
+    respond_to do |format|
+      if @value_set_header.update_attributes params[:value_set_header] then
+        format.html { redirect_to @value_set_header, notice: 'Value set header was successfully updated.' }
+      else
+        format.html { render action: "edit" }
       end
     end
   end

@@ -1,5 +1,5 @@
 class ValueSetHeader < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :title, :is_category
 
   has_many :value_set_bodies
 

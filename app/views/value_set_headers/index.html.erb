@@ -3,6 +3,9 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Title</th>
+    <th>IsCategory</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,9 +14,12 @@
 <% @value_set_headers.each do |value_set_header| %>
   <tr>
     <td><%= value_set_header.name %></td>
+    <td><%= value_set_header.title %></td>
+    <td><%= value_set_header.is_category %></td>
     <td><%= link_to 'Show', value_set_header %></td>
-    <td><%= link_to 'Edit', value_set_header_value_set_bodies_path(value_set_header) %></td>
+    <td><%= link_to '编辑子项', value_set_header_value_set_bodies_path(value_set_header) %></td>
     <td><%= link_to 'Destroy', value_set_header, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '编辑', edit_value_set_header_path(value_set_header) %></td>
   </tr>
 <% end %>
 </table>
