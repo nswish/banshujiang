@@ -1,23 +1,7 @@
 #-*- encoding: utf-8 -*-
 class EbookFormBuilder < ActionView::Helpers::FormBuilder
-  def webstorage_select(method, options={}, html_options={})
-    value_set_select('webstorages', method)
-  end
-
-  def publisher_select(method, options={}, html_options={})
-    value_set_select('publishers', method)
-  end
-
-  def programming_language_select(method, options={}, html_options={})
-    value_set_select('programming_languages', method)
-  end
-
-  def mobile_development_select(method, options={}, html_options={})
-    value_set_select('mobile_developments', method)
-  end
-
-  def operation_system_select(method, options={}, html_options={})
-    value_set_select('operation_systems', method)
+  def category_select(method, options={}, html_options={})
+    value_set_select(ActiveSupport::Inflector.pluralize(method), method)
   end
 
   private

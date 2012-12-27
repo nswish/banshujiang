@@ -4,7 +4,14 @@
   <b>Name:</b>
   <%= @value_set_header.name %>
 </p>
-
+<p>
+  <b>Title:</b>
+  <%= @value_set_header.title %>
+</p>
+<p>
+  <b>IsCategory:</b>
+  <%= @value_set_header.is_category %>
+</p>
 
 <%= link_to 'Edit', edit_value_set_header_path(@value_set_header) %> |
 <%= link_to 'Back', value_set_headers_path %>

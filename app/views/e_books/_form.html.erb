@@ -22,25 +22,17 @@
       <%= f.text_field :author %>
     </div>
     <div class="field">
-      <%= f.label :programming_language, '编程语言' %>
-      <%= f.programming_language_select :programming_language %>
-    </div>
-    <div class="field">
       <%= f.label :publish_year, '出版年份' %>
       <%= f.number_field :publish_year %>
     </div>
+
+    <% ValueSetHeader.categories.each do |category|  %>
     <div class="field">
-      <%= f.label :publisher, '出版社' %>
-      <%= f.publisher_select(:publisher) %>
+      <%= f.label ActiveSupport::Inflector.singularize(category.name), category.title %>
+      <%= f.category_select(ActiveSupport::Inflector.singularize(category.name)) %>
     </div>
-    <div class="field">
-      <%= f.label :mobile_development, '移动开发' %>
-      <%= f.mobile_development_select(:mobile_development) %>
-    </div>
-    <div class="field">
-      <%= f.label :operation_system, '操作系统' %>
-      <%= f.operation_system_select(:operation_system) %>
-    </div>
+    <% end %>
+
     <div class="field">
       <%= f.label :format, '格式' %>
       <%= f.select(:format, [["PDF", "PDF"], ["CHM", "CHM"]]) %>
