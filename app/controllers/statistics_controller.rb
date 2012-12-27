@@ -44,7 +44,7 @@ class StatisticsController < ApplicationController
     end
 
     EBook.select('programming_language, count(1) as counts').group('programming_language').order('programming_language').collect do |item|
-      result[item.programming_language] = item.counts
+      result[item.programming_language] = item.counts unless item.programming_language.blank?
     end
 
     return result;
