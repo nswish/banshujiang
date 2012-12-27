@@ -1,7 +1,10 @@
 #-*- encoding: utf-8 -*-
 class EbookFormBuilder < ActionView::Helpers::FormBuilder
-  def webstorage_select(method, options={}, html_options={})
-    value_set_select(ActiveSupport::Inflector.pluralize(method), method)
+  ValueSetHeader.all.each do |header|
+    method_name = ActiveSupport::Inflector.singularize(header.name) + "_select"
+    define_method method_name do |method, options={}, html_options={}|
+      value_set_select(header.name.dup, method, options, html_options)
+    end
   end
 
   def category_select(method, options={}, html_options={})
