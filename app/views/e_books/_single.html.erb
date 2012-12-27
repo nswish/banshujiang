@@ -3,57 +3,77 @@
 		<%= image_tag e_book.image_large, :style=>"width:420px;max-height:560px;min-height:560px;height:560px;" %>
 	</div>
 	<div class="span6">
-		<br />
-		<table class="table tablex">
-			<tr>
-				<th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", e_book_url(e_book) %></th>
-			</tr>
-			<tr>
-				<td style="text-align:right;width:100px;border-top-width:1px;">作者：</td>
-				<td><%= e_book.author %></td>
-			</tr>
-			<tr>
-				<td style="text-align:right;width:100px;">语言：</td>
-				<td><%= e_book.language %></td>
-			</tr>
-			<tr>
-				<td style="text-align:right;width:100px;">格式：</td>
-				<td><%= e_book.format %></td>
-			</tr>
-			<tr>
-				<td style="text-align:right;width:100px;">出版年份：</td>
-				<td><%= e_book.publish_year %></td>
-			</tr>
-      <% ValueSetHeader.categories.each do |category| %>
-        <% unless e_book.send(ActiveSupport::Inflector.singularize(category.name)).blank? then %>
-        <tr>
-          <td style="text-align:right;width:100px;"><%=category.title%>：</td>
-          <td><%= e_book.send(ActiveSupport::Inflector.singularize(category.name)) %></td>
-        </tr>
-        <% end %>
-      <% end %>
-			<tr>
-				<td style="text-align:right;width:100px;">下载链接：</td>
-				<td>
-          <ul class="inline">
-          <% e_book.webstorage_links.each_with_index do |link, index|%>
-            <li style="padding-left:0px;">
-            <%= 
-              unless link.ad_link.blank? then
-                link_to link.name, link.ad_link, :target=>'_blank'
-              else
-                link_to link.name, link.url, :target=>'_blank'
-              end
-            %>
-            </li>
-          <% end %>
-          </ul>
-          <div id="tip_<%=e_book.id%>">
-            <pre style="font-size:12px;">下载链接带有广告，广告出现5秒钟后，点击右上角“跳过广告”按钮，即可到达下载页面。广告是支撑本站长期运行的唯一收入来源。</pre>
-          </div>
-				</td>
-			</tr>
-		</table>
-		<br />
+		<div style="height:510px;padding-top:20px;">
+			<table class="table tablex">
+				<tr>
+					<th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", e_book_url(e_book) %></th>
+				</tr>
+				<tr>
+					<td style="text-align:right;width:100px;border-top-width:1px;">作者：</td>
+					<td><%= e_book.author %></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;width:100px;">语言：</td>
+					<td><%= e_book.language %></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;width:100px;">格式：</td>
+					<td><%= e_book.format %></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;width:100px;">出版年份：</td>
+					<td><%= e_book.publish_year %></td>
+				</tr>
+				<% ValueSetHeader.categories.each do |category| %>
+					<% unless e_book.send(ActiveSupport::Inflector.singularize(category.name)).blank? then %>
+					<tr>
+						<td style="text-align:right;width:100px;"><%=category.title%>：</td>
+						<td><%= e_book.send(ActiveSupport::Inflector.singularize(category.name)) %></td>
+					</tr>
+					<% end %>
+				<% end %>
+				<tr>
+					<td style="text-align:right;width:100px;">下载链接：</td>
+					<td>
+						<ul class="inline">
+						<% e_book.webstorage_links.each_with_index do |link, index|%>
+							<li style="padding-left:0px;">
+							<%= 
+								unless link.ad_link.blank? then
+									link_to link.name, link.ad_link, :target=>'_blank'
+								else
+									link_to link.name, link.url, :target=>'_blank'
+								end
+							%>
+							</li>
+						<% end %>
+						</ul>
+						<div id="tip_<%=e_book.id%>">
+							<pre style="font-size:12px;">下载链接带有广告，广告出现5秒钟后，点击右上角“跳过广告”按钮，即可到达下载页面。广告是支撑本站长期运行的唯一收入来源。</pre>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<% if params[:action] == 'show' %>
+		<div style="height:30px;">
+			<!-- Baidu Button BEGIN -->
+			<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right;">
+				<span class="bds_more">分享到：</span>
+				<a class="bds_qzone"></a>
+				<a class="bds_tsina"></a>
+				<a class="bds_tqq"></a>
+				<a class="bds_renren"></a>
+				<a class="bds_t163"></a>
+				<a class="shareCount"></a>
+			</div>
+			<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=5227233" ></script>
+			<script type="text/javascript" id="bdshell_js"></script>
+			<script type="text/javascript">
+			document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+			</script>
+			<!-- Baidu Button END -->
+		</div>
+		<% end %>
 	</div>
 </div>
