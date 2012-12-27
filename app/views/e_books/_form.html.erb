@@ -38,6 +38,10 @@
       <%= f.mobile_development_select(:mobile_development) %>
     </div>
     <div class="field">
+      <%= f.label :operation_system, '操作系统' %>
+      <%= f.operation_system_select(:operation_system) %>
+    </div>
+    <div class="field">
       <%= f.label :format, '格式' %>
       <%= f.select(:format, [["PDF", "PDF"], ["CHM", "CHM"]]) %>
     </div>

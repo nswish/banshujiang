@@ -1,8 +1,8 @@
 #-*- encoding: utf-8 -*-
 class EbookFormBuilder < ActionView::Helpers::FormBuilder
-	def webstorage_select(method, options={}, html_options={})
+  def webstorage_select(method, options={}, html_options={})
     value_set_select('webstorages', method)
-	end
+  end
 
   def publisher_select(method, options={}, html_options={})
     value_set_select('publishers', method)
@@ -14,6 +14,10 @@ class EbookFormBuilder < ActionView::Helpers::FormBuilder
 
   def mobile_development_select(method, options={}, html_options={})
     value_set_select('mobile_developments', method)
+  end
+
+  def operation_system_select(method, options={}, html_options={})
+    value_set_select('operation_systems', method)
   end
 
   private
