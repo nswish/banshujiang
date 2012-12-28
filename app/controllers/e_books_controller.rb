@@ -35,6 +35,7 @@ class EBooksController < ApplicationController
   # GET /e_books/1
   def show
     @e_book = EBook.find(params[:id])
+    @related_ebooks = @e_book.related_ebooks
     @title = view_context.standard_file_name @e_book
     respond_to do |format|
       format.html

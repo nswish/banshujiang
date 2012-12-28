@@ -14,11 +14,25 @@ class EBook < ActiveRecord::Base
 	after_save :save_upload_image_large
 
   ### public methods
+  public
 	def image_large_file=(file_data)
 		unless file_data.blank?
 			@file_data = file_data
 		end
 	end
+
+  def related_ebooks(limit=8)
+    result = []
+
+    [:operation_system, :mobile_development, :programming_language, :publisher].each do |item|
+      if limit > 0 && !self.send(item).blank?
+        result += EBook.where("#{item.to_s}=:#{item} and id != :id", {item=>self.send(item), :id=>self.id}).limit(limit)
+        limit = limit - result.size
+      end
+    end
+
+    return result
+  end
 
   def EBook.export
     YAML.dump(EBook.all)
