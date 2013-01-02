@@ -1,20 +1,56 @@
-<!--在验证码输入的onkeyup事件中进行验证，请按照以下提示进行-->   
-<!--定义名称为CustomDefinedAjaxOnkeyup的回调函数-->
-<script type="text/javascript">
-function CustomDefinedAjaxOnkeyup(result){
-	if(result){
-		//此处编写验证码正确后的处理代码
-		alert('correct');
-	}else{
-		//此处编写验证码错误后的处理代码
-		alert('not correct');
-	}
-}
-</script>
-<!--请将以下代码粘贴在您希望出现验证码的地方，请注意yucmedia目录的路径，以下都是以添加验证码的页面和yucmedia目录在同一个目录下做举例-->
-<script type="text/javascript" src="http://www.jiani.info/yucmedia/Action/load.php"></script>
-<input name="yucinput54962e688b" type="text" id="yucinput54962e688b" />
-<%= form_for @user do |f| %>
-<%= f.text_field :name %>
-<%= f.password_field :password %>
+<% if @user.errors.size > 0 %>
+<div style="border-style:solid;border-width:1px;border-color:red;padding-top:12px;text-align:center;color:red;">
+	<% @user.errors.each do |errkey, errvalue|%>
+		<p><%=errvalue%></p>
+		<% break %>
+	<% end %>
+</div>
 <% end %>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+	<div class="span6">
+		<div style="height:100px;"></div>
+		<div style="height:300px;font-size:40px;padding-left:160px;">
+			注册用户
+		</div>
+	</div>
+	<div class="span6" style="border-width:0px 0px 0px 1px;border-style:dashed;border-color:grey;">
+	<%= form_for @user, :html=>{:class=>'form-horizontal', :style=>'margin-bottom:0px;'} do |f| %>
+		<div class="control-group">
+			<%= f.label :email, '电子邮箱', :class=>'control-label' %>
+			<div class="controls">
+				<%= f.text_field :email %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :password, '登录密码', :class=>'control-label' %>
+			<div class="controls">
+				<%= f.password_field :password %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :password_confirmation, '密码确认', :class=>'control-label' %>
+			<div class="controls">
+				<%= f.password_field :password_confirmation %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :age, '出生年代', :class=>'control-label' %>
+			<div class="controls">
+				<%= f.select :age, [["", ""], ["70后", "70后"], ["80后", "80后"], ["90后", "90后"]] %>
+			</div>
+		</div>
+		<div class="control-group" style="margin-bottom:0px;">
+			<div class="controls">
+				<%= f.submit '注册新用户' %>
+			</div>
+		</div>
+	<% end %>
+	</div>
+</div>

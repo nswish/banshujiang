@@ -39,11 +39,7 @@
 						<% e_book.webstorage_links.each_with_index do |link, index|%>
 							<li style="padding-left:0px;">
 							<%= 
-								unless link.ad_link.blank? then
-									link_to link.name, link.ad_link, :target=>'_blank'
-								else
-									link_to link.name, link.url, :target=>'_blank'
-								end
+								link_to link.name, {:controller=>:webstorage_links, :action=>:to_link, :e_book_id=>e_book.id, :id=>link.id}, :target=>'_blank'
 							%>
 							</li>
 						<% end %>

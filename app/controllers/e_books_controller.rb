@@ -39,7 +39,6 @@ class EBooksController < ApplicationController
     @title = view_context.standard_file_name @e_book
     respond_to do |format|
       format.html
-      format.json { render json: @e_book}
     end
   end
 

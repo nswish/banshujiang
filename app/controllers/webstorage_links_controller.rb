@@ -1,5 +1,7 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
+	before_filter :require_login, :only => [:to_link]
+
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
@@ -58,4 +60,15 @@ class WebstorageLinksController < ApplicationController
       end
     end
   end
+
+	def to_link
+		link = WebstorageLink.find params[:id]
+		
+		unless link.ad_link.blank? then
+			redirect_to link.ad_link
+		else
+			redirect_to link.url
+		end
+
+	end
 end

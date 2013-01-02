@@ -9,6 +9,8 @@ RailsApp::Application.routes.draw do
 	resources :users do
 		collection do
 			get 'register', :action => :register
+			get 'login', :action => :login
+			put 'auth', :action => :auth
 		end
 	end
 
@@ -29,7 +31,11 @@ RailsApp::Application.routes.draw do
 			match :import
     end
     
-    resources :webstorage_links
+    resources :webstorage_links do
+			collection do
+				get ':id/to_link', :action=>:to_link
+			end
+		end
   end
 
   get "configinfo/index"
