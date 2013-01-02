@@ -12,7 +12,7 @@
 <br />
 <div class="row">
 	<div class="span6">
-		<div style="height:57px;"></div>
+		<div style="height:70px;"></div>
 		<div style="height:200px;font-size:40px;text-align:center;">
 			登录
 		</div>
@@ -31,9 +31,14 @@
 				<%= password_field_tag :password %>
 			</div>
 		</div>
-		<div class="control-group" style="margin-bottom:0px;">
+		<div class="control-group">
 			<div class="controls">
 				<%= submit_tag '登录' %>
+			</div>
+		</div>
+		<div class="control-group" style="margin-bottom:0px;">
+			<div class="controls">
+				<%= link_to '还没有注册？点击这里', {:controller=>:users, :action=>:register} %>
 			</div>
 		</div>
 	<% end %>
