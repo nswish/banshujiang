@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -13,7 +14,7 @@ class ApplicationController < ActionController::Base
 
 	def require_login
 		unless session[:user_id] then
-			redirect_to url_for(:controller=>:users, :action=>:login)
+			redirect_to url_for(:controller=>:users, :action=>:login), :notice => '请先登录'
 		end
 	end
 end
