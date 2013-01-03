@@ -31,8 +31,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.register
-			redirect_to url_for('/')
-			session[:user] = @user
+			redirect_to :root
+			session[:user_id] = @user.id
 		else
 			render :register 
 		end
