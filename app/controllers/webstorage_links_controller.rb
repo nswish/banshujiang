@@ -41,6 +41,7 @@ class WebstorageLinksController < ApplicationController
   end
 
   def adfly_shorten
+=begin
     require 'net/http'
 
     url = params[:url]
@@ -59,16 +60,11 @@ class WebstorageLinksController < ApplicationController
         render json: result 
       end
     end
+=end
   end
 
 	def to_link
 		link = WebstorageLink.find params[:id]
-		
-		unless link.ad_link.blank? then
-			redirect_to link.ad_link
-		else
-			redirect_to link.url
-		end
-
+		redirect_to 'http://adf.ly/2960050/banner/' + link.url
 	end
 end
