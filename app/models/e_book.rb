@@ -6,6 +6,8 @@ class EBook < ActiveRecord::Base
 
   ### relation
   has_many :webstorage_links
+  has_many :download_priviledges
+  has_many :users, :through => :download_priviledges
 
   ### constants
 	IMAGE_DIR = 'data_images'

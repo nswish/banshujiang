@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 	attr_accessible :password, :password_confirmation, :kind, :score, :age, :ip
 	attr_accessor :password_confirmation
 
+  ### relation
+  has_many :download_priviledges
+  has_many :e_books, :through => :download_priviledges
+
 	@registering = false
 
 	# validation

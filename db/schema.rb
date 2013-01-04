@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102041610) do
+ActiveRecord::Schema.define(:version => 20130104031910) do
+
+  create_table "download_priviledges", :force => true do |t|
+    t.integer  "e_book_id"
+    t.integer  "user_id"
+    t.datetime "expiration_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "e_books", :force => true do |t|
     t.string   "name"
