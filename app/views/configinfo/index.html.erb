@@ -11,6 +11,7 @@
 	<li>host:     <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%></li>
 	<li>port:     <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%></li>
 	<li>__FILE__:	<%=__FILE__%></li>
-  <li>env: <%=env%></li>
+  <li>request.env: <%=debug request.env %></li>
+	<li>ENV:	<%=debug ENV%></li>
 </ul>
 
