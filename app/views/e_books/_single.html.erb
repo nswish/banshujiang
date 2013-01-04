@@ -38,9 +38,7 @@
 						<ul class="inline">
 						<% e_book.webstorage_links.each_with_index do |link, index|%>
 							<li style="padding-left:0px;">
-							<%= 
-								link_to link.name, {:controller=>:webstorage_links, :action=>:to_link, :e_book_id=>e_book.id, :id=>link.id}, :target=>'_blank'
-							%>
+							<%= link_to link.name, {:controller=>:webstorage_links, :action=>:to_link, :e_book_id=>e_book.id, :id=>link.id} %>
 							</li>
 						<% end %>
 						</ul>

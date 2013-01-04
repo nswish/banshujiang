@@ -87,8 +87,10 @@
       <ul class="nav pull-right">
         <li>
         <% if session[:user_id] then %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user iconx"></i> <%=User.find(session[:user_id]).name%></a>
+          <% user = User.find session[:user_id] %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user iconx"></i> <%=user.name%></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><%= link_to '积分: '+user.score.to_s, url_for(:controller=>:users, :action=>:about_score) %></li>
             <li><%=link_to '退出', url_for(:controller=>:users, :action=>:logout), :method=>'PUT'%></li>
           </ul>
         <% else %>

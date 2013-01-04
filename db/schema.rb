@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104031910) do
+ActiveRecord::Schema.define(:version => 20130104072209) do
 
   create_table "download_priviledges", :force => true do |t|
     t.integer  "e_book_id"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130104031910) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "login_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "user_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sessions", :force => true do |t|

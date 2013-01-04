@@ -64,7 +64,17 @@ class WebstorageLinksController < ApplicationController
   end
 
 	def to_link
-		link = WebstorageLink.find params[:id]
-		redirect_to 'http://adf.ly/2960050/banner/' + link.url
+    user = User.find session[:user_id]
+    ebook = EBook.find params[:e_book_id]
+
+    unless user.has_download_priviledge? ebook then
+      unless user.add_download_priviledge ebook then
+        redirect_to :controller=>:users, :action=>:about_score
+        return
+      end
+    end
+
+    link = WebstorageLink.find params[:id]
+    redirect_to 'http://adf.ly/2960050/banner/' + link.url
 	end
 end

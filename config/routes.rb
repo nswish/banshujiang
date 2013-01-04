@@ -12,6 +12,7 @@ RailsApp::Application.routes.draw do
 			get 'login', :action => :login
 			put 'auth', :action => :auth
 			put 'logout', :action => :logout
+      get 'about_score', :action => :about_score
 		end
 	end
 
