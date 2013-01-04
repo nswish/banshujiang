@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  e_book_id: 1
+  user_id: 1
+  expiration_at: 2013-01-04 11:19:10
+
+two:
+  e_book_id: 1
+  user_id: 1
+  expiration_at: 2013-01-04 11:19:10
