@@ -86,11 +86,14 @@
       </ul>
       <ul class="nav pull-right">
         <li>
-					<% if session[:user_id] then %>
-						<a href="#"><i class="icon-user iconx"></i> <%=User.find(session[:user_id]).name%></a>
-					<% else %>
-						<a href="/users/login"><i class="icon-user iconx"></i> 登录</a>
-					<% end %>
+        <% if session[:user_id] then %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user iconx"></i> <%=User.find(session[:user_id]).name%></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><%=link_to '退出', url_for(:controller=>:users, :action=>:logout), :method=>'PUT'%></li>
+          </ul>
+        <% else %>
+          <a href="/users/login"><i class="icon-user iconx"></i> 登录</a>
+        <% end %>
 				</li>
       </ul>
       <ul class="nav pull-right">

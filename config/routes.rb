@@ -11,6 +11,7 @@ RailsApp::Application.routes.draw do
 			get 'register', :action => :register
 			get 'login', :action => :login
 			put 'auth', :action => :auth
+			put 'logout', :action => :logout
 		end
 	end
 
