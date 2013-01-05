@@ -19,4 +19,9 @@ class CategoryController < ApplicationController
     render 'show.html.erb'
   end
 
+	def bbs
+    condition = {params[:category]=>params[:name]}
+    @e_books = EBook.where(condition).order('created_at desc').all
+	end
+
 end
