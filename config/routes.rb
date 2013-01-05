@@ -13,6 +13,8 @@ RailsApp::Application.routes.draw do
 			put 'auth', :action => :auth
 			put 'logout', :action => :logout
       get 'about_score', :action => :about_score
+      get 'forget_password', :action => :forget_password
+      put 'send_password_reset_mail', :action => :send_password_reset_mail
 		end
 	end
 

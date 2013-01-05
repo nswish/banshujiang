@@ -98,4 +98,11 @@ class UsersController < ApplicationController
     request.reset_session
     redirect_to :back
   end
+
+  def forget_password
+  end
+
+  def send_password_reset_mail
+    UserMailer.forget_password.deliver
+  end
 end
