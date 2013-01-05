@@ -6,5 +6,6 @@ config.action_mailer.smtp_settings = {
     :user_name              =>  'nswish.ebook',
     :password               =>  'openshift',
     :authentication         =>  'plain',
-    :enable_starttls_auto   =>  true
+    :enable_starttls_auto   =>  true,
+    :openssl_verify_mode    =>  'none'
 }
