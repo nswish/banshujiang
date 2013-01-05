@@ -1,3 +1,19 @@
+<script type="text/javascript">
+var isVerified = false;
+function CustomDefinedAjaxOnkeyup(result){
+  isVerified = result;
+}
+$(document).ready(function(){
+  $('#login_form').submit(function(){
+    if(isVerified){
+      return true;
+    } else {
+      alert('请输入正确的验证码');
+      return false;
+    }
+  });
+});
+</script>
 <% if notice then %>
 <div style="border-style:solid;border-width:1px;border-color:red;padding-top:12px;text-align:center;color:red;">
 		<p><%=notice%></p>
@@ -10,15 +26,16 @@
 <br />
 <br />
 <br />
+<br />
 <div class="row">
 	<div class="span6">
-		<div style="height:70px;"></div>
+		<div style="height:88px;"></div>
 		<div style="height:200px;font-size:40px;text-align:center;">
 			登录
 		</div>
 	</div>
 	<div class="span6" style="border-width:0px 0px 0px 1px;border-style:dashed;border-color:grey;">
-	<%= form_tag '/users/auth', :method=>'PUT', :class=>'form-horizontal', :style=>'margin-bottom:0px;' do |f| %>
+	<%= form_tag '/users/auth', :method=>'PUT', :class=>'form-horizontal', :style=>'margin-bottom:0px;', :id=>'login_form' do |f| %>
 		<div class="control-group">
 			<%= label_tag :email, '电子邮箱', :class=>'control-label' %>
 			<div class="controls">
@@ -29,6 +46,13 @@
 			<%= label_tag :password, '登录密码', :class=>'control-label' %>
 			<div class="controls">
 				<%= password_field_tag :password %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= label_tag :yucinput54962e688b, '验证码', :class=>'control-label' %>
+			<div class="controls">
+        <script type="text/javascript" src="http://www.jiani.info/yucmedia/Action/load.php"></script>
+        <input name="yucinput54962e688b" type="text" id="yucinput54962e688b" />
 			</div>
 		</div>
 		<div class="control-group">
