@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104072209) do
+ActiveRecord::Schema.define(:version => 20130105075413) do
 
   create_table "download_priviledges", :force => true do |t|
     t.integer  "e_book_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20130104072209) do
     t.integer  "score"
     t.string   "kind"
     t.string   "password_hash"
+    t.string   "reset_token"
   end
 
   create_table "value_set_bodies", :force => true do |t|

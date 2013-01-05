@@ -106,6 +106,8 @@ class UsersController < ApplicationController
   def send_password_reset_mail
     begin
       user = User.where(:email => params[:email]).first!
+      user.reset_token = rand(10**6).to_s
+      user.save
       UserMailer.forget_password(user).deliver
     rescue
       redirect_to :back, :notice=>'此邮箱未注册'
@@ -115,7 +117,7 @@ class UsersController < ApplicationController
   def show_reset_password
     begin
       user = User.find params[:id]
-      unless user.password_hash == params[:scret_token] then
+      unless params[:reset_token].blank? || user.reset_token == params[:reset_token] then
         redirect_to :root
       end
       @user = user
@@ -129,6 +131,7 @@ class UsersController < ApplicationController
 
     if params[:password] == params[:password_confirm] then
       user.password = params[:password]
+      user.reset_token = ''
       user.save
       redirect_to :root
     else

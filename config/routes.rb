@@ -15,7 +15,7 @@ RailsApp::Application.routes.draw do
       get 'about_score', :action => :about_score
       get 'forget_password', :action => :forget_password
       put 'send_password_reset_mail', :action => :send_password_reset_mail
-      get 'reset_password/:id/:scret_token', :action => :show_reset_password
+      get 'reset_password/:id/:reset_token', :action => :show_reset_password
       put 'reset_password', :action => :reset_password
 		end
 	end
