@@ -1,9 +1,8 @@
 <br />
-<table class="table table-bordered">
+<table class="table table-bordered" style="width:650px;">
 	<tr>
 		<td>#</td>
 		<td>书名</td>
-		<td>作者</td>
 		<td>语言</td>
 		<td>链接</td>
 	</tr>
@@ -11,7 +10,6 @@
 	<tr>
 		<td><%=index+1%>.</td>
 		<td style="color:blue;"><%=ebook.name%></td>
-		<td><%=ebook.author%></td>
 		<td><%=ebook.language%></td>
 		<td><%=link_to '去下载', ebook, :target=>'_blank' %></td>
 	</tr>
