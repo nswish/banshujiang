@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class UsersController < ApplicationController
   # GET /users
   def index
@@ -103,6 +104,35 @@ class UsersController < ApplicationController
   end
 
   def send_password_reset_mail
-    UserMailer.forget_password.deliver
+    begin
+      user = User.where(:email => params[:email]).first!
+      UserMailer.forget_password(user).deliver
+    rescue
+      redirect_to :back, :notice=>'此邮箱未注册'
+    end
+  end
+
+  def show_reset_password
+    begin
+      user = User.find params[:id]
+      unless user.password_hash == params[:scret_token] then
+        redirect_to :root
+      end
+      @user = user
+    rescue
+      redirect_to :root
+    end
+  end
+
+  def reset_password
+    user = User.find params[:user][:id]
+
+    if params[:password] == params[:password_confirm] then
+      user.password = params[:password]
+      user.save
+      redirect_to :root
+    else
+      redirect_to :back, :notice=>'两次密码不匹配'
+    end
   end
 end
