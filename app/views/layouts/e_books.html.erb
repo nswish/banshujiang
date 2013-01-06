@@ -3,8 +3,8 @@
 <head>
   <title>[<%=site_name%>]<%=@title%> - 电子书(EBook) 免费下载</title>
   <meta property="wb:webmaster" content="919195fbd9f44369" />
-	<meta name="Description" content="<%=@description%>" />
-	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">  
+  <meta name="Description" content="<%=@description%>" />
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">  
   <%= stylesheet_link_tag    "e_books", :media => "all" %>
   <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "jquery_ujs" %>
@@ -12,42 +12,12 @@
   <%= csrf_meta_tags %>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
   <script src="/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-  <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
-	<style>
-    body {
-      background-color: #F4F4F4; 
-    }
-		.fontsize18 {
-			font-size:18px;
-		}
-		.fontsize16 {
-			font-size:16px;
-		}
-		.tablex * {
-			font-size: 15px;
-		}
-		.tablex td {
-			border-top-width: 0px;
-		}
-		.tablex th {
-			border-top-width: 0px;
-			border-color: lightgrey;
-		}
-		.tablex th a {
-			font-size: 23px;
-			color: black;
-		}
-		.tablex a:hover {
-			text-decoration: none;
-		}
-    .iconx {
-      margin-top: 0px;
-    }
-		pre {
-			margin: 0 10px 10px -10px;
-		}		
+  <style>
+    pre {
+      margin: 0 10px 10px -10px;
+    }    
     .category {}
-	</style>
+  </style>
 
 <script>
   $(document).ready(function(){
@@ -63,11 +33,11 @@
     <div style="margin-left:auto;margin-right:auto;width:970px;">
       <a class="brand"><strong><%=site_name%></strong></a>
       <ul class="nav">
-        <li><a href="/"><i class="icon-home iconx"></i> 首页</a></li>
+        <li><a href="/"><i class="icon-home"></i> 首页</a></li>
       </ul>
       <ul class="nav">
         <li>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book iconx"></i> 分类</a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book"></i> 分类</a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <% ValueSetHeader.categories.each do |category| %>
             <li class="dropdown-submenu" >
@@ -83,21 +53,21 @@
         </li>
       </ul>
       <ul class="nav">
-        <li><a href="/statistics/index"><i class="icon-list-alt iconx"></i> 统计</a></li>
+        <li><a href="/statistics/index"><i class="icon-list-alt"></i> 统计</a></li>
       </ul>
       <ul class="nav pull-right">
         <li>
         <% if session[:user_id] then %>
           <% user = User.find session[:user_id] %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user iconx"></i> <%=user.name%></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <%=user.name%></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><%= link_to '积分: '+user.score.to_s, url_for(:controller=>:users, :action=>:about_score) %></li>
             <li><%=link_to '退出', url_for(:controller=>:users, :action=>:logout), :method=>'PUT'%></li>
           </ul>
         <% else %>
-          <a href="/users/login"><i class="icon-user iconx"></i> 登录</a>
+          <a href="/users/login"><i class="icon-user"></i> 登录</a>
         <% end %>
-				</li>
+        </li>
       </ul>
       <ul class="nav pull-right">
         <li><a style="padding:3px 0px 3px;" href="/data_feeds/ebooks.rss.xml"><img src="/icons/rss.png" style="width:85px;" alt="RSS FEED"></img></a></li>
