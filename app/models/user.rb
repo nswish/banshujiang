@@ -86,6 +86,10 @@ class User < ActiveRecord::Base
 
   # 为用户增加电子书的下载权限
   def add_download_priviledge(ebook)
+    if self.has_download_priviledge? ebook then
+      return true
+    end
+
     if self.score < 2 then
       return false
     end

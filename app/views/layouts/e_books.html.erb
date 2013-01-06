@@ -9,23 +9,16 @@
   <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "jquery_ujs" %>
   <%= javascript_include_tag "e_books" %>
-  <%= csrf_meta_tags %>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
   <script src="/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-  <style>
-    pre {
-      margin: 0 10px 10px -10px;
-    }    
-    .category {}
-  </style>
-
-<script>
-  $(document).ready(function(){
-    $('.category').click(function(event){
-      event.stopImmediatePropagation();
+  <%= csrf_meta_tags %>
+  <script>
+    $(document).ready(function(){
+      $('.category').click(function(event){
+        event.stopImmediatePropagation();
+      });
     });
-  });
-</script>
+  </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top">

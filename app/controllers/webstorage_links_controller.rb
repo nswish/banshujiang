@@ -1,6 +1,6 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
-	before_filter :require_login, :only => [:to_link]
+	before_filter :require_login, :only => [:show_to_link, :to_link]
 
   def destroy
     msg = ''
@@ -63,15 +63,23 @@ class WebstorageLinksController < ApplicationController
 =end
   end
 
+  def show_to_link
+    user = User.find session[:user_id]
+    ebook = EBook.find params[:e_book_id]
+
+    if user.has_download_priviledge? ebook then
+      self.to_link
+      return
+    end
+  end
+
 	def to_link
     user = User.find session[:user_id]
     ebook = EBook.find params[:e_book_id]
 
-    unless user.has_download_priviledge? ebook then
-      unless user.add_download_priviledge ebook then
-        redirect_to :controller=>:users, :action=>:about_score
-        return
-      end
+    unless user.add_download_priviledge ebook then
+      redirect_to :controller=>:users, :action=>:about_score
+      return
     end
 
     link = WebstorageLink.find params[:id]

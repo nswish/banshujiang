@@ -40,7 +40,8 @@ RailsApp::Application.routes.draw do
     
     resources :webstorage_links do
 			collection do
-				get ':id/to_link', :action=>:to_link
+				get ':id/to_link', :action=>:show_to_link
+        post ':id/to_link', :action=>:to_link
 			end
 		end
   end

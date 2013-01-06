@@ -1,0 +1,46 @@
+<script type="text/javascript">
+var isVerified = false;
+function CustomDefinedAjaxOnkeyup(result){
+  isVerified = result;
+}
+$(document).ready(function(){
+  $('#login_form').submit(function(){
+    if(isVerified){
+      return true;
+    } else {
+      alert('请输入正确的验证码');
+      return false;
+    }
+  });
+});
+</script>
+<% if notice then %>
+<div>
+<%=notice%>
+</div>
+<% end %>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+  <div class="span7 offset3">
+  <h3 style="text-align:center;">请证明您不是下载机器人 :)</h3>
+<br />
+  <%= form_tag url_for(:controller=>:webstorage_links, :action=>:to_link), :class=>'form-horizontal', :style=>'margin-bottom:0px;', :id=>'login_form' do  %>
+    <div class="control-group">
+      <%= label_tag :yucinput54962e688b, '验证码', :class=>'control-label' %>
+      <div class="controls">
+        <script type="text/javascript" src="http://www.jiani.info/yucmedia/Action/load.php"></script>
+        <input name="yucinput54962e688b" type="text" id="yucinput54962e688b" />
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag '去下载页面 >>' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
