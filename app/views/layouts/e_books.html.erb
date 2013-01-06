@@ -21,56 +21,7 @@
   </script>
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div style="margin-left:auto;margin-right:auto;width:970px;">
-      <a class="brand"><strong><%=site_name%></strong></a>
-      <ul class="nav">
-        <li><a href="/"><i class="icon-home"></i> 首页</a></li>
-      </ul>
-      <ul class="nav">
-        <li>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book"></i> 分类</a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <% ValueSetHeader.categories.each do |category| %>
-            <li class="dropdown-submenu" >
-              <a class="category" tabindex="-1" href="javascript:void(0);"><%=category.title%></a>
-              <ul class="dropdown-menu">
-                <% category.name_value_array.each do |item|%>
-                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></a></li>
-                <% end %>
-              </ul>
-            </li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav">
-        <li><a href="/statistics/index"><i class="icon-list-alt"></i> 统计</a></li>
-      </ul>
-      <ul class="nav pull-right">
-        <li>
-        <% if session[:user_id] then %>
-          <% user = User.find session[:user_id] %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <%=user.name%></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to '积分: '+user.score.to_s, url_for(:controller=>:users, :action=>:about_score) %></li>
-            <li><%=link_to '退出', url_for(:controller=>:users, :action=>:logout), :method=>'PUT'%></li>
-          </ul>
-        <% else %>
-          <a href="/users/login"><i class="icon-user"></i> 登录</a>
-        <% end %>
-        </li>
-      </ul>
-      <ul class="nav pull-right">
-        <li><a style="padding:3px 0px 3px;" href="/data_feeds/ebooks.rss.xml"><img src="/icons/rss.png" style="width:85px;" alt="RSS FEED"></img></a></li>
-      </ul>
-      <ul class="nav pull-right">
-        <li><div style="margin-top:8px;"><wb:follow-button uid="3198737743" type="gray_2" width="120" height="24" ></wb:follow-button></div></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<%= render 'shared/top_banner' %>
 
 <div style="margin-left:auto;margin-right:auto;width:980px;margin-top:44px;">
 <%= yield %>
