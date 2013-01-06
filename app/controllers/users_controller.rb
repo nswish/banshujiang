@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 		begin
 			@user = User.auth name, password_raw
 			session[:user_id] = @user.id
-			redirect_to back_url
+			redirect_to back_url.blank? ? :root : back_url
 		rescue Exception => ex
 			flash[:notice] = ex.message
 			render :login
