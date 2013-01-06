@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105075413) do
+ActiveRecord::Schema.define(:version => 20130106054627) do
 
   create_table "download_priviledges", :force => true do |t|
     t.integer  "e_book_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130105075413) do
     t.string   "programming_language"
     t.string   "mobile_development"
     t.string   "operation_system"
+    t.string   "database"
   end
 
   create_table "identities", :force => true do |t|
