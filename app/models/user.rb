@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	attr_accessor :password_confirmation
 
   ### relation
+  has_many :feedbacks
   has_many :download_priviledges
   has_many :e_books, :through => :download_priviledges
 

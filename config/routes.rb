@@ -9,15 +9,17 @@ RailsApp::Application.routes.draw do
 
 	resources :users do
 		collection do
-			get 'register', :action => :register
-			get 'login', :action => :login
-			put 'auth', :action => :auth
-			put 'logout', :action => :logout
-      get 'about_score', :action => :about_score
-      get 'forget_password', :action => :forget_password
-      put 'send_password_reset_mail', :action => :send_password_reset_mail
-      get 'reset_password/:id/:reset_token', :action => :show_reset_password
-      put 'reset_password', :action => :reset_password
+			get  'register',                        :action => :register
+			get  'login',                           :action => :login
+			put  'auth',                            :action => :auth
+			put  'logout',                          :action => :logout
+      get  'about_score',                     :action => :about_score
+      get  'forget_password',                 :action => :forget_password
+      put  'send_password_reset_mail',        :action => :send_password_reset_mail
+      get  'reset_password/:id/:reset_token', :action => :show_reset_password
+      put  'reset_password',                  :action => :reset_password
+      get  'feedbacks/new',                   :action => :new_feedback
+      post 'feedbacks/new',                   :action => :create_feedback
 		end
 	end
 
@@ -45,6 +47,8 @@ RailsApp::Application.routes.draw do
 			end
 		end
   end
+
+  resources :feedbacks
 
   get "configinfo/index"
 

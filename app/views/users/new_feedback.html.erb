@@ -1,0 +1,19 @@
+<%=notice%>
+<br />
+<br />
+<div class="row">
+  <div class = "span12">
+    <ol>
+    <% @feedbacks.each do |feedback| %>
+      <li><%=feedback.content%><%= link_to '删除', feedback, :method=>:delete, :class=>'pull-right' %></li>
+    <% end %>
+    </ol>
+  </div>
+  <div class="span12">
+  <h3>向我们吐槽</h3>
+  <%=form_tag url_for(:controller=>:users, :action=>:create_feedback) do %>
+    <%= text_area_tag :content, '', :class => :span12, :rows => 8 %>
+    <%= submit_tag '我来说两句', :class => 'pull-right'%>
+  <% end %>
+  </div>
+</div>

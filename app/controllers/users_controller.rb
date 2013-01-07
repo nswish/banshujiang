@@ -1,5 +1,6 @@
 #-*- encoding: utf-8 -*-
 class UsersController < ApplicationController
+  before_filter :require_login, :only => [:new_feedback]
   # GET /users
   def index
     @users = User.all
@@ -137,5 +138,23 @@ class UsersController < ApplicationController
     else
       redirect_to :back, :notice=>'两次密码不匹配'
     end
+  end
+
+  def new_feedback
+    user = User.find session[:user_id]
+    @feedbacks = user.feedbacks
+  end
+
+  def create_feedback
+    user = User.find session[:user_id]
+
+    unless params[:content].blank? then
+      feedback = user.feedbacks.build
+      feedback.user_name = user.name
+      feedback.content = params[:content]
+      feedback.save
+    end
+
+    redirect_to url_for(:controller=>:users, :action=>:new_feedback), :notice => '感谢您的建议 -- 您的支持是我们能够一直坚持下去的动力!'
   end
 end
