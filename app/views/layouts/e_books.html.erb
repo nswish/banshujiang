@@ -6,10 +6,7 @@
   <meta name="Description" content="<%=@description%>" />
   <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">  
   <%= stylesheet_link_tag    "e_books", :media => "all" %>
-  <% if Rails.env == "production" %>
-    <%= javascript_include_tag "jquery", "jquery_ujs", :cache=>true %>
-  <% else %>
-    <%= javascript_include_tag "jquery", "jquery_ujs" %>
+  <%= javascript_include_tag "jquery", "jquery_ujs" %>
   <% end %>
   <%= javascript_include_tag "e_books" %>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
