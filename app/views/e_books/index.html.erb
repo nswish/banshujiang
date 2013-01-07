@@ -1,9 +1,11 @@
+<% content_for :head do %>
 <script>
   var filter_form_show = function(){
     $('#filter_toggle').hide();
     $('#filter_div').fadeIn();
   }
 </script>
+<% end %>
 
 <div id="filter_toggle" style="text-align:center;" class="row">
   <a style="color:black;" href="javascript:filter_form_show()"><i class="icon-filter" style="margin"></i> 筛选</a>

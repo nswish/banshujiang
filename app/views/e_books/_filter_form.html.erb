@@ -1,3 +1,4 @@
+<% content_for :head do %>
 <style>
   #filter_table td {
     border-width: 0px;
@@ -10,6 +11,8 @@
     margin: 0px;
   }
 </style>
+<% end %>
+
 <div id="filter_div" class="row shadow-panel" style="display:none;margin-bottom:10px;margin-left:0px;">
 <%=form_tag url_for(:controller=>:e_books, :action=>:index), :method=>:get, :id=>:filter_form, :style=>"margin-bottom:0px;" do %>
   <table id="filter_table" class="table" style="margin-bottom:0px;">
