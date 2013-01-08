@@ -1,0 +1,37 @@
+<% #require render "shared/noty_head" %>
+
+<% content_for :head do %>
+<script type="text/javascript">
+var yuc_call_back = function(result){
+  show_noty('正在验证，请稍后...');
+
+  var $form = $('#yucinput54962e688b').parents('form');
+  if(result){
+    $form.data('verified', true).submit();
+  } else {
+    $form.data('verified', false);
+    show_noty('请输入正确的验证码');
+  }
+}
+
+$(document).ready(function(){
+  $('#yucinput54962e688b').parents('form').submit(function(){
+    $this = $(this);
+    if($this.data('verified')){
+      return true;
+    } else {
+      yuc_captcha_obj.customajax('yucinput54962e688b','yuc_call_back')
+      return false;
+    }
+  });
+});
+</script>
+<% end %>
+
+<div class="control-group">
+  <%= label_tag :yucinput54962e688b, '验证码', :class=>'control-label' %>
+  <div class="controls">
+    <script type="text/javascript" src="http://www.jiani.info/yucmedia/Action/load.php"></script>
+    <input name="yucinput54962e688b" type="text" id="yucinput54962e688b" />
+  </div>
+</div>

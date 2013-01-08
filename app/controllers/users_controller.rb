@@ -24,21 +24,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  def create
-    @user = User.new(params[:user])
-		back_url = flash[:http_referer] = flash[:http_referer]
-
-    if @user.register
-			session[:user_id] = @user.id
-			redirect_to back_url
-		else
-			render :register 
-		end
-  end
-
   # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 
@@ -64,34 +50,50 @@ class UsersController < ApplicationController
   end
 
 	def register
-		unless flash[:http_referer] then
-			flash[:http_referer] = env["HTTP_REFERER"]
-		else
-			flash[:http_referer] = flash[:http_referer]
-		end
 		@user = User.new
+    flash.keep(:referer)
 	end
 
-	def login
-		unless flash[:http_referer] then
-			flash[:http_referer] = env["HTTP_REFERER"]
+  # POST /users
+  def create
+    @user = User.new(params[:user])
+		back_url = flash[:referer]
+
+    if @user.register
+			session[:user_id] = @user.id
+			redirect_to back_url.blank? ? :root : back_url
 		else
-			flash[:http_referer] = flash[:http_referer]
+      flash.keep(:referer)
+			render :register 
 		end
+  end
+
+	def login
 		@user = User.new
+
+    http_referer = env["HTTP_REFERER"] ? env["HTTP_REFERER"] : " "
+
+    if http_referer =~ /localhost/ && Rails.env == "development" || http_referer =~ /ebook.jiani.info/ && Rails.env == 'production' then
+      if flash[:referer].presence then
+        flash.keep(:referer)
+      else
+        flash[:referer] = http_referer
+      end
+    end
 	end
 
 	def auth
 		name = email = params[:email]
 		password_raw = params[:password]
-		back_url = flash[:http_referer] = flash[:http_referer]
+		back_url = flash[:referer]
 
 		begin
 			@user = User.auth name, password_raw
 			session[:user_id] = @user.id
 			redirect_to back_url.blank? ? :root : back_url
 		rescue Exception => ex
-			flash[:notice] = ex.message
+			flash.now[:notice] = ex.message
+      flash.keep(:referer)
 			render :login
 		end
 	end
