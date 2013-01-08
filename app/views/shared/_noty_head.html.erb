@@ -1,0 +1,6 @@
+<%= javascript_include_tag "/noty/jquery.noty", "/noty/layouts/topCenter", "/noty/themes/default" %>
+<script>
+  var show_noty = function(message){
+    noty({text: message, 'layout': 'topCenter', 'dismissQueue': true, 'timeout':3000});
+  };
+</script>

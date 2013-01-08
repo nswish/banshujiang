@@ -1,5 +1,5 @@
 <% content_for :head do%>
-<%= javascript_include_tag "/noty/jquery.noty", "/noty/layouts/topCenter", "/noty/themes/default" %>
+<%= render '/shared/noty_head' %>
 <script type="text/javascript">
 var isVerified = false;
 function CustomDefinedAjaxOnkeyup(result){
@@ -10,7 +10,7 @@ $(document).ready(function(){
     if(isVerified){
       return true;
     } else {
-      noty({text: '请输入正确的验证码', 'layout': 'topCenter', 'dismissQueue': true, 'timeout':3000});
+      show_noty('请输入正确的验证码');
       return false;
     }
   });
