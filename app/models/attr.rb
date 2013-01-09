@@ -26,4 +26,21 @@ class Attr < ActiveRecord::Base
       [attr.name, attr.id]
     end
   end
+
+	def self.export
+		YAML.dump(Attr.all)
+	end
+
+	def self.import(doc)
+    Attr.all.each do |attr|
+      attr.delete
+    end
+
+    YAML.load(doc).each do |item|
+      attr = Attr.new
+      attr.initialize_dup item
+      attr.id = item.id
+      attr.save
+    end
+	end
 end
