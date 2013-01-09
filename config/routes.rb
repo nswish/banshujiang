@@ -1,4 +1,6 @@
 RailsApp::Application.routes.draw do
+  resources :attrs
+
   get "statistics/index"
 
   match 'category/:category/:name' => 'category#show'

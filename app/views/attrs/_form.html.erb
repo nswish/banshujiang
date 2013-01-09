@@ -1,0 +1,8 @@
+<%=form_for @attr do |f| %>
+  <%=f.label :name, '属性名' %>
+  <%=f.text_field :name %>
+  <br />
+  <%=f.submit %>
+<% end %>
+
+<%=link_to :index, attrs_path %>

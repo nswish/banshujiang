@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107021622) do
+ActiveRecord::Schema.define(:version => 20130109084633) do
+
+  create_table "attrs", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "download_priviledges", :force => true do |t|
     t.integer  "e_book_id"
@@ -19,6 +26,14 @@ ActiveRecord::Schema.define(:version => 20130107021622) do
     t.datetime "expiration_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "e_book_attrs", :force => true do |t|
+    t.integer  "e_book_id"
+    t.integer  "attr_id"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "e_books", :force => true do |t|
@@ -101,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130107021622) do
     t.datetime "updated_at",  :null => false
     t.string   "title"
     t.boolean  "is_category"
+    t.integer  "attr_id"
   end
 
   create_table "webstorage_links", :force => true do |t|

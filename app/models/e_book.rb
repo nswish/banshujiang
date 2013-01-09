@@ -8,6 +8,8 @@ class EBook < ActiveRecord::Base
   has_many :webstorage_links
   has_many :download_priviledges
   has_many :users, :through => :download_priviledges
+  has_many :e_book_attrs
+  has_many :attrs, :through => :e_book_attrs
 
   ### constants
 	IMAGE_DIR = 'data_images'

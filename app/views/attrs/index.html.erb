@@ -1,0 +1,12 @@
+<% @attrs.each do |attr| %>
+<p>
+  <%=attr.id%>. <%=attr.name%> 
+  <% unless attr.value_set_header.blank? then %>
+    <%=select_tag :value_set_header, options_for_select(attr.value_set_header.name_value_array) %>
+  <% end %>
+  <%=link_to :edit, edit_attr_path(attr)%>
+  <%=link_to :delete, attr, :method=>:delete, :data=>{:confirm=>'R U Sure?'}%>
+</p>
+<% end %>
+
+<%=link_to :new, new_attr_path %>
