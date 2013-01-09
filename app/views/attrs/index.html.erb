@@ -1,6 +1,6 @@
 <% @attrs.each do |attr| %>
 <p>
-  <%=attr.id%>. <%=attr.name%> 
+  <%=attr.id%>. <%=attr.name%> <%=attr.title%>
   <% unless attr.value_set_header.blank? then %>
     <%=select_tag :value_set_header, options_for_select(attr.value_set_header.name_value_array) %>
   <% end %>
