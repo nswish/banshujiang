@@ -53,7 +53,11 @@
       <%= hidden_field_tag 'e_book_attrs[][id]', e_book_attr ? e_book_attr.id : nil %>
       <%= hidden_field_tag 'e_book_attrs[][attr_id]', attr.id %>
       <%= hidden_field_tag 'e_book_attrs[][e_book_id]', @e_book.id %>
-      <%= text_field_tag 'e_book_attrs[][value]', e_book_attr ? e_book_attr.value : nil %>
+      <% if attr.value_set_header %>
+        <%=select_tag 'e_book_attrs[][value]', options_for_select([["",""]]+attr.value_set_header.name_value_array)%>
+      <% else %>
+        <%= text_field_tag 'e_book_attrs[][value]', e_book_attr ? e_book_attr.value : nil %>
+      <% end %>
     </div>
     <% end %>
 
