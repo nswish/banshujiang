@@ -9,9 +9,7 @@ class ValueSetHeader < ActiveRecord::Base
   end
 
   def ValueSetHeader.import(doc)
-    ValueSetHeader.all.each do |header|
-      header.delete
-    end
+    ValueSetHeader.delete_all
 
     YAML.load(doc).each do |item|
       header = ValueSetHeader.new

@@ -37,9 +37,7 @@ class Attr < ActiveRecord::Base
 	end
 
 	def self.import(doc)
-    Attr.all.each do |attr|
-      attr.delete
-    end
+    Attr.delete_all
 
     YAML.load(doc).each do |item|
       attr = Attr.new
