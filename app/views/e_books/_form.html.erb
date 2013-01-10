@@ -54,7 +54,7 @@
       <%= hidden_field_tag 'e_book_attrs[][attr_id]', attr.id %>
       <%= hidden_field_tag 'e_book_attrs[][e_book_id]', @e_book.id %>
       <% if attr.value_set_header %>
-        <%=select_tag 'e_book_attrs[][value]', options_for_select([["",""]]+attr.value_set_header.name_value_array)%>
+        <%=select_tag 'e_book_attrs[][value]', options_for_select(attr.value_set_header.name_value_array, e_book_attr ? e_book_attr.value : nil), :include_blank=>true %>
       <% else %>
         <%= text_field_tag 'e_book_attrs[][value]', e_book_attr ? e_book_attr.value : nil %>
       <% end %>
