@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Title</th>
     <th>IsCategory</th>
+    <th>attr_id</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,6 +17,7 @@
     <td><%= value_set_header.name %></td>
     <td><%= value_set_header.title %></td>
     <td><%= value_set_header.is_category %></td>
+    <td><%= value_set_header.attr_id %></td>
     <td><%= link_to '显示', value_set_header %></td>
     <td><%= link_to '编辑', edit_value_set_header_path(value_set_header) %></td>
     <td><%= link_to '删除', value_set_header, method: :delete, data: { confirm: 'Are you sure?' } %></td>

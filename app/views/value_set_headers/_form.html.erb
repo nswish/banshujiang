@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :attr_id %><br />
-    <%= f.select :attr_id, [[0,0]]+Attr.name_id_array%>
+    <%= f.select :attr_id, [["",0]]+Attr.name_id_array%>
   </div>
   <div class="actions">
     <%= f.submit %>
