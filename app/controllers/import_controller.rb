@@ -9,7 +9,7 @@ class ImportController < ApplicationController
     model_class = eval params[:id]
 
     require 'net/http'
-    model_class.import= Net::HTTP.get(URI 'http://ebook.jiani.info/export/'+params[:id]+'.yaml')
+    model_class.import Net::HTTP.get(URI 'http://ebook.jiani.info/export/'+params[:id]+'.yaml')
 
     redirect_to :back
   end

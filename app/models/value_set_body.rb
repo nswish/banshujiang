@@ -9,9 +9,7 @@ class ValueSetBody < ActiveRecord::Base
   end
 
   def ValueSetBody.import(doc)
-    ValueSetBody.all.each do |body|
-      body.delete
-    end
+    ValueSetBody.delete_all
 
     YAML.load(doc).each do |item|
       body = ValueSetBody.new
