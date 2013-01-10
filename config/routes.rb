@@ -1,5 +1,7 @@
 RailsApp::Application.routes.draw do
   resources :attrs
+  resources :import
+  resources :export
 
   get "statistics/index"
 
