@@ -1,25 +1,30 @@
 class Attr < ActiveRecord::Base
-  attr_accessible :name, :type
+  attr_accessible :name, :kind, :title
 
   has_many :e_books, :through => :e_book_attrs
   has_many :e_book_attrs
   has_one  :value_set_header
 
-	NameCache = begin
-		result = {}
-		Attr.all.each do |attr|
-			result[attr.id] = attr.name
-		end
-		result
-	end
+  after_save :refresh_cache
 
-	TitleCache = begin
+  def self.id_title_hash
 		result = {}
 		Attr.all.each do |attr|
 			result[attr.id] = attr.title
 		end
-		result
-	end
+		return result
+  end
+  
+  def self.id_name_hash
+ 		result = {}
+		Attr.all.each do |attr|
+			result[attr.id] = attr.name
+		end
+		return result
+  end
+
+	NameCache = self.id_name_hash
+  TitleCache = self.id_title_hash
 
   def self.name_id_array
     Attr.all.collect do |attr|
@@ -43,4 +48,10 @@ class Attr < ActiveRecord::Base
       attr.save
     end
 	end
+
+  private
+  def refresh_cache
+    Attr::NameCache.clear.merge! Attr.id_name_hash
+    Attr::TitleCache.clear.merge! Attr.id_title_hash
+  end
 end

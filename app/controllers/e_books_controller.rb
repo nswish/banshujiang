@@ -2,6 +2,8 @@
 class EBooksController < ApplicationController
   LIMIT_PER_PAGE = 10 
 
+  before_filter :require_login, :only=>[:new, :edit]
+
   def root
     redirect_to url_for(:controller=>:e_books, :action=>:index)
   end
@@ -58,27 +60,39 @@ class EBooksController < ApplicationController
 
   # POST /e_books
   def create
+    puts params
     @e_book = EBook.new(params[:e_book])
-    cookies[:token] = params[:token]
 
-    if params[:token]=='zwyxyz' and @e_book.save
-      rss
+    begin
+      ActiveRecord::Base.transaction do
+        unless @e_book.save then raise '新增失败！' end
+        params[:e_book_attrs].each do |e_book_attr| 
+          e_book_attr[:e_book_id] = @e_book.id
+          @e_book.e_book_attrs.create(e_book_attr) unless (e_book_attr[:value].strip! || e_book_attr[:value]).blank?
+        end
+      end
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
-    else
-      redirect_to url_for(:controller=>:e_books, :action=>:new), notice: '新增失败！'
+    rescue Exception=>ex
+      redirect_to url_for(:controller=>:e_books, :action=>:new), notice: ex.message
     end
   end
 
   # PUT /e_books/1
   def update
     @e_book = EBook.find(params[:id])
-    cookies[:token] = params[:token]
 
-    if params[:token]=='zwyxyz' and @e_book.update_attributes(params[:e_book])
-      redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新成功！'
-      rss
-    else
-      redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: '更新失败！'
+    begin
+      ActiveRecord::Base.transaction do
+        unless @e_book.update_attributes params[:e_book] then raise '更新失败！' end
+        @e_book.e_book_attrs.clear
+
+        params[:e_book_attrs].each do |e_book_attr| 
+          @e_book.e_book_attrs.create(e_book_attr) unless (e_book_attr[:value].strip! || e_book_attr[:value]).blank?
+        end
+      end
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '更新成功！'
+    rescue Exception=>ex
+      redirect_to url_for(:controller=>:e_books, :action=>:new), notice: ex.message
     end
   end
 
