@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20130109123952) do
     t.integer  "publish_year"
     t.string   "programming_language"
     t.string   "mobile_development"
-    t.string   "operation_system"
     t.string   "database"
   end
 
