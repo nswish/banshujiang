@@ -12,7 +12,6 @@ class EBooksController < ApplicationController
 
   # GET /e_books
   def index
-    puts params[:programming_languages]
     page
   end
 
@@ -21,17 +20,9 @@ class EBooksController < ApplicationController
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
     offset = (@page_id - 1) * LIMIT_PER_PAGE
 
-    condition = {}
-    if params[:programming_languages] then
-      condition[:programming_language] = params[:programming_languages].keys
-    end
-    if params[:publishers] then
-      condition[:publisher] = params[:publishers].keys
-    end
-
-    @e_books = EBook.where(condition).order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
-
-    @page_count = (EBook.where(condition).count / LIMIT_PER_PAGE.to_f).ceil
+    @title = "第#{@page_id}页"
+    @e_books = EBook.order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
+    @page_count = (EBook.count / LIMIT_PER_PAGE.to_f).ceil
 
     render 'index.html.erb'
   end

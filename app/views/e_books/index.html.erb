@@ -1,18 +1,4 @@
-<% content_for :head do %>
-<script>
-  var filter_form_show = function(){
-    $('#filter_toggle').hide();
-    $('#filter_div').fadeIn();
-  }
-</script>
-<% end %>
-
-<div id="filter_toggle" style="text-align:center;" class="row">
-  <a style="color:black;" href="javascript:filter_form_show()"><i class="icon-filter" style="margin"></i> 筛选</a>
-</div>
-
-<%=render :partial => 'filter_form' %>
-
+<br />
 <% @e_books.each_with_index do |e_book, index| %>
 	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
   <% if index < @e_books.size-1 then %>
