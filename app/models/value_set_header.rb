@@ -23,8 +23,4 @@ class ValueSetHeader < ActiveRecord::Base
       [ item.id, item.value ]
     end
   end
-
-  def ValueSetHeader.categories
-    ValueSetHeader.where(:is_category=>true).order(:created_at).all
-  end
 end

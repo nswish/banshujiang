@@ -2,7 +2,9 @@
 class EBooksController < ApplicationController
   LIMIT_PER_PAGE = 10 
 
-  before_filter :require_login, :only=>[:new, :edit]
+  if Rails.env == :production then
+    before_filter :require_login, :only=>[:new, :edit]
+  end
 
   def root
     redirect_to url_for(:controller=>:e_books, :action=>:index)

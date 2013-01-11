@@ -25,14 +25,6 @@
       <%= f.label :publish_year, '出版年份' %>
       <%= f.number_field :publish_year %>
     </div>
-
-    <% ValueSetHeader.categories.each do |category|  %>
-    <div class="field">
-      <%= f.label ActiveSupport::Inflector.singularize(category.name), category.title %>
-      <%= f.category_select(ActiveSupport::Inflector.singularize(category.name)) %>
-    </div>
-    <% end %>
-
     <div class="field">
       <%= f.label :format, '格式' %>
       <%= f.select(:format, [["PDF", "PDF"], ["CHM", "CHM"]]) %>
@@ -41,16 +33,10 @@
       <%= f.label :language, '语言' %>
       <%= f.select(:language, [["英文", "英文"], ["中文", "中文"]]) %>
     </div>
-    <div class="field">
-      <%= f.label :image_large_file, '书籍封面' %>
-      <%= f.file_field :image_large_file %>
-    </div>
-
     <% Attr.all.each do |attr|
        e_book_attr = @e_book.e_book_attrs.where(:attr_id=>attr.id).first %>
     <div class="field">
       <%= label_tag Attr::TitleCache[attr.id] %>
-      <%= hidden_field_tag 'e_book_attrs[][id]', e_book_attr ? e_book_attr.id : nil %>
       <%= hidden_field_tag 'e_book_attrs[][attr_id]', attr.id %>
       <%= hidden_field_tag 'e_book_attrs[][e_book_id]', @e_book.id %>
       <% if attr.value_set_header %>
@@ -60,13 +46,13 @@
       <% end %>
     </div>
     <% end %>
-
     <div class="field">
-      <%= label_tag :token %>
-      <%= text_field_tag :token, cookies[:token] %>
+      <%= f.label :image_large_file, '书籍封面' %>
+      <%= f.file_field :image_large_file %>
     </div>
+    <br />
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit '提交' %>
     </div>
   <% end %>
   </div>
