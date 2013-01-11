@@ -24,14 +24,12 @@
 					<td style="text-align:right;width:100px;">出版年份：</td>
 					<td><%= e_book.publish_year %></td>
 				</tr>
-				<% ValueSetHeader.categories.each do |category| %>
-					<% unless e_book.send(ActiveSupport::Inflector.singularize(category.name)).blank? then %>
-					<tr>
-						<td style="text-align:right;width:100px;"><%=category.title%>：</td>
-						<td><%= e_book.send(ActiveSupport::Inflector.singularize(category.name)) %></td>
-					</tr>
-					<% end %>
-				<% end %>
+        <% e_book.e_book_attrs.order(:attr_id).each do |ebookattr| %>
+        <tr>
+          <td style="text-align:right;width:100px;"><%=Attr::TitleCache[ebookattr.attr_id]%>：</td>
+          <td><%= ebookattr.value %></td>
+        </tr>
+        <% end %>
 				<tr>
 					<td style="text-align:right;width:100px;">下载链接：</td>
 					<td>
