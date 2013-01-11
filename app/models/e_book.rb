@@ -1,5 +1,8 @@
 #-*- encoding: utf-8 -*-
 class EBook < ActiveRecord::Base
+  require 'imexportable'
+  extend ImExportable
+
   ### attributes
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :publisher, :programming_language
   attr_accessible :mobile_development, :operation_system, :database
@@ -36,27 +39,6 @@ class EBook < ActiveRecord::Base
     end
 
     return result
-  end
-
-  def EBook.export
-    YAML.dump(EBook.all)
-  end
-
-	def EBook.import(doc, url)
-		result = YAML.load doc
-		result.each do |item|
-      begin
-        EBook.find(item.id)
-      rescue ActiveRecord::RecordNotFound
-  			ebook = EBook.new
-        ebook.initialize_dup item 
-        ebook.id = item.id
-        ebook.save
-        ebook.created_at = item.created_at
-        ebook.updated_at = item.updated_at
-        ebook.save
-      end
-    end
   end
 
   ### private methods

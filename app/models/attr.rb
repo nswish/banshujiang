@@ -1,4 +1,6 @@
 class Attr < ActiveRecord::Base
+  require 'imexport'
+  include imexport
   attr_accessible :name, :kind, :title
 
   has_many :e_books, :through => :e_book_attrs
@@ -31,10 +33,6 @@ class Attr < ActiveRecord::Base
       [attr.name, attr.id]
     end
   end
-
-	def self.export
-		YAML.dump(Attr.all)
-	end
 
 	def self.import(doc)
     Attr.delete_all
