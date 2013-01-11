@@ -5,7 +5,7 @@ class EBook < ActiveRecord::Base
 
   ### attributes
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :publisher, :programming_language
-  attr_accessible :mobile_development, :operation_system, :database
+  attr_accessible :mobile_development, :database
 
   ### relation
   has_many :webstorage_links
