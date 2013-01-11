@@ -3,7 +3,7 @@ module ImExportable
       YAML.dump self.all
     end
 
-    def import
+    def import(doc)
       self.delete_all
 
       YAML.load(doc).each do |item|
