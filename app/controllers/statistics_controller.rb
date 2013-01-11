@@ -39,12 +39,8 @@ class StatisticsController < ApplicationController
   def _programming_language_count
     result = {}
 
-    ValueSetHeader.find(3).value_array.collect do |item|
-      result[item[0]] = 0
-    end
-
-    EBook.select('programming_language, count(1) as counts').group('programming_language').order('programming_language').collect do |item|
-      result[item.programming_language] = item.counts unless item.programming_language.blank?
+    Attr.where(:name=>'programming_language').first.e_book_attrs.select('value, count(1) as counts').group(:value).each do |item|
+      result[item.value] = item.counts
     end
 
     return result;
