@@ -1,6 +1,4 @@
 class Attr < ActiveRecord::Base
-  require 'imexport'
-  include imexport
   attr_accessible :name, :kind, :title
 
   has_many :e_books, :through => :e_book_attrs
