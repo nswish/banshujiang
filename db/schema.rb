@@ -41,16 +41,12 @@ ActiveRecord::Schema.define(:version => 20130109123952) do
     t.string   "name"
     t.string   "language"
     t.string   "author"
-    t.string   "publisher"
     t.string   "format"
     t.string   "image_large"
     t.string   "image_small"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "publish_year"
-    t.string   "programming_language"
-    t.string   "mobile_development"
-    t.string   "database"
   end
 
   create_table "feedbacks", :force => true do |t|

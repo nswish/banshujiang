@@ -4,7 +4,6 @@ class CreateEBooks < ActiveRecord::Migration
       t.string :name
       t.string :language
       t.string :author
-      t.string :publisher
       t.string :format
       t.string :image_large
       t.string :image_small
