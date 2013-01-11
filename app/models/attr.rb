@@ -1,4 +1,7 @@
 class Attr < ActiveRecord::Base
+  require 'imexportable'
+  extend ImExportable
+
   attr_accessible :name, :kind, :title
 
   has_many :e_books, :through => :e_book_attrs
@@ -31,17 +34,6 @@ class Attr < ActiveRecord::Base
       [attr.name, attr.id]
     end
   end
-
-	def self.import(doc)
-    Attr.delete_all
-
-    YAML.load(doc).each do |item|
-      attr = Attr.new
-      attr.initialize_dup item
-      attr.id = item.id
-      attr.save
-    end
-	end
 
   private
   def refresh_cache

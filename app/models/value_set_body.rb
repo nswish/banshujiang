@@ -1,21 +1,8 @@
 class ValueSetBody < ActiveRecord::Base
+  require 'imexportable'
+  extend ImExportable
+
   attr_accessible :name, :value, :value_set_header_id
 
   belongs_to :value_set_header
-
-  public
-  def ValueSetBody.export
-    YAML.dump ValueSetBody.all
-  end
-
-  def ValueSetBody.import(doc)
-    ValueSetBody.delete_all
-
-    YAML.load(doc).each do |item|
-      body = ValueSetBody.new
-      body.initialize_dup item
-      body.id = item.id
-      body.save
-    end
-  end
 end
