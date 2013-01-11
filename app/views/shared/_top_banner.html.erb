@@ -9,7 +9,7 @@
         <li>
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-book"></i> 分类</a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <% ValueSetHeader.categories.each do |category| %>
+            <% Attr.categories.each do |category| %>
             <li class="dropdown-submenu" >
               <a class="category" tabindex="-1" href="javascript:void(0);"><%=category.title%></a>
               <ul class="dropdown-menu">

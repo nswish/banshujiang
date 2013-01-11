@@ -35,6 +35,12 @@ class Attr < ActiveRecord::Base
     end
   end
 
+  def self.categories
+    (Attr.all.select do |attr| attr.value_set_header end).collect do |attr|
+      attr.value_set_header
+    end
+  end
+
   private
   def refresh_cache
     Attr::NameCache.clear.merge! Attr.id_name_hash
