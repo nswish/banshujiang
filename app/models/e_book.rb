@@ -4,8 +4,7 @@ class EBook < ActiveRecord::Base
   extend ImExportable
 
   ### attributes
-  attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :publisher, :programming_language
-  attr_accessible :mobile_development, :database
+  attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year
 
   ### relation
   has_many :webstorage_links
@@ -29,16 +28,15 @@ class EBook < ActiveRecord::Base
 	end
 
   def related_ebooks(limit=8)
-    result = []
-
-    [:operation_system, :mobile_development, :programming_language, :publisher].each do |item|
-      if limit > 0 && !self.send(item).blank?
-        result += EBook.where("#{item.to_s}=:#{item} and id != :id", {item=>self.send(item), :id=>self.id}).limit(limit)
-        limit = limit - result.size
-      end
+    condition = ["", []]
+    self.e_book_attrs.all.collect do |ebookattr|
+      condition[0] << 'or attr_id = ? and value = ? '
+      condition[1] << ebookattr.attr_id << ebookattr.value
     end
-
-    return result
+    
+    result = EBookAttr.where(condition[0][3..-1], *condition[1]).order('attr_id desc').limit(limit).collect do |ebookattr|
+      ebookattr.e_book
+    end
   end
 
   ### private methods

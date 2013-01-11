@@ -1,0 +1,4 @@
+<%=form_tag url_for(:controller=>:import, :action=>:create, :id=>model_name) do %>
+  <%=model_name%> <%=submit_tag '导入' %>
+<% end %>
+

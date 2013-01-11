@@ -1,4 +1,1 @@
-<%=form_tag url_for(:controller=>:import, :action=>:create, :id=>params[:id]) do %>
-  <%=submit_tag '导入' %>
-<% end %>
-
+<%=render :partial=>'form', :locals=>{:model_name=>params[:id]} %>

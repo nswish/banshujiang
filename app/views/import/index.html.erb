@@ -1,2 +1,4 @@
-<h1>Import#index</h1>
-<p>Find me in app/views/import/index.html.erb</p>
+<% model_names = [:EBook, :WebstorageLink, :Attr, :EBookAttr, :ValueSetHeader, :ValueSetBody] %>
+<% model_names.each do |name| %>
+  <%= render :partial=>'form', :locals=>{:model_name=>name} %>
+<% end %>
