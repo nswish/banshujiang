@@ -34,7 +34,7 @@ class EBook < ActiveRecord::Base
       condition[1] << ebookattr.attr_id << ebookattr.value
     end
     
-    result = EBookAttr.where(condition[0][3..-1], *condition[1]).order('attr_id desc').limit(limit).collect do |ebookattr|
+    result = EBookAttr.select(:e_book_id).uniq.where( '('+condition[0][3..-1]+') and e_book_id != ?', *(condition[1]<<self.id) ).limit(limit).collect do |ebookattr|
       ebookattr.e_book
     end
   end
