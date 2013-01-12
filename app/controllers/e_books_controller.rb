@@ -64,7 +64,7 @@ class EBooksController < ApplicationController
           @e_book.e_book_attrs.create(e_book_attr) unless (e_book_attr[:value].strip! || e_book_attr[:value]).blank?
         end
       end
-      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
+      redirect_to url_for(:controller=>:e_books, :action=>:new, :id=>@e_book.id), notice: '新增成功！'
     rescue Exception=>ex
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: ex.message
     end
@@ -85,7 +85,7 @@ class EBooksController < ApplicationController
       end
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '更新成功！'
     rescue Exception=>ex
-      redirect_to url_for(:controller=>:e_books, :action=>:new), notice: ex.message
+      redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: ex.message
     end
   end
 

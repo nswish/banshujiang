@@ -3,6 +3,9 @@ class EBook < ActiveRecord::Base
   require 'imexportable'
   extend ImExportable
 
+  require 'RMagick'
+  include Magick
+
   ### attributes
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year
 
@@ -46,19 +49,27 @@ class EBook < ActiveRecord::Base
 			# if self.image_large has value then test the file exist? and delete it
 			unless self.image_large.blank?
 				file_path = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_large}"
-				if File::file? file_path
-					File::delete file_path
-				end
+        File::delete file_path if File::file? file_path
+
+        file_path_small = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_small}"
+        File::delete file_path_small if File::file? file_path_small
 			end
 
 			# write file to dir and link to it
 			filename_ext = @file_data.original_filename.split('.').last.downcase
 			self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
+			self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
 
 			file_path = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_large}"
+			file_path_small = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_small}"
+
 			File.open(file_path, 'wb') do |f|
 				f.write(@file_data.read)
 			end
+
+      image_file = ImageList.new(file_path)
+      image_file.resize(420,560).write(file_path)
+      image_file.resize(160,213).write(file_path_small)
 
 			@file_data = nil
 			self.save
