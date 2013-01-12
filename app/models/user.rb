@@ -54,10 +54,7 @@ class User < ActiveRecord::Base
 
   def User.auth(name, password_raw)
     user = User.where(:name => name).first
-	
-		unless user then
-			raise '登录失败，请确认是否输入正确的邮箱地址'
-		end
+    raise '登录失败，此电子邮箱地址未注册' unless user
 
 		if user.password == password_raw then
       new_date = Time.now.in_time_zone(ActiveSupport::TimeZone.new "Beijing").to_date
