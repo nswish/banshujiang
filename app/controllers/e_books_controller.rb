@@ -2,9 +2,7 @@
 class EBooksController < ApplicationController
   LIMIT_PER_PAGE = 10 
 
-  if Rails.env == :production then
-    before_filter :require_login, :only=>[:new, :edit]
-  end
+  before_filter :require_login, :only=>[:new, :edit]
 
   def root
     redirect_to url_for(:controller=>:e_books, :action=>:index)
@@ -64,7 +62,7 @@ class EBooksController < ApplicationController
           @e_book.e_book_attrs.create(e_book_attr) unless (e_book_attr[:value].strip! || e_book_attr[:value]).blank?
         end
       end
-      redirect_to url_for(:controller=>:e_books, :action=>:new, :id=>@e_book.id), notice: '新增成功！'
+      redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>@e_book.id), notice: '新增成功！'
     rescue Exception=>ex
       redirect_to url_for(:controller=>:e_books, :action=>:new), notice: ex.message
     end
