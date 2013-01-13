@@ -85,8 +85,8 @@ class WebstorageLinksController < ApplicationController
     end
 
     link = WebstorageLink.find params[:id]
-    #redirect_to 'http://adf.ly/2960050/banner/' + link.url
-    redirect_to link.url
+    redirect_to 'http://adf.ly/2960050/banner/' + link.url
+    #redirect_to link.url
 	end
 
   private 
