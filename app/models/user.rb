@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 		@registering = true
 
 		self.name = self.email
-		self.score = 10
+		self.score = 20
 		self.kind = '普通用户'
 		self.save
 	end
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
       new_datetime = new_date.to_time_in_current_zone.in_time_zone(ActiveSupport::TimeZone.new "UTC")
 
       if LoginLog.where('user_id = ? and created_at >= ?', user.id, new_datetime).count == 0 then
-        user.score = user.score + 1
+        user.score = user.score + 2
         user.save
       end
 
