@@ -46,3 +46,4 @@ gem 'thor', '= 0.14.6'
 gem 'minitest'
 
 gem "rmagick", "~> 2.13.1"
+gem "rmmseg-cpp", "~> 0.2.9"
