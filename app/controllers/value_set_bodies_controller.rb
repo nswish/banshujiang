@@ -55,17 +55,15 @@ class ValueSetBodiesController < ApplicationController
   end
 
   # PUT /value_set_bodies/1
-  # PUT /value_set_bodies/1.json
   def update
+    @value_set_header = ValueSetHeader.find params[:value_set_header_id]
     @value_set_body = ValueSetBody.find(params[:id])
 
     respond_to do |format|
       if @value_set_body.update_attributes(params[:value_set_body])
-        format.html { redirect_to @value_set_body, notice: 'Value set body was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to [@value_set_header, @value_set_body], notice: 'Value set body was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @value_set_body.errors, status: :unprocessable_entity }
       end
     end
   end
