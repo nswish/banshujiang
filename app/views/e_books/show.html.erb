@@ -1,3 +1,6 @@
+<% content_for(:head) do%>
+  <meta name="Description" content="<%=@e_book.description%>" />
+<% end %>
 <br />
 
 <%=render :partial => 'single', :locals => {:e_book => @e_book} %>

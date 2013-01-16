@@ -30,10 +30,6 @@ class EBooksController < ApplicationController
     @e_book = EBook.find(params[:id])
     @related_ebooks = @e_book.related_ebooks
     @title = view_context.standard_file_name @e_book
-		@description = "出版社: #{@e_book.e_book_attrs.where('attr_id = ?', Attr.where(:name=>:publisher).first.id).first.value}; 格式: #{@e_book.format}; 语言: #{@e_book.language}; 作者: #{@e_book.author}; 出版年份: #{@e_book.publish_year}"
-    respond_to do |format|
-      format.html
-    end
   end
 
   # GET /e_books/new
