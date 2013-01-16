@@ -1,0 +1,9 @@
+<br />
+<% @e_books.each_with_index do |e_book, index| %>
+  <%= render :partial => 'single_small', :locals => {:e_book => e_book, :index=>index} %>
+  <br />
+<% end %>
+<% if @e_books.count == 0 then%>
+  没有搜索到相关书籍
+<% end %>
+

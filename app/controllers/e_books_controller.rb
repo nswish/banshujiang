@@ -121,6 +121,23 @@ class EBooksController < ApplicationController
     end
 	end
 
+  def search
+    require 'rmmseg'
+    RMMSeg::Dictionary.load_dictionaries
+
+    search_words = params[:search_words]
+    search_word_array = []
+
+    algor = RMMSeg::Algorithm.new(search_words)
+    loop do
+      tok = algor.next_token
+      break if tok.nil?
+      search_word_array << tok.text.downcase
+    end
+
+    @e_books = EBook.search search_word_array
+  end
+
   def rss
     _sitemap_rss
     _top10new_rss

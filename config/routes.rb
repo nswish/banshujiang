@@ -36,6 +36,7 @@ RailsApp::Application.routes.draw do
   resources :e_books do
     collection do
       get 'page/:id', :action => :page
+      get 'search', :action => :search
     end
     
     resources :webstorage_links do

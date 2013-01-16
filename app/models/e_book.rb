@@ -30,6 +30,20 @@ class EBook < ActiveRecord::Base
 		end
 	end
 
+  def self.search(search_word_array)
+    result = []
+    TextForSearchCache.each do |item|
+      search_word_array.each do |word|
+        if item[:text][word] then
+          result << item[:id]
+          break
+        end
+      end
+    end
+
+    return EBook.where(:id=>result).all
+  end
+
   def related_ebooks(limit=8)
     condition = ["", []]
     self.e_book_attrs.all.collect do |ebookattr|
@@ -78,9 +92,9 @@ class EBook < ActiveRecord::Base
   def self.load_text_for_search_cache
     EBook.includes(:e_book_attrs).order('id desc').all.collect do |ebook|
       attrs = ebook.e_book_attrs.collect do |attr|
-        attr.value
+        attr.value.downcase
       end
-      {:id=>ebook.id, :text=>"#{ebook.name} #{attrs.join ' '}"}
+      {:id=>ebook.id, :text=>"#{ebook.name.downcase} #{attrs.join ' '}"}
     end
   end
 
