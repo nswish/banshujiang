@@ -21,6 +21,7 @@ class EBook < ActiveRecord::Base
 
   ### trigger
 	after_save :save_upload_image_large
+  after_save :refresh_cache
 
   ### public methods
   public
@@ -56,6 +57,21 @@ class EBook < ActiveRecord::Base
     end
   end
 
+  def self.load_text_for_search_cache
+    EBook.includes(:e_book_attrs).order('id desc').all.collect do |ebook|
+      attrs = ebook.e_book_attrs.collect do |attr|
+        attr.value.downcase
+      end
+      {:id=>ebook.id, :text=>"#{ebook.name.downcase} #{attrs.join ' '}"}
+    end
+  end
+
+  TextForSearchCache = self.load_text_for_search_cache
+
+  def refresh_cache
+    EBook::TextForSearchCache.clear.concat EBook.load_text_for_search_cache
+  end
+
 	private
 	def save_upload_image_large
 		if @file_data
@@ -89,18 +105,4 @@ class EBook < ActiveRecord::Base
 		end
 	end
 
-  def self.load_text_for_search_cache
-    EBook.includes(:e_book_attrs).order('id desc').all.collect do |ebook|
-      attrs = ebook.e_book_attrs.collect do |attr|
-        attr.value.downcase
-      end
-      {:id=>ebook.id, :text=>"#{ebook.name.downcase} #{attrs.join ' '}"}
-    end
-  end
-
-  TextForSearchCache = self.load_text_for_search_cache
-
-  def self.refresh_cache
-    EBook::TextForSearchCache.clear.concat EBook.load_text_for_search_cache
-  end
 end
