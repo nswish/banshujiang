@@ -114,6 +114,8 @@ class EBooksController < ApplicationController
   def restthings
 		EBook.refresh_cache
     _sitemap_rss
+		puts `rm public/data_images/all.zip; zip -9 public/data_images/all.zip public/data_images/*`
+		render :text=>'ok'
   end
 
   private
