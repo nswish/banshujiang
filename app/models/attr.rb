@@ -36,7 +36,7 @@ class Attr < ActiveRecord::Base
   end
 
   def self.categories
-    (Attr.all.select do |attr| attr.value_set_header end).collect do |attr|
+    (Attr.includes(:value_set_header).all.select do |attr| attr.value_set_header end).collect do |attr|
       attr.value_set_header
     end
   end
