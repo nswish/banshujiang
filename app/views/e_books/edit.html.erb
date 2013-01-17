@@ -2,8 +2,8 @@
   <% if @e_book.id-1 > 0 %>
     <%=link_to '前一本', edit_e_book_path(EBook.find @e_book.id-1)%> | 
   <% end %>
-  <% if EBook.count > @e_book.id+1 %>
-  <%=link_to '后一本', edit_e_book_path(EBook.find @e_book.id+1)%> |
+  <% if EBook.count >= @e_book.id+1 %>
+    <%=link_to '后一本', edit_e_book_path(EBook.find @e_book.id+1)%> |
   <% end %>
   <%=link_to '新增一本', new_e_book_path %> 
 </div>
