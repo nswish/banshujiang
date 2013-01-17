@@ -47,7 +47,6 @@ class EBooksController < ApplicationController
 
   # POST /e_books
   def create
-    puts params
     @e_book = EBook.new(params[:e_book])
 
     begin
@@ -95,28 +94,6 @@ class EBooksController < ApplicationController
 =end
   end
 
-	def export
-		result = { :e_books => EBook.export, :webstorage_links => WebstorageLink.export }
-
-		respond_to do |format|
-			format.json { render json: result }
-			format.html
-		end
-	end
-
-	def import
-    if params['import_file'] then
-      docs = JSON.load params['import_file'].read
-      EBook.import docs['e_books']
-      WebstorageLink.import docs['webstorage_links ']
-    elsif params['import_url'] then
-      require 'net/http'
-      docs = JSON.load Net::HTTP.get(URI(params['import_url']))
-      EBook.import docs['e_books'], params['import_url']
-      WebstorageLink.import docs['webstorage_links']
-    end
-	end
-
   def search
     require 'rmmseg'
     RMMSeg::Dictionary.load_dictionaries
@@ -134,9 +111,9 @@ class EBooksController < ApplicationController
     @e_books = EBook.search search_word_array
   end
 
-  def rss
+  def restthings
+		EBook.refresh_cache
     _sitemap_rss
-    _top10new_rss
   end
 
   private
@@ -158,28 +135,6 @@ class EBooksController < ApplicationController
     end
 
     File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/data_feeds/sitemap.rss.xml", 'wb') do |f|
-      f.write the_rss
-    end
-  end
-
-  def _top10new_rss
-    require 'rss'
-    the_rss = RSS::Maker::RSS20.make do |maker|
-      maker.channel.title = '电子书(EBook)下载'
-      maker.channel.description = '最新发布的10本书籍'
-      maker.channel.link = 'http://ebook.jiani.info'
-
-      EBook.order('created_at desc').limit(LIMIT_PER_PAGE).all.each do |ebook|
-        maker.items.new_item do |item|
-          item.link = url_for(ebook) 
-          item.title = ebook.name
-          item.description = "<p><strong>作者:</strong> #{ebook.author}</p><p><strong>下载地址:</strong></p> <a href='#{url_for(ebook)}'>#{url_for(ebook)}</a>"
-          item.pubDate = ebook.updated_at.to_s
-        end
-      end
-    end
-
-    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/data_feeds/ebooks.rss.xml", 'wb') do |f|
       f.write the_rss
     end
   end

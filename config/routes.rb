@@ -36,6 +36,7 @@ RailsApp::Application.routes.draw do
     collection do
       get 'page/:id', :action => :page
       get 'search', :action => :search
+			get 'restthings', :action => :restthings
     end
     
     resources :webstorage_links do

@@ -21,7 +21,6 @@ class EBook < ActiveRecord::Base
 
   ### trigger
 	after_save :save_upload_image_large
-  after_save :refresh_cache
 
   ### public methods
   public
@@ -75,7 +74,7 @@ class EBook < ActiveRecord::Base
 
   TextForSearchCache = self.load_text_for_search_cache
 
-  def refresh_cache
+  def self.refresh_cache
     EBook::TextForSearchCache.clear.concat EBook.load_text_for_search_cache
   end
 
