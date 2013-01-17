@@ -72,29 +72,4 @@ class User < ActiveRecord::Base
 			raise '登录失败，密码输入错误'
 		end
   end
-
-  # 用户是否有电子书的下载权限
-  def has_download_priviledge?(ebook)
-    begin
-      self.download_priviledges.where("e_book_id = ? and expiration_at > ?", ebook.id, Time.now).count > 0
-    rescue
-      return false
-    end
-  end
-
-  # 为用户增加电子书的下载权限
-  def add_download_priviledge(ebook)
-    if self.has_download_priviledge? ebook then
-      return true
-    end
-
-    if self.score < 2 then
-      return false
-    end
-
-    DownloadPriviledge.create(:user_id=>self.id, :e_book_id=>ebook.id, :expiration_at=>Time.now+2.days)
-
-    self.score = self.score - 2
-    self.save
-  end
 end
