@@ -22,9 +22,11 @@
           </ul>
         </li>
       </ul>
+      <% if session[:user_id] then %>
       <ul class="nav">
         <li><a href="/statistics/index"><i class="icon-list-alt"></i> 统计</a></li>
       </ul>
+      <% end %>
       <ul class="nav pull-right">
         <li>
         <% if session[:user_id] then %>
