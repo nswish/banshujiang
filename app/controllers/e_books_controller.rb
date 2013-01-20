@@ -105,7 +105,7 @@ class EBooksController < ApplicationController
     loop do
       tok = algor.next_token
       break if tok.nil?
-      search_word_array << tok.text.downcase
+      search_word_array << tok.text.downcase.force_encoding("UTF-8")
     end
 
     @e_books = EBook.search search_word_array

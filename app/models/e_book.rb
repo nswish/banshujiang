@@ -39,14 +39,20 @@ class EBook < ActiveRecord::Base
 
   def self.search(search_word_array)
     result = []
+
+		# 全部匹配
     TextForSearchCache.each do |item|
-      search_word_array.each do |word|
-        if item[:text][word] then
-          result << item[:id]
-          break
-        end
-      end
+      matched_words = search_word_array.select { |word| puts word.encoding; item[:text][word] }
+			result << item[:id] if matched_words.length == search_word_array.length
     end
+
+		# 部分匹配
+		if result.length == 0 then
+			TextForSearchCache.each do |item|
+				matched_words = search_word_array.select { |word| item[:text][word] }
+				result << item[:id] if matched_words.length > 0
+			end
+		end
 
     return EBook.where(:id=>result).all
   end
