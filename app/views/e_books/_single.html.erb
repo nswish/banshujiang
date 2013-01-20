@@ -1,71 +1,87 @@
 <div class="row shadow-panel" style="margin-left:0px;">
-	<div class="span6" style="">
-		<%= image_tag e_book.image_large %>
-	</div>
-	<div class="span6">
-		<div style="height:510px;padding-top:20px;">
-			<table class="table tablex">
-				<tr>
-					<th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", e_book_url(e_book) %></th>
-				</tr>
-				<tr style="border-style:solid;border-width:1px 0px 0px 0px;border-color:lightgrey;">
-					<td style="text-align:right;width:100px;">作者：</td>
-					<td><%= e_book.author %></td>
-				</tr>
-				<tr>
-					<td style="text-align:right;width:100px;">语言：</td>
-					<td><%= e_book.language %></td>
-				</tr>
-				<tr>
-					<td style="text-align:right;width:100px;">格式：</td>
-					<td><%= e_book.format %></td>
-				</tr>
-				<tr>
-					<td style="text-align:right;width:100px;">出版年份：</td>
-					<td><%= e_book.publish_year %></td>
-				</tr>
+  <div class="span6" style="">
+    <%= image_tag e_book.image_large %>
+  </div>
+  <div class="span6">
+    <div style="height:510px;padding-top:20px;">
+      <table class="table tablex">
+        <tr>
+          <th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", e_book_url(e_book) %></th>
+        </tr>
+        <tr style="border-style:solid;border-width:1px 0px 0px 0px;border-color:lightgrey;">
+          <td style="text-align:right;width:100px;">作者：</td>
+          <td><%= e_book.author %></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;width:100px;">语言：</td>
+          <td><%= e_book.language %></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;width:100px;">格式：</td>
+          <td><%= e_book.format %></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;width:100px;">出版年份：</td>
+          <td><%= e_book.publish_year %></td>
+        </tr>
         <% e_book.e_book_attrs.order(:attr_id).each do |ebookattr| %>
         <tr>
           <td style="text-align:right;width:100px;"><%=Attr::TitleCache[ebookattr.attr_id]%>：</td>
           <td><%= ebookattr.value %></td>
         </tr>
         <% end %>
-				<tr>
-					<td style="text-align:right;width:100px;">下载链接：</td>
-					<td>
-						<ul class="inline">
-						<% e_book.webstorage_links.each_with_index do |link, index|%>
-							<li style="padding-left:0px;">
-							<%= link_to link.name, {:controller=>:webstorage_links, :action=>:to_link, :e_book_id=>e_book.id, :id=>link.id} %>
-							</li>
-						<% end %>
-						</ul>
-						<div>
-							<pre style="font-size:12px;">书籍均收集自互联网，仅供学习和研究使用，请莫用于商业用途。谢谢合作。</pre>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<% if params[:controller] == 'e_books' && params[:action] == 'show' %>
-		<div style="height:30px;">
-			<!-- Baidu Button BEGIN -->
-			<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right;">
-				<span class="bds_more">分享到：</span>
-				<a class="bds_qzone"></a>
-				<a class="bds_tsina"></a>
-				<a class="bds_tqq"></a>
-				<a class="bds_renren"></a>
-				<a class="bds_t163"></a>
-				<a class="shareCount"></a>
-			</div>
-			<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=5227233" ></script>
-			<script type="text/javascript" id="bdshell_js"></script>
-			<script type="text/javascript">
-			document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-			</script>
-			<!-- Baidu Button END -->
-		</div>
-		<% end %>
-	</div>
+        <tr>
+          <td style="text-align:right;width:100px;">下载链接：</td>
+          <td>
+            <ul class="inline">
+            <% e_book.webstorage_links.each_with_index do |link, index|%>
+              <li style="padding-left:0px;">
+              <%= link_to link.name, {:controller=>:webstorage_links, :action=>:to_link, :e_book_id=>e_book.id, :id=>link.id} %>
+              </li>
+            <% end %>
+            </ul>
+            <div>
+              <% if params[:controller] == 'e_books' && params[:action] == 'show' %>
+              <div style="margin-left:-5px;">
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-6789053066161681";
+                /* ebook-3 */
+                google_ad_slot = "6242137202";
+                google_ad_width = 234;
+                google_ad_height = 60;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+              </div>
+              <% else %>
+              <pre style="font-size:12px;">书籍均收集自互联网，仅供学习和研究使用，请莫用于商业用途。谢谢合作。</pre>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <% if params[:controller] == 'e_books' && params[:action] == 'show' %>
+    <div style="height:30px;">
+      <!-- Baidu Button BEGIN -->
+      <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right;">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+      </div>
+      <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=5227233" ></script>
+      <script type="text/javascript" id="bdshell_js"></script>
+      <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script>
+      <!-- Baidu Button END -->
+    </div>
+    <% end %>
+  </div>
 </div>
