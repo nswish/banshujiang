@@ -11,6 +11,6 @@ class ImportController < ApplicationController
     require 'net/http'
     model_class.import Net::HTTP.get(URI 'http://ebook.jiani.info/export/'+params[:id]+'.yaml')
 
-    redirect_to :back
+    render :text => "ok"
   end
 end

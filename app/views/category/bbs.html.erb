@@ -1,4 +1,15 @@
 <br />
+<h3>论坛代码</h3>
+<pre>
+[table=98%]
+[tr][td][align=left]#[/align][/td][td][align=left]书名[/align][/td][td][align=left]语言[/align][/td][td][align=left]链接[/align][/td][/tr]
+<% @e_books.each_with_index do |ebook, index| %>
+[tr][td][align=left]<%=index+1%>.[/align][/td][td][align=left]<%=ebook.name%>[/align][/td][td][align=left]<%=ebook.language%>[/align][/td][td][align=left][color=#088cc][url=http://ebook.jiani.info<%=url_for ebook%>]去下载[/url][/color][/align][/td][/tr]
+<% end %>
+[/table]
+</pre>
+
+<h3>表格</h3>
 <table class="table table-bordered" style="width:650px;">
 	<tr>
 		<td>#</td>

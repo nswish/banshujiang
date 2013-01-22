@@ -24,8 +24,11 @@ class CategoryController < ApplicationController
   end
 
 	def bbs
-    condition = {params[:category]=>params[:name]}
-    @e_books = EBook.where(condition).order('created_at desc').all
+    attr_id = Attr.where(:name=>params[:category]).first.id
+    @e_books = EBookAttr.includes(:e_book).where(:attr_id=>attr_id, :value=>params[:name]).map do |e_book_attr|
+      e_book_attr.e_book
+    end
+    @e_books.sort! { |a,b| a.id <=> b.id }
 	end
 
 end
