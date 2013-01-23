@@ -82,33 +82,8 @@ class EBooksController < ApplicationController
     end
   end
 
-  # DELETE /e_books/1
-  def destroy
-=begin
-    @e_book = EBook.find(params[:id])
-    @e_book.destroy
-
-    respond_to do |format|
-      format.html { redirect_to e_books_url }
-    end
-=end
-  end
-
   def search
-    require 'rmmseg'
-    RMMSeg::Dictionary.load_dictionaries
-
-    search_words = params[:search_words]
-    search_word_array = []
-
-    algor = RMMSeg::Algorithm.new(search_words)
-    loop do
-      tok = algor.next_token
-      break if tok.nil?
-      search_word_array << tok.text.downcase.force_encoding("UTF-8")
-    end
-
-    @e_books = EBook.search search_word_array
+    @e_books = EBook.search params[:search_words]
   end
 
   def restthings

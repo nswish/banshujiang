@@ -37,36 +37,57 @@ class EBook < ActiveRecord::Base
     return "作者: #{self.author}; 语言: #{self.language}; 格式: #{self.format}; 出版年份: #{self.publish_year}; " + attr_desc
   end
 
-  def self.search(search_word_array)
-    result = []
+  def self.search(search_words)
+    require 'rmmseg'
+    RMMSeg::Dictionary.load_dictionaries
 
-		# 全部匹配
-    TextForSearchCache.each do |item|
-      matched_words = search_word_array.select { |word| puts word.encoding; item[:text][word] }
-			result << item[:id] if matched_words.length == search_word_array.length
+    search_word_array = []
+    ebook_result = []
+
+    # 分词
+    algor = RMMSeg::Algorithm.new(search_words)
+    loop do
+      tok = algor.next_token
+      break if tok.nil?
+      search_word_array << tok.text.downcase.force_encoding("UTF-8")
     end
 
-		# 部分匹配
-		if result.length == 0 then
-			TextForSearchCache.each do |item|
-				matched_words = search_word_array.select { |word| item[:text][word] }
-				result << item[:id] if matched_words.length > 0
-			end
-		end
+		# 全部匹配
+    matched_all_ids = []
+    TextForSearchCache.each do |item|
+      matched_words = search_word_array.select { |word| item[:text][word] }
+			matched_all_ids << item[:id] if matched_words.length == search_word_array.length
+    end
+    ebook_result.concat EBook.where(:id=>matched_all_ids)
 
-    return EBook.where(:id=>result).all
+		# 部分匹配
+    matched_parts_ids = []
+    TextForSearchCache.each do |item|
+      matched_words = search_word_array.select { |word| item[:text][word] }
+      matched_parts_ids << item[:id] if matched_words.length > 0
+    end
+    matched_parts_ids = matched_parts_ids - matched_all_ids
+    ebook_result.concat EBook.where(:id=>matched_parts_ids)
+
+    return ebook_result[1..35]
   end
 
   def related_ebooks(limit=8)
-    condition = ["", []]
-    self.e_book_attrs.all.collect do |ebookattr|
-      condition[0] << 'or attr_id = ? and value = ? '
-      condition[1] << ebookattr.attr_id << ebookattr.value
+    ebook_result = []
+    id_result = []
+
+    self.e_book_attrs.order('id desc').each do |e_book_attr|
+      ids = EBookAttr.includes(:e_book).where(:attr_id=>e_book_attr.attr_id, :value=>e_book_attr.value).collect { |item|
+        item.e_book.id
+      }
+      ids = ids - id_result - [self.id]
+
+      if ids.length > 0 then
+        ebook_result.concat EBook.where(:id=>ids).all
+      end
     end
-    
-    result = EBookAttr.select(:e_book_id).uniq.where( '('+condition[0][3..-1]+') and e_book_id != ?', *(condition[1]<<self.id) ).limit(limit).collect do |ebookattr|
-      ebookattr.e_book
-    end
+
+    return ebook_result[1..8]
   end
 
   def self.load_text_for_search_cache
