@@ -58,7 +58,6 @@ class EBook < ActiveRecord::Base
       matched_words = search_word_array.select { |word| item[:text][word] }
 			matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
-    ebook_result.concat EBook.where(:id=>matched_all_ids)
 
 		# 部分匹配
     matched_parts_ids = []
@@ -66,8 +65,8 @@ class EBook < ActiveRecord::Base
       matched_words = search_word_array.select { |word| item[:text][word] }
       matched_parts_ids << item[:id] if matched_words.length > 0
     end
-    matched_parts_ids = matched_parts_ids - matched_all_ids
-    ebook_result.concat EBook.where(:id=>matched_parts_ids)
+
+    ebook_result.concat EBook.where(:id=>matched_parts_ids | matched_all_ids)
 
     return ebook_result[1..35]
   end
