@@ -42,7 +42,6 @@ class EBook < ActiveRecord::Base
     RMMSeg::Dictionary.load_dictionaries
 
     search_word_array = []
-    ebook_result = []
 
     # 分词
     algor = RMMSeg::Algorithm.new(search_words)
@@ -58,7 +57,6 @@ class EBook < ActiveRecord::Base
       matched_words = search_word_array.select { |word| item[:text][word] }
 			matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
-    ebook_result.concat EBook.where(:id=>matched_all_ids)
 
 		# 部分匹配
     matched_parts_ids = []
@@ -66,28 +64,21 @@ class EBook < ActiveRecord::Base
       matched_words = search_word_array.select { |word| item[:text][word] }
       matched_parts_ids << item[:id] if matched_words.length > 0
     end
-    matched_parts_ids = matched_parts_ids - matched_all_ids
-    ebook_result.concat EBook.where(:id=>matched_parts_ids)
 
-    return ebook_result[1..35]
+    matched_ids = matched_parts_ids | matched_all_ids
+    return EBook.find(matched_ids[0...35])
   end
 
   def related_ebooks(limit=8)
-    ebook_result = []
     id_result = []
 
     self.e_book_attrs.order('id desc').each do |e_book_attr|
-      ids = EBookAttr.includes(:e_book).where(:attr_id=>e_book_attr.attr_id, :value=>e_book_attr.value).collect { |item|
+      id_result = id_result | (EBookAttr.includes(:e_book).where(:attr_id=>e_book_attr.attr_id, :value=>e_book_attr.value).collect { |item|
         item.e_book.id
-      }
-      ids = ids - id_result - [self.id]
-
-      if ids.length > 0 then
-        ebook_result.concat EBook.where(:id=>ids).all
-      end
+      })
     end
 
-    return ebook_result[1..8]
+    return EBook.find(id_result-[self.id])[0...8]
   end
 
   def self.load_text_for_search_cache
