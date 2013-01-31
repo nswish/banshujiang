@@ -92,7 +92,7 @@ class EBooksController < ApplicationController
 		puts `cd public/data_images; rm all.zip; zip -9 all.zip *`
 		render :text=>'ok'
   end
-
+    
   private
   def _sitemap_rss
     require 'rss'
