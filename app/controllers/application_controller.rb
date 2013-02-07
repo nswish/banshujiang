@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
 	private
 	def check_session_expiration
-		if !session[:last_seen] || session[:last_seen] < 15.minutes.ago then
+		if !session[:last_seen] || session[:last_seen] < 30.minutes.ago then
 			request.reset_session
 		end
 		session[:last_seen] = Time.now
