@@ -48,6 +48,7 @@ class EBooksController < ApplicationController
   # POST /e_books
   def create
     @e_book = EBook.new(params[:e_book])
+    @e_book.download_count = 0
 
     begin
       ActiveRecord::Base.transaction do

@@ -68,7 +68,11 @@ class WebstorageLinksController < ApplicationController
 
 	def to_link
     link = WebstorageLink.find params[:id]
-		#redirect_to 'http://adf.ly/2960050/banner/' + link.url
+
+    ebook = EBook.find params[:e_book_id] 
+    ebook.download_count = ebook.download_count + 1
+    ebook.save
+
 		redirect_to link.url
 	end
 
