@@ -35,9 +35,9 @@ class EBook < ActiveRecord::Base
 
   def description
     attr_desc = (self.e_book_attrs.includes(:attr).collect do |e_book_attr|
-      e_book_attr.attr.title + ": " + e_book_attr.value
-    end).join("; ")
-    return "点击下载. 语言: #{self.language}; 格式: #{self.format}; 出版年份: #{self.publish_year}; 作者: #{self.author}; " + attr_desc
+      e_book_attr.attr.title + ": " + e_book_attr.value + ";"
+    end).join(" ")
+    return "点击下载. 语言: #{self.language}; 格式: #{self.format}; 出版年份: #{self.publish_year}; " + attr_desc + " 作者: #{self.author};"
   end
 
   def self.search(search_words)
