@@ -52,7 +52,7 @@ class EBooksController < ApplicationController
 
     begin
       ActiveRecord::Base.transaction do
-        unless @e_book.save then raise '新增失败！' end
+        unless @e_book.save then raise '新增失败！'+"#{@e_book.errors.full_messages}" end
         params[:e_book_attrs].each do |e_book_attr| 
           e_book_attr[:e_book_id] = @e_book.id
           @e_book.e_book_attrs.create(e_book_attr) unless (e_book_attr[:value].strip! || e_book_attr[:value]).blank?

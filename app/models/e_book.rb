@@ -16,6 +16,9 @@ class EBook < ActiveRecord::Base
   has_many :e_book_attrs, :dependent => :destroy, :autosave => true
   has_many :attrs, :through => :e_book_attrs
 
+  ### validate
+  validates :name, :uniqueness => true
+
   ### constants
 	IMAGE_DIR = 'data_images'
 
