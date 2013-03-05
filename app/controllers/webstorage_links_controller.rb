@@ -67,11 +67,24 @@ class WebstorageLinksController < ApplicationController
   end
 
 	def to_link
+    if !session[:download_time_array] then !session[:download_time_array] = [] end
+    while session[:download_time_array].length > 0 && session[:download_time_array].first < 12.hours.ago
+      session[:download_time_array].shift
+    end
+    puts ":download_time_array=>#{session[:download_time_array]}"
+
+    if session[:download_time_array].length >= 10 then
+      redirect_to url_for(:controller=>:webstorage_links, :action=>:show_to_link, :e_book_id=>params[:e_book_id], :id=>params[:id]), :notice=>'您已经超过了许可下载的最大次数，请明日再来'
+      return
+    end
+
     link = WebstorageLink.find params[:id]
 
     ebook = EBook.find params[:e_book_id] 
     ebook.download_count = ebook.download_count + 1
     ebook.save
+    
+    session[:download_time_array].push Time.now
 
 		redirect_to link.url
 	end
