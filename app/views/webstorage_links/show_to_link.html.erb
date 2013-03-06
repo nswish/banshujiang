@@ -20,7 +20,28 @@ $(document).ready(function(){
 
 <% if notice then %>
 <div>
-<%=notice%>
+<script>
+  var delta = <%=@remain_time%>;
+  var fromtime = new Date().getTime();
+  var totime = fromtime + delta;
+
+  var format_time = function(remain_time){
+    if(remain_time <= 0)return "00:00:00";
+    
+    var remain_secord = Math.ceil(remain_time / 1000);
+    var secord = (remain_secord) % 60;
+    var minute = Math.ceil((remain_secord - secord)/60) % 60;
+    var hour   = Math.ceil((remain_secord - minute*60 - secord)/3600); 
+    return (hour<10?"0":"") + hour + ":" + (minute<10?"0":"") + minute + ":" + (secord<10?"0":"") + secord;
+  }
+
+  var remain = function(){
+    $('#time_remain').text(format_time(totime-(new Date()).getTime()));
+  }
+
+  setInterval(remain,1000);
+</script>
+<%=notice%>请在倒计时 <span style="color:red;" id="time_remain"></span> 结束之后再来访问。
 </div>
 <% end %>
 <br />
