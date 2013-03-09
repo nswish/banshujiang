@@ -120,6 +120,16 @@ class WebstorageLinksController < ApplicationController
 
 		redirect_to link.url
 	end
+  
+  def match_ip_location
+    require 'net/http'
+    @ip_locations = IpDownload.where("ip > ' ' and location is null").order(:location).all.map do |ip_download|
+      body = Net::HTTP.get(URI 'http://ip138.com/ips1388.asp?ip=101.87.159.99&action=2').force_encoding('gb2312').encode 'utf-8'
+      ip_download.location = body[/本站主数据：(.*?)</].chop.split('：')[1]
+      ip_download.save
+      ip_download
+    end
+  end
 
   private 
   def webstorage_name(url)

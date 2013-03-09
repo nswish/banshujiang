@@ -26,7 +26,8 @@ RailsApp::Application.routes.draw do
 		end
 	end
 
-  match '/webstorage_links/adfly_shorten.:format' => 'webstorage_links#adfly_shorten'
+#  match '/webstorage_links/adfly_shorten.:format' => 'webstorage_links#adfly_shorten'
+  match '/webstorage_links/match_ip_location' => 'webstorage_links#match_ip_location'
 
   resources :value_set_headers do
     resources :value_set_bodies
