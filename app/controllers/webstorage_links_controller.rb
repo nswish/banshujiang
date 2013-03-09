@@ -1,6 +1,6 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
-  DOWNLOAD_COUNT_LIMIT = 2
+  DOWNLOAD_COUNT_LIMIT = 10
   DOWNLOAD_HOUR_LIMIT  = 12
   def destroy
     msg = ''
