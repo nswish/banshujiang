@@ -1,7 +1,7 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
   DOWNLOAD_COUNT_LIMIT = 2
-  DOWNLOAD_HOUR_LIMIT = 12
+  DOWNLOAD_HOUR_LIMIT  = 12
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
@@ -66,9 +66,10 @@ class WebstorageLinksController < ApplicationController
   end
 
   def show_to_link
+  
     # 按客户端屏蔽 显示
     if session[:download_time_array] && session[:download_time_array].length >= DOWNLOAD_COUNT_LIMIT then
-      @remain_time = (session[:download_time_array].first.to_i - DOWNLOAD_HOUR_LIMIT.hours.ago.to_i)*1000
+      @remain_time = (session[:download_time_array].first - DOWNLOAD_HOUR_LIMIT.hours.ago) * 1000
       return
     end
 

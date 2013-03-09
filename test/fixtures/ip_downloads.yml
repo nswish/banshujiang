@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ip: MyString
+  e_book_id: 1
+  e_book_name: MyString
+  location: MyString
+
+two:
+  ip: MyString
+  e_book_id: 1
+  e_book_name: MyString
+  location: MyString
