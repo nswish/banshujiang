@@ -1,5 +1,7 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
+  DOWNLOAD_COUNT_LIMIT = 2
+  DOWNLOAD_HOUR_LIMIT = 12
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
@@ -64,29 +66,56 @@ class WebstorageLinksController < ApplicationController
   end
 
   def show_to_link
-    if session[:download_time_array] && session[:download_time_array].length >= 1 then
-      @remain_time = (session[:download_time_array].first.to_i - 12.hours.ago.to_i)*1000
+    # 按客户端屏蔽 显示
+    if session[:download_time_array] && session[:download_time_array].length >= DOWNLOAD_COUNT_LIMIT then
+      @remain_time = (session[:download_time_array].first.to_i - DOWNLOAD_HOUR_LIMIT.hours.ago.to_i)*1000
+      return
+    end
+
+    # 按ip屏蔽 显示
+    ip = request.env['HTTP_X_FORWARDED_FOR']
+    counts = IpDownload.where(:created_at=>[DOWNLOAD_HOUR_LIMIT.hours.ago..DateTime.now], :ip=>ip).count
+
+    if counts >= DOWNLOAD_COUNT_LIMIT then
+      ip_download = IpDownload.where(:created_at=>[DOWNLOAD_HOUR_LIMIT.hours.ago..DateTime.now], :ip=>ip).order('created_at').first
+      @remain_time = (ip_download.created_at - DOWNLOAD_HOUR_LIMIT.hours.ago) * 1000
+      return
     end
   end
 
 	def to_link
+    # 按客户端屏蔽
     if !session[:download_time_array] then !session[:download_time_array] = [] end
-    while session[:download_time_array].length > 0 && session[:download_time_array].first < 12.hours.ago
+    while session[:download_time_array].length > 0 && session[:download_time_array].first < DOWNLOAD_HOUR_LIMIT.hours.ago
       session[:download_time_array].shift
     end
 
-    if session[:download_time_array].length >= 10 then
+    if session[:download_time_array].length >= DOWNLOAD_COUNT_LIMIT then
       redirect_to url_for(:controller=>:webstorage_links, :action=>:show_to_link, :e_book_id=>params[:e_book_id], :id=>params[:id]), :notice=>'您已经超过了许可下载的最大次数。'
       return
     end
 
+    # 按ip屏蔽
+    ip = request.env['HTTP_X_FORWARDED_FOR']
+    e_book = EBook.find params[:e_book_id]  
+    counts = IpDownload.where(:created_at=>[DOWNLOAD_HOUR_LIMIT.hours.ago..DateTime.now], :ip=>ip).count
+    if counts >= DOWNLOAD_COUNT_LIMIT then
+      redirect_to url_for(:controller=>:webstorage_links, :action=>:show_to_link, :e_book_id=>params[:e_book_id], :id=>params[:id]), :notice=>'您已经超过了许可下载的最大次数。'
+      return
+    end
+
+    # 下载开始
     link = WebstorageLink.find params[:id]
 
     ebook = EBook.find params[:e_book_id] 
     ebook.download_count = ebook.download_count + 1
     ebook.save
     
+    # 记录客户端下载时间
     session[:download_time_array].push Time.now
+
+    # 记录ip下载时间
+    IpDownload.create(:ip=>ip, :e_book_id=>e_book.id, :e_book_name=>e_book.name)
 
 		redirect_to link.url
 	end
