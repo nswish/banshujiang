@@ -1,7 +1,9 @@
 <table>
 <% @ip_locations.each do |ip_location| %>
   <tr>
-    <td><%=ip_location.ip %></td><td><%=ip_location.location%></td><td>ip_location.isp</td>
+    <td><%=ip_location.ip %></td>
+    <td><%=ip_location.e_book_id%></td><td><%=ip_location.e_book_name%></td>
+    <td><%=ip_location.location%></td><td><%=ip_location.isp%></td>
   </tr>
 <% end %>
 </table>
