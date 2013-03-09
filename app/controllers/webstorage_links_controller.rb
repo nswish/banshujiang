@@ -147,6 +147,8 @@ class WebstorageLinksController < ApplicationController
       return '华硕网盘'
     elsif url =~ /www\.box\.com/ then
       return 'Box.com'
+    elsif url =~ /mega/ then
+      return 'Mega网盘'
     else
       return '地址'
     end
