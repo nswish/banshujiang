@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130309010149) do
+ActiveRecord::Schema.define(:version => 20130309061008) do
 
   create_table "attrs", :force => true do |t|
     t.string   "name"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20130309010149) do
     t.string   "location"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "isp"
   end
 
   create_table "login_logs", :force => true do |t|
