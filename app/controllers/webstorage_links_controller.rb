@@ -66,6 +66,8 @@ class WebstorageLinksController < ApplicationController
   end
 
   def show_to_link
+    @e_book = EBook.find params[:e_book_id]
+    @title = view_context.standard_file_name(@e_book) + '下载链接'
   
     # 按客户端屏蔽 显示
     if session[:download_time_array] && session[:download_time_array].length >= DOWNLOAD_COUNT_LIMIT then
