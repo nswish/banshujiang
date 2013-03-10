@@ -1,3 +1,4 @@
+#-*- encoding:utf-8 -*-
 class CategoryController < ApplicationController
 	layout 'e_books'
 
@@ -8,7 +9,11 @@ class CategoryController < ApplicationController
   end
 
   def page
+  puts params
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
+
+    @title = "[#{params[:name]}]第#{@page_id}页"
+
     offset = (@page_id - 1) * LIMIT_PER_PAGE
 
     condition = {}
