@@ -1,11 +1,11 @@
 <br/>
 <table class="table table-bordered table-hover table-condensed">
   <tr>
-    <th>#</th><th>IP</th><th>EBookId</th><th>EBookName</th><th>Location</th><th>ISP</th>
+    <th>#</th><th>CreatedAt</th><th>IP</th><th>EBookId</th><th>EBookName</th><th>Location</th><th>ISP</th>
   </tr>
 <% @ip_locations.each_with_index do |ip_location, index| %>
   <tr>
-    <td><%=index+1%></td><td><%=ip_location.ip %></td>
+    <td><%=index+1%></td><td><%=Time.zone.utc_to_local(ip_location.created_at.utc).to_s.delete('UTC')%></td><td><%=ip_location.ip %></td>
     <td><%=ip_location.e_book_id%></td><td><%=ip_location.e_book_name%></td>
     <td><%=ip_location.location%></td><td><%=ip_location.isp%></td>
   </tr>
