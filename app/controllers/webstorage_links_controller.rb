@@ -128,15 +128,16 @@ class WebstorageLinksController < ApplicationController
 
     ip_map = {}
     @ip_locations = IpDownload.where("ip > ' ' and location is null").order(:location).all.map do |ip_download|
-      if !ip_map[ip_download.ip] then
-        body = Net::HTTP.get(URI "http://ip138.com/ips1388.asp?ip=#{ip_download.ip}&action=2").force_encoding('gb2312').encode 'utf-8'
-        ip_map[ip_download.ip] = body[/本站主数据：(.*?)</].chop.split('：')[1]
+      last_ip = ip_download.ip.split(',')[-1].strip # 可能有多个ip地址，取最后一个
+      if !ip_map[last_ip] then
+        body = Net::HTTP.get(URI "http://ip138.com/ips1388.asp?ip=#{last_ip}&action=2").force_encoding('gb2312').encode 'utf-8'
+        ip_map[last_ip] = body[/本站主数据：(.*?)</].chop.split('：')[1]
       end
 
-      ip_download.location = ip_map[ip_download.ip].split(' ')[0]
-      ip_download.isp = ip_map[ip_download.ip].split(' ')[1]
-
+      ip_download.location = ip_map[last_ip].split(' ')[0]
+      ip_download.isp = ip_map[last_ip].split(' ')[1]
       ip_download.save
+
       ip_download
     end
   end
