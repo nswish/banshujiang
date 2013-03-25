@@ -63,7 +63,7 @@
       <ol>
       <% @e_book.webstorage_links.each do |link| %>
         <li>
-          <%=link.name%> | <%=link.url%> | <%=link.ad_link%> | 
+          <%=link.name%> | <%=link.url%> | <%=link.secret_key%> | 
           <%= link_to '编辑', edit_e_book_webstorage_link_path(@e_book, link) %>
           <%= link_to '删除', url_for([@e_book, link]), method: :delete, data: {confirm: '确定删除么？'} %>
         </li>
@@ -74,7 +74,7 @@
     <%= form_for [@e_book, WebstorageLink.new], :builder=>EbookFormBuilder do |f|%>
     <div class="field">
       <%=f.label :url, '文件链接' %>
-      <%=f.text_field :url, :class=>:span6 %>
+      <%=f.text_area :url, :class=>:span6, :rows=>2 %>
     </div>
     <div class="actions">
       <%=f.submit '新增'%>

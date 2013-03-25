@@ -15,8 +15,8 @@ class WebstorageLinksController < ApplicationController
   def create
     msg = ''
     if cookies[:token] == 'zwyxyz' then
-      webstorage_link = WebstorageLink.new(params[:webstorage_link])
-      webstorage_link.name = webstorage_name webstorage_link.url
+      webstorage_link = WebstorageLink.new
+      webstorage_link.url, webstorage_link.name, webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
       webstorage_link.e_book_id = params[:e_book_id]
       webstorage_link.save
       msg = "新增了#{webstorage_link.name}的链接！"
@@ -33,9 +33,9 @@ class WebstorageLinksController < ApplicationController
 
   def update
     @webstorage_link = WebstorageLink.find params[:id]
-    params[:webstorage_link][:name] = webstorage_name params[:webstorage_link][:url]
+    @webstorage_link.url, @webstorage_link.name, @webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
     
-    if cookies[:token]=='zwyxyz' and @webstorage_link.update_attributes(params[:webstorage_link])
+    if cookies[:token]=='zwyxyz' and @webstorage_link.save
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新成功！'
     else
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新失败！'
@@ -143,17 +143,22 @@ class WebstorageLinksController < ApplicationController
   end
 
   private 
-  def webstorage_name(url)
+  def analyze_url(url)
     if url =~ /pan\.baidu\.com/ then
-      return '百度网盘'
+      if url =~ /密码/ then
+        tokens = url.delete('链接:密码:').split(' ')
+        return tokens[0], '百度网盘', tokens[1]
+      else
+        return url, '百度网盘', nil
+      end
     elsif url =~ /www\.asuswebstorage\.com/ then
-      return '华硕网盘'
+      return url, '华硕网盘', nil
     elsif url =~ /www\.box\.com/ then
-      return 'Box.com'
+      return url, 'Box.com', nil
     elsif url =~ /mega/ then
-      return 'Mega网盘'
+      return url, 'Mega网盘', nil
     else
-      return '地址'
+      return 'javascript:void;', '地址', nil
     end
   end
 end
