@@ -7,7 +7,7 @@ class EBook < ActiveRecord::Base
   include Magick
 
   ### attributes
-  attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year
+  attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :download_count
 
   ### relation
   has_many :webstorage_links
