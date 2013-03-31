@@ -3,12 +3,15 @@
 	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
 
   <% if index == 2 %>
+    <br />
   <% end %>
 
   <% if index == 5 %>
+    <br />
   <% end %>
 
   <% if index == 8 %>
+    <br />
   <% end %>
 
   <% if index < @e_books.size-1 && ![2,5,8].include?(index) then %>
