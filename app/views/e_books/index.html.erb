@@ -27,7 +27,7 @@
       <% for ebook in @latest_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img><a/>
         </div>
       </li>
       <% end %>
