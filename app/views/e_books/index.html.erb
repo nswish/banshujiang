@@ -3,51 +3,12 @@
 	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
 
   <% if index == 2 %>
-    <div style="width:730px;margin-left:auto;margin-right:auto;padding-top:5px;padding-bottom:1px;">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-2450778008333083";
-      /* ebook-1 */
-      google_ad_slot = "9923592456";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript"
-      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
   <% end %>
 
   <% if index == 5 %>
-    <div style="width:730px;margin-left:auto;margin-right:auto;padding-top:5px;padding-bottom:1px;">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-2450778008333083";
-      /* ebook-2 */
-      google_ad_slot = "3942607659";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript"
-      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
   <% end %>
 
   <% if index == 8 %>
-    <div style="width:730px;margin-left:auto;margin-right:auto;padding-top:5px;padding-bottom:1px;">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-2450778008333083";
-      /* ebook-4 */
-      google_ad_slot = "5419340858";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript"
-      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
   <% end %>
 
   <% if index < @e_books.size-1 && ![2,5,8].include?(index) then %>
