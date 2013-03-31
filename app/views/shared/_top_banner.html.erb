@@ -38,12 +38,6 @@
         <% end %>
         </li>
       </ul>
-      <%=form_tag url_for(:controller=>:e_books, :action=>:search), :method=>:get, :class=>"form-search navbar-form pull-right" do %>
-        <div class="input-append">
-          <%=text_field_tag :search_words, '', :class=>"span2 search-query"%>
-          <button type="submit" class="btn">搜索</button>
-        </div>
-      <% end %>
       <ul class="nav pull-right">
         <li><div style="margin-top:8px;"><wb:follow-button uid="3198737743" type="gray_2" width="120" height="24" ></wb:follow-button></div></li>
       </ul>

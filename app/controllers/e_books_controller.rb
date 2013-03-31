@@ -10,7 +10,7 @@ class EBooksController < ApplicationController
 
   # GET /e_books
   def index
-    page
+    @latest_10_books = EBook.order('created_at desc').limit(8).all
   end
 
   # GET /e_books/page/1
@@ -21,8 +21,6 @@ class EBooksController < ApplicationController
     @title = "第#{@page_id}页"
     @e_books = EBook.order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
     @page_count = (EBook.count / LIMIT_PER_PAGE.to_f).ceil
-
-    render 'index.html.erb'
   end
 
   # GET /e_books/1

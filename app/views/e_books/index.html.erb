@@ -1,30 +1,39 @@
-<br/>
-<% @e_books.each_with_index do |e_book, index| %>
-	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
-
-  <% if index == 2 %>
-    <br />
-  <% end %>
-
-  <% if index == 5 %>
-    <br />
-  <% end %>
-
-  <% if index == 8 %>
-    <br />
-  <% end %>
-
-  <% if index < @e_books.size-1 && ![2,5,8].include?(index) then %>
-    <br />
-  <% end %>
-<% end %>
-
-<div class="pagination pagination-right">
-  <ul>
-    <% (1..@page_count).each do |index| %>
-      <li <%if index == @page_id then %>class="active"<% end %>>
-        <%= link_to index.to_s, url_for(:controller=>'e_books', :action=>'page', :id=>index)+"?"+request.env['QUERY_STRING'] %>
-      </li>
-    <% end %>
-  </ul>
+<div>
+  <div style="width:280px;margin-top:80px;" class='center'>
+    <span style='font-size:50px;vertical-align:middle;'>搬</span>
+    <img src='logo.png' style='width:128px;height:128px;'></img>
+    <span style="font-size:50px;vertical-align:middle;">匠</span>
+  </div>
 </div>
+
+<div style="height: 50px; padding-left:210px;margin: 20px 0px 40px 0px;">
+<%=form_tag url_for(:controller=>:e_books, :action=>:search), :method=>:get do %>
+  <div class="input-append">
+    <%=text_field_tag :search_words, '', :class=>"span6"%>
+    <button type="submit" class="btn">书籍搜索</button>
+  </div>
+<% end %>
+</div>
+
+<br/>
+
+<div style="border: 1px solid #EEE">
+  <div style="border-bottom: 0px solid #EEE; margin-bottom: 10px; padding:6px 0px 6px 15px; background-image: url(background.png); background-position:0 -476px;">
+    <span style="font-size: 15px;">最新更新</span>
+    <span style="font-size: 13px; float: right; margin-right: 15px;"><%=link_to '更多>>', url_for(:controller=>:e_books, :action=>:page, :id=>1) %></span>
+  </div>
+  <div style="height: 175px;padding: 15px 0px 0px 0px;">
+    <ul style="list-style-type:none;margin:0px;">
+      <% for ebook in @latest_10_books %>
+      <li style="float:left;width:110px;margin-left:13px;">
+        <div>
+          <img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<br/>
+
