@@ -2,23 +2,24 @@
 <% @e_books.each_with_index do |e_book, index| %>
 	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
 
-  <% if index == 2 %>
-    <br />
-  <% end %>
-
-  <% if index == 5 %>
-    <br />
-  <% end %>
-
-  <% if index == 8 %>
-    <br />
-  <% end %>
-
-  <% if index < @e_books.size-1 && ![2,5,8].include?(index) then %>
+  <% if index < @e_books.size-1 then %>
     <br />
   <% end %>
 <% end %>
 
+<script type="text/javascript" language="javascript">
+yiqifa_sid='4abb6bd9af9726d4';
+yiqifa_pid='424234';
+yiqifa_wid='629176';
+yiqifa_vid='368713';
+yiqifa_cid='7014';
+yiqifa_lid='160692';
+yiqifa_w='760';
+yiqifa_h='90';
+yiqifa_euid='';
+</script>
+<script type="text/javascript" language="javascript" src="http://p.yiqifa.com/js/show.js"></script>
+<br/>
 <div class="pagination pagination-right">
   <ul>
     <% (1..@page_count).each do |index| %>
