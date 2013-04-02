@@ -11,6 +11,7 @@
     line-height: 16px;
     margin-top: 5px;
     text-shadow: 3px 2px 2px #ddd;
+    overflow: hidden;
   }
 </style>
 
@@ -43,7 +44,7 @@
       <% for ebook in @latest_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
           <div class="booktitle"><%=ebook.name%></div>
         </div>
       </li>
@@ -63,7 +64,7 @@
       <% for ebook in @download_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
           <div class="booktitle"><%=ebook.name%></div>
         </div>
       </li>
