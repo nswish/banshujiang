@@ -35,7 +35,7 @@
       <% for ebook in @latest_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img><a/>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
         </div>
       </li>
       <% end %>
@@ -44,4 +44,22 @@
 </div>
 
 <br/>
+
+<div style="border: 1px solid #EEE">
+  <div style="border-bottom: 0px solid #EEE; margin-bottom: 10px; padding:6px 0px 6px 15px; background-image: url(background.png); background-position:0 -476px;">
+    <span style="font-size: 15px;">下载最多</span>
+  </div>
+  <div style="height: 175px;padding: 15px 0px 0px 0px;">
+    <ul style="list-style-type:none;margin:0px;">
+      <% for ebook in @download_10_books %>
+      <li style="float:left;width:110px;margin-left:13px;">
+        <div>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
 

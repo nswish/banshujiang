@@ -11,6 +11,7 @@ class EBooksController < ApplicationController
   # GET /e_books
   def index
     @latest_10_books = EBook.order('created_at desc').limit(8).all
+    @download_10_books = EBook.order('download_count desc').limit(8).all
   end
 
   # GET /e_books/page/1
