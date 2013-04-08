@@ -68,8 +68,15 @@ class EBook < ActiveRecord::Base
       matched_parts_ids << item[:id] if matched_words.length > 0
     end
 
-    matched_ids = matched_parts_ids | matched_all_ids
-    return EBook.find(matched_ids[0...35])
+    matched_ids = matched_all_ids | matched_parts_ids 
+    matched_ids = matched_ids[0...40]
+
+    EBook.find(matched_ids).each do |ebook|
+      index = matched_ids.index ebook.id
+      matched_ids[index] = ebook
+    end
+
+    return matched_ids
   end
 
   def related_ebooks(limit=8)
