@@ -1,9 +1,20 @@
 <br />
+<div style="height: 50px; padding-left:220px;margin: 10px 0px 10px 0px;">
+<%=form_tag url_for(:controller=>:e_books, :action=>:search), :method=>:get do %>
+  <div class="input-append">
+    <%=text_field_tag :search_words, params['search_words'], :class=>"span6"%>
+    <button type="submit" class="btn">书籍搜索</button>
+  </div>
+<% end %>
+</div>
+
 <% @e_books.each_with_index do |e_book, index| %>
   <%= render :partial => 'single_small', :locals => {:e_book => e_book, :index=>index} %>
   <br />
 <% end %>
 <% if @e_books.count == 0 then%>
+<div style="text-align: center;">
   没有搜索到相关书籍
+</div>
 <% end %>
 

@@ -42,6 +42,11 @@ class EBook < ActiveRecord::Base
 
   def self.search(search_words)
     require 'rmmseg'
+
+    if search_words.blank? then
+      return []
+    end
+
     RMMSeg::Dictionary.load_dictionaries
 
     search_word_array = []
