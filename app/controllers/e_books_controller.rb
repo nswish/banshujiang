@@ -90,15 +90,6 @@ class EBooksController < ApplicationController
     _sitemap_rss
 		puts `cd public/data_images; rm all.zip; zip -9 all.zip *`
 
-    # 将图片链接指向cdn.ebook.info
-    ActiveRecord::Base.transaction do
-      EBook.where("image_large not like 'http://cdn.jiani.info'").all.each do |ebook|
-        ebook.image_large = "http://cdn.jiani.info/cdn/images/%d.jpeg" % ebook.id
-        ebook.image_small = "http://cdn.jiani.info/cdn/images/%ds.jpeg" % ebook.id
-        ebook.save
-      end
-    end
-
 		render :text=>'ok'
   end
     
