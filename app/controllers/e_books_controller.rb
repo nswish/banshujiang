@@ -1,6 +1,6 @@
 #-*- encoding: utf-8 -*-
 class EBooksController < ApplicationController
-  LIMIT_PER_PAGE = 10 
+  LIMIT_PER_PAGE = 10  
 
   before_filter :require_login, :only=>[:new, :edit]
 
