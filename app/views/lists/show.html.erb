@@ -1,0 +1,8 @@
+<br />
+<p id="notice"><%= notice %></p>
+
+<% @list.e_books.each_with_index do |e_book, index| %>
+  <%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
+  <br />
+<% end %>
+

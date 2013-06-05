@@ -1,4 +1,7 @@
 RailsApp::Application.routes.draw do
+  resources :lists
+
+
   resources :attrs
   resources :import
   resources :export
