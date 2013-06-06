@@ -5,4 +5,6 @@
   <%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
   <br />
 <% end %>
-
+<div class='pull-right'>
+  <%= link_to '更多>>', url_for(:controller=>'e_books', :action=>'page', :id=>1) %>
+</div>
