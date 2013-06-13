@@ -1,4 +1,4 @@
-<% model_names = [:EBook, :WebstorageLink, :Attr, :EBookAttr, :ValueSetHeader, :ValueSetBody] %>
+<% model_names = [:EBook, :WebstorageLink, :Attr, :EBookAttr, :ValueSetHeader, :ValueSetBody, :List] %>
 <% model_names.each do |name| %>
   <%= render :partial=>'form', :locals=>{:model_name=>name} %>
 <% end %>
