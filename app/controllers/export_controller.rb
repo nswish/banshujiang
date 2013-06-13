@@ -4,6 +4,7 @@ class ExportController < ApplicationController
 
     respond_to do |format|
       format.yaml { render text: model_class.export }
+      format.json { render text: model_class.export }
     end
   end
 end
