@@ -1,4 +1,12 @@
+<% content_for(:head) do%>
+<script>
+  $(document).ready(function(){
+  });
+</script>
+<% end %>
+
 <br />
+
 <div style="height: 50px; padding-left:220px;margin: 10px 0px 10px 0px;">
 <%=form_tag url_for(:controller=>:e_books, :action=>:search), :method=>:get do %>
   <div class="input-append">

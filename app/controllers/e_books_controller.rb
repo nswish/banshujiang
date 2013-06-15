@@ -82,15 +82,26 @@ class EBooksController < ApplicationController
   end
 
   def search
-    @e_books = EBook.search params[:search_words]
+    content = params[:search_words].strip
+    @e_books = EBook.search content
+
+    search_word = SearchWord.where(:content=>content).first
+
+    if search_word then
+      search_word.search_count = search_word.search_count + 1
+    else
+      search_word = SearchWord.new(:content=>content, :search_count=>1)
+    end
+
+    search_word.save
   end
 
   def restthings
 		EBook.refresh_cache
     _sitemap_rss
-		puts `cd public/data_images; rm all.zip; zip -9 all.zip *`
+		result = `cd public/data_images; rm all.zip; zip -9 all.zip *`
 
-		render :text=>'ok'
+		render :inline=>"<pre>"+result+"</pre>"
   end
     
   private
