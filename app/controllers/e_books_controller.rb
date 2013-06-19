@@ -35,6 +35,7 @@ class EBooksController < ApplicationController
     @title = "创建电子书"
     @e_book = EBook.new
 		@e_book.publish_year = Date.today.year
+    @e_book.list_id = List.order('id desc').first.id
   end
 
   # GET /e_books/1/edit
