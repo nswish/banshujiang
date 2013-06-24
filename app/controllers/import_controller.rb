@@ -6,7 +6,6 @@ class ImportController < ApplicationController
   end
 
   def create
-    puts 'aaaa'
     model_class = eval params[:id]
 
     require 'net/http'
