@@ -1,7 +1,8 @@
 #source 'http://mirror1.prod.rhcloud.com/mirror/ruby/'
 source 'https://rubygems.org'
+#source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
