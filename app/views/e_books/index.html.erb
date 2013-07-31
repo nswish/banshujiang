@@ -34,7 +34,7 @@
 <div>
   <div style="width:280px;margin-top:80px;" class='center'>
     <span class='logofont'>搬</span>
-    <img src='/logo.png' style='width:128px;height:128px;'></img>
+    <img src='/logo.png' style='width:128px;height:128px;' alt='搬书匠' />
     <span class='logofont'>匠</span>
   </div>
 </div>
@@ -63,7 +63,7 @@
           <div class="span11">
             <ul class="inline">
               <% category.name_value_array.each do |item|%>
-                <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></a></li>
+                <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></li>
               <% end %>
             </ul>
           </div>
@@ -87,7 +87,7 @@
       <% for ebook in @latest_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt="<%=raw ebook.name%>" /></a>
           <div class="booktitle"><%=ebook.name%></div>
         </div>
       </li>
@@ -108,7 +108,7 @@
       <% for ebook in @download_10_books %>
       <li style="float:left;width:110px;margin-left:13px;">
         <div>
-          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt=""></img></a>
+          <a href="<%=url_for(:controller=>:e_books, :action=>:show, :id=>ebook.id)%>" data-toggle="tooltip" title="<%=ebook.name%>"><img class="shadow-panel" src="<%=ebook.image_small%>" alt="" /></a>
           <div class="booktitle"><%=ebook.name%></div>
         </div>
       </li>
