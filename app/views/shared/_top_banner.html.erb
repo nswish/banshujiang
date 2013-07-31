@@ -14,7 +14,7 @@
               <a class="category" tabindex="-1" href="javascript:void(0);"><%=category.title%></a>
               <ul class="dropdown-menu">
                 <% category.name_value_array.each do |item|%>
-                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></a></li>
+                  <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></li>
                 <% end %>
               </ul>
             </li>
