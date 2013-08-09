@@ -100,9 +100,8 @@ class EBooksController < ApplicationController
   def restthings
 		EBook.refresh_cache
     _sitemap_rss
-		result = `cd public/data_images; rm all.zip; zip -9 all.zip *`
 
-		render :inline=>"<pre>"+result+"</pre>"
+		render :inline=>"<a href='/'>all ok!</a>"
   end
     
   private
