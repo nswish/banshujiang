@@ -29,6 +29,17 @@
 <%= yield %>
 </div>
 
+<div style="text-align:center;">
+  <div style="font-size:14px;font-weight:bold;">
+    期待您的支持
+  </div>
+  <div>
+    <a href='http://me.alipay.com/nswish'> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>
+  </div>
+</div>
+
+<br><br>
+
 <% if Rails.env == "production" && cookies[:token] != "zwyxyz" %>
 <div style="display:none;">
   <!-- Baidu.com -->
