@@ -154,7 +154,7 @@ class WebstorageLinksController < ApplicationController
       end
     elsif url =~ /www\.asuswebstorage\.com/ then
       return url, '华硕网盘', nil
-    elsif url =~ /www\.box\.com/ then
+    elsif url =~ /\.box\.com/ then
       return url, 'Box.com', nil
     elsif url =~ /mega/ then
       return url, 'Mega网盘', nil
