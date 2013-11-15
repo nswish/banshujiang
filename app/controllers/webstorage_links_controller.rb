@@ -124,8 +124,8 @@ class WebstorageLinksController < ApplicationController
   def analyze_url(url)
     if url =~ /pan\.baidu\.com/ then
       if url =~ /密码/ then
-        tokens = url.delete('链接提取密码').split(' ')
-        return tokens[0][1..-1], '百度网盘', tokens[1][1..-1]
+        tokens = url.split(' ')
+        return tokens[1], '百度网盘', tokens[3]
       else
         return url, '百度网盘', nil
       end
