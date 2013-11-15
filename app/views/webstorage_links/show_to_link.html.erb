@@ -35,7 +35,7 @@
 
   var reduce = function(){
     remain -= 1;    
-    $('#remain_time').text(remain);
+    $('#remain_time').text(remain<0?0:remain);
     if (remain <= 0 && !to_download_flag) {
       to_download_flag = true;
       to_download();
