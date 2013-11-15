@@ -1,7 +1,7 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
   DOWNLOAD_COUNT_LIMIT = 10
-  DOWNLOAD_HOUR_LIMIT  = 12
+  DOWNLOAD_HOUR_LIMIT  = 10
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
@@ -40,29 +40,6 @@ class WebstorageLinksController < ApplicationController
     else
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新失败！'
     end
-  end
-
-  def adfly_shorten
-=begin
-    require 'net/http'
-
-    url = params[:url]
-    advert_type = 'int'
-
-    ad_link = "http://api.adf.ly/api.php?key=34dd18483add2804990269bf458a83cf&uid=2960050&advert_type=#{advert_type}&domain=adf.ly&url=#{url}"
-
-    respond_to do |format|
-      format.json do
-        result = {}
-        begin
-          result['ad_link'] = Net::HTTP.get(URI ad_link)
-        rescue Exception => ex
-          result['ad_link'] = ex.message
-        end
-        render json: result 
-      end
-    end
-=end
   end
 
   def show_to_link
