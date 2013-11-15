@@ -54,16 +54,16 @@
   <div class="region-head">
     <span style="font-size: 15px;">分类</span>
   </div>
-  <div class="region-body" style="height: 185px;margin-top: -5px;">
+  <div class="region-body" style="margin-top: -12px;overflow:hidden;">
     <ul style="list-style-type:none;margin:0px;">
       <% Attr.categories.each do |category| %>
       <li style="margin-bottom:5px;">
         <div class="row" style="margin-left: -5px;">
-          <div class="span1"><%=category.title%></div>
+          <div class="span1" style="padding-top:5px;"><%=category.title%></div>
           <div class="span11">
             <ul class="inline">
               <% category.name_value_array.each do |item|%>
-                <li><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></li>
+                <li style="border-left:1px solid lightgrey;margin:5px 0;padding-left:11px;"><%=link_to item[0], :controller=>:category, :action=>:show, :category=>ActiveSupport::Inflector.singularize(category.name), :name=>item[1] %></li>
               <% end %>
             </ul>
           </div>
