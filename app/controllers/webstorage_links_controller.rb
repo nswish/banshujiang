@@ -13,14 +13,11 @@ class WebstorageLinksController < ApplicationController
   end
 
   def create
-    msg = ''
-    if cookies[:token] == 'zwyxyz' then
-      webstorage_link = WebstorageLink.new
-      webstorage_link.url, webstorage_link.name, webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
-      webstorage_link.e_book_id = params[:e_book_id]
-      webstorage_link.save
-      msg = "新增了#{webstorage_link.name}的链接！"
-    end
+    webstorage_link = WebstorageLink.new
+    webstorage_link.url, webstorage_link.name, webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
+    webstorage_link.e_book_id = params[:e_book_id]
+    webstorage_link.save
+    msg = "新增了#{webstorage_link.name}的链接！"
 
     redirect_to :back, notice: msg
   end
