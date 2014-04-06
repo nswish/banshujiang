@@ -34,7 +34,7 @@ class EBooksController < ApplicationController
   def new
     @title = "创建电子书"
     @e_book = EBook.new
-		@e_book.publish_year = Date.today.year
+        @e_book.publish_year = Date.today.year
     @e_book.list_id = List.order('id desc').first.id
   end
 
@@ -98,10 +98,10 @@ class EBooksController < ApplicationController
   end
 
   def restthings
-		EBook.refresh_cache
+    EBook.refresh_cache
     _sitemap_rss
 
-		render :inline=>"<a href='/'>all ok!</a>"
+    render :inline=>"<a href='/'>all ok!</a>"
   end
     
   private
@@ -122,7 +122,7 @@ class EBooksController < ApplicationController
       end
     end
 
-    File.open("#{ENV['OPENSHIFT_REPO_DIR']}/public/data_feeds/sitemap.rss.xml", 'wb') do |f|
+    File.open(File.expand_path("../../../public/data_feeds/sitemap.rss.xml", __FILE__), 'wb') do |f|
       f.write the_rss
     end
   end

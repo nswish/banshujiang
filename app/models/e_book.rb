@@ -20,18 +20,18 @@ class EBook < ActiveRecord::Base
   validates :name, :uniqueness => true
 
   ### constants
-	IMAGE_DIR = 'data_images'
+    IMAGE_DIR = 'data_images'
 
   ### trigger
-	after_save :save_upload_image_large
+    after_save :save_upload_image_large
 
   ### public methods
   public
-	def image_large_file=(file_data)
-		unless file_data.blank?
-			@file_data = file_data
-		end
-	end
+    def image_large_file=(file_data)
+        unless file_data.blank?
+            @file_data = file_data
+        end
+    end
 
   def description
     attr_desc = (self.e_book_attrs.includes(:attr).collect do |e_book_attr|
@@ -59,14 +59,14 @@ class EBook < ActiveRecord::Base
       search_word_array << tok.text.downcase.force_encoding("UTF-8")
     end
 
-		# 全部匹配
+        # 全部匹配
     matched_all_ids = []
     TextForSearchCache.each do |item|
       matched_words = search_word_array.select { |word| item[:text][word] }
-			matched_all_ids << item[:id] if matched_words.length == search_word_array.length
+            matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
 
-		# 部分匹配
+        # 部分匹配
     matched_parts_ids = []
     TextForSearchCache.each do |item|
       matched_words = search_word_array.select { |word| item[:text][word] }
@@ -111,37 +111,37 @@ class EBook < ActiveRecord::Base
     EBook::TextForSearchCache.clear.concat EBook.load_text_for_search_cache
   end
 
-	private
-	def save_upload_image_large
-		if @file_data
-			# if self.image_large has value then test the file exist? and delete it
-			unless self.image_large.blank?
-				file_path = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_large}"
-        File::delete file_path if File::file? file_path
+    private
+    def save_upload_image_large
+        if @file_data
+            # if self.image_large has value then test the file exist? and delete it
+            unless self.image_large.blank?
+                file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+                file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
-        file_path_small = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_small}"
-        File::delete file_path_small if File::file? file_path_small
-			end
+                File::delete file_path if File::file? file_path
+                File::delete file_path_small if File::file? file_path_small
+            end
 
-			# write file to dir and link to it
-			filename_ext = @file_data.original_filename.split('.').last.downcase
-			self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
-			self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
+            # write file to dir and link to it
+            filename_ext = @file_data.original_filename.split('.').last.downcase
+            self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
+            self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
 
-			file_path = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_large}"
-			file_path_small = "#{ENV['OPENSHIFT_REPO_DIR']}/public/#{self.image_small}"
+            file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+            file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
-			File.open(file_path, 'wb') do |f|
-				f.write(@file_data.read)
-			end
+            File.open(file_path, 'wb') do |f|
+                f.write(@file_data.read)
+            end
 
-      image_file = ImageList.new(file_path)
-      image_file.resize(420,560).write(file_path)
-      image_file.resize(160,213).write(file_path_small)
+            image_file = ImageList.new(file_path)
+            image_file.resize(420,560).write(file_path)
+            image_file.resize(160,213).write(file_path_small)
 
-			@file_data = nil
-			self.save
-		end
-	end
+            @file_data = nil
+            self.save
+        end
+    end
 
 end
