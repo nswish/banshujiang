@@ -1,7 +1,6 @@
 RailsApp::Application.routes.draw do
   resources :lists
 
-
   resources :attrs
   resources :import
   resources :export
@@ -11,6 +10,8 @@ RailsApp::Application.routes.draw do
   match 'category/:category/:name' => 'category#show'
   match 'category/:category/:name/bbs' => 'category#bbs'
   match 'category/:category/:name/page/:id' => 'category#page'
+
+  match 'support/pay' => 'support#show'
 
   match '/auth/:provider/callback' => 'users#index'
 
