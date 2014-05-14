@@ -50,7 +50,7 @@ class WebstorageLinksController < ApplicationController
     end
 
     # 按ip屏蔽 显示
-    ip = request.env['REMOTE_ADDR'] || request.env['HTTP_X_FORWARDED_FOR']
+    ip = request.env['HTTP_X_FORWARDED_FOR'] || request.env['REMOTE_ADDR']
 
     counts = IpDownload.where(:created_at=>[DOWNLOAD_HOUR_LIMIT.hours.ago..DateTime.now], :ip=>ip).count
 
@@ -74,7 +74,7 @@ class WebstorageLinksController < ApplicationController
     end
 
     # 按ip屏蔽
-    ip = request.env['REMOTE_ADDR'] || request.env['HTTP_X_FORWARDED_FOR']
+    ip = request.env['HTTP_X_FORWARDED_FOR'] || request.env['REMOTE_ADDR']
     e_book = EBook.find params[:e_book_id]  
     counts = IpDownload.where(:created_at=>[DOWNLOAD_HOUR_LIMIT.hours.ago..DateTime.now], :ip=>ip).count
     if counts >= DOWNLOAD_COUNT_LIMIT then
