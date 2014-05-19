@@ -1,5 +1,10 @@
-<% if @link.secret_key then %>
-<div style="text-align:center;border-bottom-width:1px;border-bottom-style:dashed;">提取密码：<%=raw @link.secret_key%></div>
+<% if @link.url =~ /mega/ %>
+  <script>
+    location.replace("<%=@link.url%>");
+  </script>
+<% else %>
+  <% if @link.secret_key then %>
+  <div style="text-align:center;border-bottom-width:1px;border-bottom-style:dashed;">提取密码：<%=raw @link.secret_key%></div>
+  <% end %>
+  <iframe src='<%=@link.url%>'></iframe>
 <% end %>
-<iframe src='<%=@link.url%>'>
-</iframe>

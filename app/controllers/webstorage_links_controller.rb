@@ -133,6 +133,8 @@ class WebstorageLinksController < ApplicationController
       return url, 'Box.com', nil
     elsif url =~ /mega/ then
       return url, 'Mega网盘', nil
+    elsif url =~ /vmall\.com/ then
+      return url, '华为网盘', nil
     else
       return 'javascript:void;', '地址', nil
     end
