@@ -111,37 +111,61 @@ class EBook < ActiveRecord::Base
     EBook::TextForSearchCache.clear.concat EBook.load_text_for_search_cache
   end
 
-    private
-    def save_upload_image_large
-        if @file_data
-            # if self.image_large has value then test the file exist? and delete it
-            unless self.image_large.blank?
-                file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
-                file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
+  private
+  def save_upload_image_large
+    if @file_data
+      # if self.image_large has value then test the file exist? and delete it
+      unless self.image_large.blank?
+        file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+        file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
-                File::delete file_path if File::file? file_path
-                File::delete file_path_small if File::file? file_path_small
-            end
+        File::delete file_path if File::file? file_path
+        File::delete file_path_small if File::file? file_path_small
+      end
 
-            # write file to dir and link to it
-            filename_ext = @file_data.original_filename.split('.').last.downcase
-            self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
-            self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
+      # write file to dir and link to it
+      filename_ext = @file_data.original_filename.split('.').last.downcase
+      self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
+      self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
 
-            file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
-            file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
+      file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+      file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
-            File.open(file_path, 'wb') do |f|
-                f.write(@file_data.read)
-            end
+      File.open(file_path, 'wb') do |f|
+        f.write(@file_data.read)
+      end
 
-            image_file = ImageList.new(file_path)
-            image_file.resize(420,560).write(file_path)
-            image_file.resize(160,213).write(file_path_small)
+      image_file = ImageList.new(file_path)
+      image_file.resize(420,560).write(file_path)
+      image_file.resize(160,213).write(file_path_small)
 
-            @file_data = nil
-            self.save
-        end
+      if upload_to_qiniu file_path, "#{id}.#{filename_ext}" then
+        self.image_large = "http://#{Rails.env == 'production' ? 'imgebook' : 'testebook'}.qiniudn.com/#{id}.#{filename_ext}"
+      end
+
+      if upload_to_qiniu file_path_small, "#{id}s.#{filename_ext}" then
+        self.image_small = "http://#{Rails.env == 'production' ? 'imgebook' : 'testebook'}.qiniudn.com/#{id}s.#{filename_ext}"
+      end
+
+      @file_data = nil
+
+      self.save
     end
+  end
+
+  def upload_to_qiniu(file_path, key)
+    require 'qiniu'
+    
+    put_policy = Qiniu::Auth::PutPolicy.new(Rails.env == 'production' ? 'imgebook' : 'testebook')
+    uptoken = Qiniu::Auth.generate_uptoken(put_policy)
+
+    code, result, response_headers = Qiniu::Storage.upload_with_put_policy(
+      put_policy,
+      file_path,
+      key
+    )
+
+    return code == 200
+  end
 
 end

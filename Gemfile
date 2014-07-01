@@ -50,3 +50,5 @@ gem "rmagick", "~> 2.13.1"
 gem "rmmseg-cpp", "~> 0.2.9"
 
 gem "thin"
+
+gem 'qiniu', '~> 6.2.1'
