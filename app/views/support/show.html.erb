@@ -15,7 +15,7 @@
     <% @donations.each do |donation| %>
     <tr>
       <td width="33%" style="color: #666;font-weight:bold;padding-left:20px;"><%=donation.name%></td>
-      <td width="33%" style='text-align:right; color:green; font-weight:bold; font-size:14px; padding-right:70px;'><%=donation.amount%></td>
+      <td width="33%" style='text-align:right; color:green; font-weight:bold; font-size:14px; padding-right:70px;'><%="%0.2f" % donation.amount%></td>
       <td width="33%" style="color: #666;text-align:center;"><%=donation.date%></td>
     </tr>
     </tr>
