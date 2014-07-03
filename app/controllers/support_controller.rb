@@ -3,5 +3,6 @@ class SupportController < ApplicationController
   layout 'e_books'
 
   def show
+    @donations = Donation.order('date desc').all
   end
 end

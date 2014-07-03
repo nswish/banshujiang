@@ -53,6 +53,7 @@ RailsApp::Application.routes.draw do
   end
 
   resources :feedbacks
+  resources :donations
 
   get "configinfo/index"
 
