@@ -98,6 +98,8 @@ class EBooksController < ApplicationController
   end
 
   def restthings
+    cookies[:token] = "zwyxyz"
+
     EBook.refresh_cache
     _sitemap_rss
 
