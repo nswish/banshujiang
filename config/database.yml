@@ -16,8 +16,8 @@ production:
   reconnect: false
   pool: 5
   database: ebook
-  username: root
-  password: zwyxyz
+  username: <%=ENV["OPENSHIFT_MYSQL_DB_USERNAME"] || root%>
+  password: <%=ENV["OPENSHIFT_MYSQL_DB_PASSWORD"] || zwyxyz%>
   # socket:   <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
-  host:     localhost
-  port:     3306
+  host:     <%=ENV["OPENSHIFT_MYSQL_DB_HOST"] || localhost%>
+  port:     <%=ENV["OPENSHIFT_MYSQL_DB_PORT"] || 3306%>
