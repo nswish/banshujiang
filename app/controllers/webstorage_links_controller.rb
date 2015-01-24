@@ -1,7 +1,7 @@
 #-*- encoding:utf-8 -*-
 class WebstorageLinksController < ApplicationController
-  DOWNLOAD_COUNT_LIMIT = 10
-  DOWNLOAD_HOUR_LIMIT  = 10
+  DOWNLOAD_COUNT_LIMIT = 12
+  DOWNLOAD_HOUR_LIMIT  = 8
   def destroy
     msg = ''
     if cookies[:token] == 'zwyxyz' then
