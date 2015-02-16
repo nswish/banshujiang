@@ -14,6 +14,12 @@ class EBooksController < ApplicationController
     @download_10_books = EBook.order('download_count desc').limit(8).all
   end
 
+  def exists
+    respond_to do |format|
+      format.json { render :json => { 'exists' => EBook.where(:name => params[:name]).count > 0} }
+    end
+  end
+
   # GET /e_books/page/1
   def page
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end

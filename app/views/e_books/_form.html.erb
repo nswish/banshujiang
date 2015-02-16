@@ -1,3 +1,20 @@
+<% content_for(:head) do%>
+  <script>
+    $(document).ready(function(){
+      $("#e_book_name").blur(function(){
+        var that = this;
+
+        $.get("/e_books/exists.json?name="+encodeURI(this.value))
+          .success(function(result){
+            if(result.exists)
+              $(that).css("border", "1px solid red");
+          });
+      }).focus(function(){
+        $(this).css("border", "");
+      });
+    });
+  </script>
+<% end %>
 <div class="row">
   <div class="span6">
   <%= form_for(@e_book, :html=>{:multipart=>true}, :builder=>EbookFormBuilder) do |f| %>

@@ -42,6 +42,7 @@ RailsApp::Application.routes.draw do
       get 'page/:id', :action => :page
       get 'search', :action => :search
 			get 'restthings', :action => :restthings
+      get 'exists', :action => :exists
     end
     
     resources :webstorage_links do
