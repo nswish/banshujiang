@@ -4,7 +4,7 @@
       $("#e_book_name").blur(function(){
         var that = this;
 
-        $.get("/e_books/exists.json?name="+encodeURI(this.value))
+        $.get("/e_books/exists.json?name="+encodeURIComponent(this.value))
           .success(function(result){
             if(result.exists)
               $(that).css("border", "1px solid red");
