@@ -5,20 +5,10 @@
   <title>[<%=site_name%>]<%=@title%> - 电子书(EBook)</title>
   <meta name="ujianVerification" content="5b402cb330ce535b47381fc109aae4a6" />
   <meta property="wb:webmaster" content="919195fbd9f44369" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <link href="http://libebook.qiniudn.com/bootstrap.min.css" rel="stylesheet">  
   <%= stylesheet_link_tag "e_books", :media => "all" %>
-  <script src="http://libebook.qiniudn.com/jquery-1.9.1.min.js"></script>
-  <script src="http://libebook.qiniudn.com/jquery-migrate-1.1.1.min.js"></script>
-  <%= javascript_include_tag "jquery_ujs"%>
-  <%= javascript_include_tag "e_books" %>
   <%= csrf_meta_tags %>
-  <script>
-    $(document).ready(function(){
-      $('.category').click(function(event){
-        event.stopImmediatePropagation();
-      });
-    });
-  </script>
   <%= yield :head %>
 </head>
 <body>
@@ -29,14 +19,14 @@
 </div>
 
 <% if params[:controller] != 'support' %>
-<div style="text-align:center;">
+<section style="text-align:center;">
   <div style="font-size:14px;font-weight:bold;">
     期待您的支持
   </div>
   <div>
     <a href='/support/pay'><img src='http://imgebook.qiniudn.com/donation.png'/></a>
   </div>
-</div>
+</section>
 <% end %>
 
 <br><br>
@@ -51,7 +41,19 @@
 </div>
 <% end %>
 
+  <script src="http://libebook.qiniudn.com/jquery-1.9.1.min.js"></script>
+  <script src="http://libebook.qiniudn.com/jquery-migrate-1.1.1.min.js"></script>
+  <%= javascript_include_tag "jquery_ujs"%>
+  <%= javascript_include_tag "e_books" %>
   <script src="http://libebook.qiniudn.com/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $(document).ready(function(){
+      $('.category').click(function(event){
+        event.stopImmediatePropagation();
+      });
+    });
+  </script>
+  <%= yield :footer %>
 </body>
 </html>
