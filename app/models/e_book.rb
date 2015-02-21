@@ -59,14 +59,14 @@ class EBook < ActiveRecord::Base
       search_word_array << tok.text.downcase.force_encoding("UTF-8")
     end
 
-        # 全部匹配
+    # 全部匹配
     matched_all_ids = []
     TextForSearchCache.each do |item|
       matched_words = search_word_array.select { |word| item[:text][word] }
             matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
 
-        # 部分匹配
+    # 部分匹配
     matched_parts_ids = []
     TextForSearchCache.each do |item|
       matched_words = search_word_array.select { |word| item[:text][word] }
@@ -74,7 +74,7 @@ class EBook < ActiveRecord::Base
     end
 
     matched_ids = matched_all_ids | matched_parts_ids 
-    matched_ids = matched_ids[0...40]
+    matched_ids = matched_ids[0...60]
 
     EBook.find(matched_ids).each do |ebook|
       index = matched_ids.index ebook.id
