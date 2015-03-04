@@ -20,17 +20,17 @@
 </div>
 
 <% if params[:controller] != 'support' %>
-<section style="text-align:center;">
+<div style="text-align:center;">
   <div style="font-size:14px;font-weight:bold;">
     期待您的支持
   </div>
   <div>
     <a href='/support/pay'><img src='http://imgebook.qiniudn.com/donation.png'/></a>
   </div>
-</section>
+</div>
 <% end %>
 
-<br><br>
+<div style="margin: 25px;"></div>
 
 <% if Rails.env == "production" && cookies[:token] != "zwyxyz" %>
 <div style="display:none;">

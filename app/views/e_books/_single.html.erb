@@ -4,10 +4,11 @@
   </div>
   <div class="span6">
     <div style="height:510px;padding-top:20px;">
+      <div class="ebook-title">
+          <%=link_to "#{e_book.name}", {:controller=>:e_books, :action=>:show, :id=>e_book.id} %>
+      </div>
       <table class="table tablex">
-        <tr>
-          <th colspan="2" style="text-align:center;"><%=link_to "#{e_book.name}", {:controller=>:e_books, :action=>:show, :id=>e_book.id} %></th>
-        </tr>
+      <tbody>
         <tr style="border-style:solid;border-width:1px 0px 0px 0px;border-color:lightgrey;">
           <td style="text-align:right;width:100px;">作者：</td>
           <td><%= e_book.author %></td>
@@ -48,6 +49,7 @@
             </div>
           </td>
         </tr>
+      </tbody>
       </table>
     </div>
     <% if params[:controller] == 'e_books' && params[:action] == 'show' %>
