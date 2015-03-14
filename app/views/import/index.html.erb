@@ -2,3 +2,6 @@
 <% model_names.each do |name| %>
   <%= render :partial=>'form', :locals=>{:model_name=>name} %>
 <% end %>
+
+刷新计数 <input type="button" onclick="refreshCount()" value="开始"/>
+<span id="refresh_msg"></span>

@@ -5,3 +5,7 @@ window.importModel = (url, model_name) ->
 	$('#'+model_name+'_msg').text('正在处理...').css('color', 'red')
 	$.post url, (data) ->
 		$('#'+model_name+'_msg').text('处理完成...').css('color', 'blue')
+
+window.refreshCount = ()->
+	$.post '/import/refreshCount.json', (data) ->
+		$('refresh_msg').text('处理完成...').css('color', 'blue')

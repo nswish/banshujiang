@@ -13,4 +13,12 @@ class ImportController < ApplicationController
 
     render :text => "ok"
   end
+
+  def refreshCount
+    require 'net/http'
+
+    EBook.refreshCount Net::HTTP.get(URI 'http://ebook.jiani.info/export/EBook.json')
+
+    render :text => "ok"
+  end
 end

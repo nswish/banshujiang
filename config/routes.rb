@@ -2,7 +2,11 @@ RailsApp::Application.routes.draw do
   resources :lists
 
   resources :attrs
-  resources :import
+  resources :import do
+    collection do
+      post 'refreshCount', :action=>'refreshCount'
+    end
+  end
   resources :export
 
   get "statistics/index"

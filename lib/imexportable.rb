@@ -21,4 +21,14 @@ module ImExportable
     end
   end
 
+  def refreshCount(doc)
+    ActiveRecord::Base.transaction do
+      JSON.load(doc).each do |item|
+        item = JSON.load(item)
+        inst = self.find item["id"]
+        inst.send "download_count=".to_sym, item["download_count"]
+        inst.save
+      end
+    end
+  end
 end
