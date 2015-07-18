@@ -4,7 +4,12 @@ class SupportController < ApplicationController
 
   def show
     @donations = Donation.order('date desc').all.map do |donation|
-      donation.name = donation.name[0...-2] + '*' + donation.name[-1]
+      if donation.date < '2015.07.13 00:00' then
+        donation.name = donation.name[0...-2] + '*' + donation.name[-1]
+      else
+        donation.name = donation.name + '(支付宝名)'
+      end
+
       donation
     end
   end
