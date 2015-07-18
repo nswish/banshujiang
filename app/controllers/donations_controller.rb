@@ -2,7 +2,7 @@ class DonationsController < ApplicationController
   # GET /donations
   # GET /donations.json
   def index
-    @donations = Donation.all
+    @donations = Donation.order('created_at desc').all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,7 @@ class DonationsController < ApplicationController
   # GET /donations/new
   # GET /donations/new.json
   def new
-    @donation = Donation.new
+    @donation = Donation.new date: DateTime.now.strftime('%Y.%m.%d %H:%M')
 
     respond_to do |format|
       format.html # new.html.erb
