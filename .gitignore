@@ -16,3 +16,4 @@
 
 public/assets/
 .sass-cache/
+*.out
