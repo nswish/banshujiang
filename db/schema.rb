@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140703034619) do
+ActiveRecord::Schema.define(:version => 20151028051116) do
 
   create_table "attrs", :force => true do |t|
     t.string   "name"
@@ -143,10 +143,11 @@ ActiveRecord::Schema.define(:version => 20140703034619) do
     t.integer  "e_book_id"
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "ad_link"
     t.string   "secret_key"
+    t.string   "file_format"
   end
 
 end
