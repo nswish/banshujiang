@@ -5,10 +5,16 @@ test:
   timeout: 5000
 
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   pool: 5
-  timeout: 5000
+  database: ebook
+  username: <%=ENV["OPENSHIFT_MYSQL_DB_USERNAME"] || 'root'%>
+  password: <%=ENV["OPENSHIFT_MYSQL_DB_PASSWORD"] || 'zwyxyz'%>
+  # socket:   <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
+  host:     <%=ENV["OPENSHIFT_MYSQL_DB_HOST"] || 'localhost'%>
+  port:     <%=ENV["OPENSHIFT_MYSQL_DB_PORT"] || 3306%>
 
 production:
   adapter: mysql2

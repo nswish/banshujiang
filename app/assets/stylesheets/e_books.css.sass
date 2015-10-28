@@ -14,8 +14,9 @@
   height: 146px
 
 .tablex
+  line-height: 1.5
   font:
-    size: 15px
+    size: 16px
   td 
     border:
       top-width: 0px
@@ -26,7 +27,11 @@
     color: black
     line-height: 25px
   text-align: center
-  margin-bottom: 8px
+  margin-bottom: 15px
+
+.table
+  th, td
+    line-height: inherit
 
 pre
   margin: 0 10px 10px -10px
@@ -36,4 +41,33 @@ pre
   margin-right: auto
 
 body
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif, STHeiti, "微软雅黑"
+  font-family: "Helvetica Neue", "微软雅黑", Helvetica, Arial, sans-serif, STHeiti
+
+.format-tag
+  padding: 2px 4px
+  font-size: 12px
+  color: white
+  visibility: hidden
+
+.link-name:hover
+  + span
+    visibility: visible
+  text-decoration: none
+
+a.PDF
+  color: #FF4136
+a.CHM
+  color: #85144b
+a.EPUB
+  color: #2ECC40
+a.MOBI
+  color: #0074D9
+
+span.PDF
+  background-color: #FF4136
+span.CHM
+  background-color: #85144b
+span.EPUB
+  background-color: #2ECC40
+span.MOBI
+  background-color: #0074D9
