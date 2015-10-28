@@ -15,6 +15,7 @@ class WebstorageLinksController < ApplicationController
   def create
     webstorage_link = WebstorageLink.new
     webstorage_link.url, webstorage_link.name, webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
+    webstorage_link.file_format = params[:webstorage_link][:file_format]
 
     if WebstorageLink.where({:url=>webstorage_link.url}).count > 0 then
       msg = "已有相同的链接存在！"
@@ -38,8 +39,9 @@ class WebstorageLinksController < ApplicationController
   def update
     @webstorage_link = WebstorageLink.find params[:id]
     @webstorage_link.url, @webstorage_link.name, @webstorage_link.secret_key = analyze_url params[:webstorage_link][:url]
+    @webstorage_link.file_format = params[:webstorage_link][:file_format]
 
-    if WebstorageLink.where({:url=>@webstorage_link.url}).count > 0 then
+    if WebstorageLink.where(["url = ? and id <> ?", @webstorage_link.url, @webstorage_link.id]).count > 0 then
       redirect_to url_for(:controller=>:e_books, :action=>:edit, :id=>params[:e_book_id]), notice: '更新失败！已有相同的链接存在！'
       return
     end

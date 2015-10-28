@@ -8,6 +8,10 @@
     <%=f.text_area :url, :class=>:span6, :rows=>2 %>
   </div>
   <div class="field">
+    <%= f.label :file_format, '格式' %>
+    <%= f.select(:file_format, [["PDF", "PDF"], ["CHM", "CHM"], ["MOBI", "MOBI"], ["EPUB", "EPUB"]]) %>
+  </div>
+  <div class="field">
     <%=f.submit :save%>
   </div>
 <% end %>

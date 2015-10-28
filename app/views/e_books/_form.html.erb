@@ -84,7 +84,7 @@
       <ol>
       <% @e_book.webstorage_links.each do |link| %>
         <li>
-          <%=link.name%> | <%=link.url%> | <%=link.secret_key%> | 
+          <%=link.name%> | <%=link.url%> | <%=link.secret_key%> | <%=link.file_format%>
           <%= link_to '编辑', edit_e_book_webstorage_link_path(@e_book, link) %>
           <%= link_to '删除', url_for([@e_book, link]), method: :delete, data: {confirm: '确定删除么？'} %>
         </li>
@@ -96,6 +96,10 @@
     <div class="field">
       <%=f.label :url, '文件链接' %>
       <%=f.text_area :url, :class=>:span6, :rows=>2 %>
+    </div>
+    <div class="field">
+      <%= f.label :file_format, '格式' %>
+      <%= f.select(:file_format, [["PDF", "PDF"], ["CHM", "CHM"], ["MOBI", "MOBI"], ["EPUB", "EPUB"]]) %>
     </div>
     <div class="actions">
       <%=f.submit '新增'%>
