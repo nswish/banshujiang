@@ -1,10 +1,15 @@
-<% if @link.url =~ /mega/ %>
+<% if @link.secret_key then %>
+  <% if @isIE then%>
+    <script>
+      alert('您的提取密码:\n<%=@link.secret_key%>');
+      location.replace("<%=@link.url%>");
+    </script>
+  <% else %>
+    <div style="text-align:center;border-bottom-width:1px;border-bottom-style:dashed;padding: 5px 0; font-size: 16px; font-family:'微软雅黑'">提取密码：<%=raw @link.secret_key%></div>
+    <iframe src='<%=@link.url%>'></iframe>
+  <% end %>
+<% else %>
   <script>
     location.replace("<%=@link.url%>");
   </script>
-<% else %>
-  <% if @link.secret_key then %>
-  <div style="text-align:center;border-bottom-width:1px;border-bottom-style:dashed;padding: 5px 0; font-size: 16px; font-family:'微软雅黑'">提取密码：<%=raw @link.secret_key%></div>
-  <% end %>
-  <iframe src='<%=@link.url%>'></iframe>
 <% end %>
