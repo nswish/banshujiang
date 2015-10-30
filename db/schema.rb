@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151028051116) do
+ActiveRecord::Schema.define(:version => 20151030043030) do
 
   create_table "attrs", :force => true do |t|
     t.string   "name"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20151028051116) do
     t.string   "ad_link"
     t.string   "secret_key"
     t.string   "file_format"
+    t.string   "user_agent"
   end
 
 end
