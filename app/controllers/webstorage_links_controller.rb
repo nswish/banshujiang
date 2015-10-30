@@ -107,7 +107,7 @@ class WebstorageLinksController < ApplicationController
     session[:download_time_array].push Time.now
 
     # 记录ip下载时间
-    IpDownload.create(:ip=>ip, :e_book_id=>e_book.id, :e_book_name=>e_book.name)
+    IpDownload.create(:ip=>ip, :e_book_id=>e_book.id, :e_book_name=>e_book.name, :user_agent=>request.env['HTTP_USER_AGENT'])
 
     @isIE = request.env['HTTP_USER_AGENT'][/MSIE/] != nil
 

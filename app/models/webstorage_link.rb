@@ -3,7 +3,7 @@ class WebstorageLink < ActiveRecord::Base
   extend ImExportable
 
   ### attributes
-  attr_accessible :e_book_id, :name, :url, :ad_link, :secret_key
+  attr_accessible :e_book_id, :name, :url, :ad_link, :secret_key, :file_format
 
   ### relation
   belongs_to :e_book
