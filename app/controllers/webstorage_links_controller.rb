@@ -109,7 +109,7 @@ class WebstorageLinksController < ApplicationController
     # 记录ip下载时间
     IpDownload.create(:ip=>ip, :e_book_id=>e_book.id, :e_book_name=>e_book.name, :user_agent=>request.env['HTTP_USER_AGENT'])
 
-    @isIE = request.env['HTTP_USER_AGENT'][/MSIE/] != nil
+    @isIE = request.env['HTTP_USER_AGENT'][/MSIE|Trident/] != nil
 
     render :layout => 'application'
 	end
