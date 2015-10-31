@@ -8,7 +8,7 @@
   <%=link_to '新增一本', new_e_book_path %> 
 </div>
 <input type="text" class="span6" value="[<%=site_name%>#<%=@e_book.id%>]<%=standard_file_name @e_book%>" onclick="select()"></input>
-<div><%= notice %></div>
+<div style="color:blue;"><%= notice %></div>
 <%= render 'form' %>
 
 <%= link_to 'Show', @e_book %> |
