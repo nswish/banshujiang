@@ -47,6 +47,8 @@ RailsApp::Application.routes.draw do
       get 'search', :action => :search
 			get 'restthings', :action => :restthings
       get 'exists', :action => :exists
+      post 'upload/:id', :action => :upload
+      post 'receive', :action => :receive
     end
     
     resources :webstorage_links do

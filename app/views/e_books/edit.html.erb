@@ -1,3 +1,36 @@
+<% content_for(:footer) do%>
+  <script>
+    (function(){
+      $("#ebook_sync").click(function(){
+        var $this = $(this),
+            $self = $this;
+
+        if($this.text() === "同步中...") {
+          return;
+        } else {
+          $this.text("同步中...");
+        }
+
+        $.post("../upload/<%=@e_book.id%>.json").done(function(result){
+          if(typeof(console) != 'undefined' && console.log)
+            console.log(result.data);
+          
+          if(result.data.match(/^fail:/)) {
+            alert(result.data);
+          } else {
+            alert('同步成功!');
+          }
+
+          $self.text("同步");
+        }).fail(function(error){
+          alert(error);
+          $self.text("同步");
+        });
+      });
+    }());
+  </script>
+<% end %>
+
 <div>
   <% if @e_book.id-1 > 0 %>
     <%=link_to '前一本', edit_e_book_path(EBook.find @e_book.id-1)%> | 
@@ -5,7 +38,8 @@
   <% if EBook.count >= @e_book.id+1 %>
     <%=link_to '后一本', edit_e_book_path(EBook.find @e_book.id+1)%> |
   <% end %>
-  <%=link_to '新增一本', new_e_book_path %> 
+  <%=link_to '新增一本', new_e_book_path %> |
+  <a id="ebook_sync" href="javascript:void(0);">同步</a>
 </div>
 <input type="text" class="span6" value="[<%=site_name%>#<%=@e_book.id%>]<%=standard_file_name @e_book%>" onclick="select()"></input>
 <div style="color:blue;"><%= notice %></div>

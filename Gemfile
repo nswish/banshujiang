@@ -10,7 +10,6 @@ gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'sqlite3'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -28,15 +27,6 @@ gem 'jquery-rails'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
 # To use debugger
 # gem 'debugger'
 
@@ -52,3 +42,5 @@ gem "rmmseg-cpp", "~> 0.2.9"
 gem "thin"
 
 gem 'qiniu', '~> 6.2.1'
+
+gem 'httpclient', '2.6.0.1'

@@ -47,7 +47,9 @@
   <%= javascript_include_tag "jquery_ujs"%>
   <%= javascript_include_tag "e_books" %>
   <script src="http://libebook.qiniudn.com/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+  <% unless params[:controller] == 'e_books' && params[:action] == 'edit' then %>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+  <% end %>
   <script>
     $(document).ready(function(){
       $('.category').click(function(event){
