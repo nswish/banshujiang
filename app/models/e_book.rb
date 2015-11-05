@@ -20,18 +20,18 @@ class EBook < ActiveRecord::Base
   validates :name, :uniqueness => true
 
   ### constants
-    IMAGE_DIR = 'data_images'
+  IMAGE_DIR = 'data_images'
 
   ### trigger
-    after_save :save_upload_image_large
+  after_save :save_upload_image_large
 
   ### public methods
   public
-    def image_large_file=(file_data)
-        unless file_data.blank?
-            @file_data = file_data
-        end
+  def image_large_file=(file_data)
+    unless file_data.blank?
+      @file_data = file_data
     end
+  end
 
   def description
     attr_desc = (self.e_book_attrs.includes(:attr).collect do |e_book_attr|
@@ -94,6 +94,16 @@ class EBook < ActiveRecord::Base
     end
 
     return EBook.find(id_result-[self.id])[0...8]
+  end
+
+  # 和ebook有关的说有数据
+  # 包括ebook本身数据、属性数据和网盘存储地址数据
+  def full_data
+    {
+      ebook: self,
+      ebook_attrs: self.e_book_attrs.all,
+      ebook_webstorage_links: self.webstorage_links.all
+    }
   end
 
   def self.load_text_for_search_cache

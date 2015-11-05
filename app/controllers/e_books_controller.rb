@@ -116,15 +116,10 @@ class EBooksController < ApplicationController
   def upload
     id = params[:id]
     ebook = EBook.find(id)
-    data = { 
-      ebook: ebook,
-      ebook_attrs: ebook.e_book_attrs.all,
-      ebook_webstorage_links: ebook.webstorage_links.all
-    }
 
     client = HTTPClient.new
 
-    res = client.post 'http://ebook.jiani.info/e_books/receive', :body=>data.to_json, :header=>{'Content-Type'=>'application/json'}
+    res = client.post 'http://ebook.jiani.info/e_books/receive', :body=>ebook.full_data.to_json, :header=>{'Content-Type'=>'application/json'}
 
     render :json=>{ :data => "#{res.body}" }
   end
