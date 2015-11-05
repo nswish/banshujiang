@@ -47,6 +47,7 @@ RailsApp::Application.routes.draw do
       get 'search', :action => :search
 			get 'restthings', :action => :restthings
       get 'exists', :action => :exists
+      get ':id/need_sync', :action => :need_sync
       post 'upload/:id', :action => :upload
       post 'receive', :action => :receive
     end

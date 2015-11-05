@@ -32,15 +32,24 @@ class EBooksController < ApplicationController
 
   # GET /e_books/1
   def show
-    @e_book = EBook.find(params[:id])
-    @title = view_context.standard_file_name @e_book
+    id = params[:id]
+
+    respond_to do |format|
+      format.html { 
+        @e_book = EBook.find(id)
+        @title = view_context.standard_file_name @e_book
+      }
+      format.json {
+        render json: EBook.exists?(id) ? EBook.find(id).full_data : {}
+      }
+    end
   end
 
   # GET /e_books/new
   def new
     @title = "创建电子书"
     @e_book = EBook.new
-        @e_book.publish_year = Date.today.year
+    @e_book.publish_year = Date.today.year
     @e_book.list_id = List.order('id desc').first.id
   end
 
@@ -86,6 +95,18 @@ class EBooksController < ApplicationController
     rescue Exception=>ex
       redirect_to url_for(:controller=>:e_books, :action=>:edit), notice: ex.message
     end
+  end
+
+  def need_sync
+    ebook = EBook.find(params[:id])
+    client = HTTPClient.new
+
+    res = client.get "http://ebook.jiani.info/e_books/#{ebook.id}.json"
+
+    remote_ebook_data = JSON.load res.body
+    ebook_data = JSON.load ebook.full_data.to_json
+
+    render json: { status: ebook_data.eql?(remote_ebook_data) }
   end
 
   def search
