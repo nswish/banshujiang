@@ -105,8 +105,9 @@ class EBooksController < ApplicationController
 
     remote_ebook_data = JSON.load res.body
     ebook_data = JSON.load ebook.full_data.to_json
+    puts remote_ebook_data, ebook_data, ebook_data.eql?(remote_ebook_data)
 
-    render json: { status: ebook_data.eql?(remote_ebook_data) }
+    render json: { status: !ebook_data.eql?(remote_ebook_data) }
   end
 
   def search

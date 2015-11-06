@@ -5,10 +5,10 @@
         var $this = $(this),
             $self = $this;
 
-        if($this.text() === "同步中...") {
+        if($this.text() === "| 同步中...") {
           return;
         } else {
-          $this.text("同步中...");
+          $this.text("| 同步中...");
         }
 
         $.post("../upload/<%=@e_book.id%>").done(function(result){
@@ -22,16 +22,16 @@
             alert('同步成功!');
           }
 
-          $self.text("同步");
+          $self.text("| 同步");
         }).fail(function(error){
           alert(error);
-          $self.text("同步");
+          $self.text("| 同步");
         });
       });
 
       function need_sync() {
         $.get("../<%=@e_book.id%>/need_sync").then(function(result){
-          if(!result.status) {
+          if(result.status) {
             $('#ebook_sync').show();
           } else {
             $('#ebook_sync').hide();
