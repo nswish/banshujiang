@@ -15,11 +15,17 @@
 
 <div class="pagination pagination-right">
   <ul>
-    <% (1..@page_count).each do |index| %>
-      <li <%if index == @page_id then %>class="active"<% end %>>
-        <%= link_to index.to_s, url_for(:controller=>'e_books', :action=>'page', :id=>index)+"?"+request.env['QUERY_STRING'] %>
-      </li>
-    <% end %>
   </ul>
 </div>
 
+<% content_for :footer do %>
+<script>
+  var pagination = new PaginationView({
+    el: $(".pagination"),
+    page_count: <%=@page_count%>,
+    current_page: <%=@page_id%>,
+    page_container: "ul",
+    page_item_tmpl: "<li class='{{=selected}}'><a href='/e_books/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>"  
+  });
+</script>
+<% end %>
