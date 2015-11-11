@@ -13,10 +13,7 @@
 <a href='http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&AllianceID=295804&sid=758273&ouid=&app=0102F00&jumpUrl=http://www.ctrip.com' target='_blank' ><img src='http://pages.ctrip.com/amd/2014/1/3/qz/qu960x80.jpg' border='0' /></a>
 </div>
 
-<div class="pagination pagination-right">
-  <ul>
-  </ul>
-</div>
+<div class="pagination center"><ul></ul></div>
 
 <% content_for :footer do %>
 <script>
@@ -24,8 +21,11 @@
     el: $(".pagination"),
     page_count: <%=@page_count%>,
     current_page: <%=@page_id%>,
+    max_page_item: 12,
     page_container: "ul",
-    page_item_tmpl: "<li class='{{=selected}}'><a href='/e_books/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>"  
+    page_item_tmpl: "<li class='{{=selected}}'><a href='/e_books/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>",
+    page_item_placeholder_tmpl: "<li class='disabled'><a>...</a></li>",
+    page_item_label_tmpl: "<li><a href='/e_books/page/{{=page_index}}'>{{=page_label}}</a></li>",
   });
 </script>
 <% end %>
