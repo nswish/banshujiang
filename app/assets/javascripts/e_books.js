@@ -3,15 +3,22 @@
       interpolate: /\{\{=(.+?)\}\}/g
   };
 
+  var PaginationModel = Backbone.Model.extend({
+    initialize: function(attr){
+      this.set("current_page_no", attr.current_page_no || 1);
+      this.set("page_count", attr.page_count || 1);
+    }
+  });
+
   var PaginationView = Backbone.View.extend({
     initialize: function(attr){
-      this.page_count = attr.page_count || 0;
-      this.current_page = attr.current_page || 0;
+      this.max_page_item = attr.max_page_item || 10;
       this.page_item_tmpl = attr.page_item_tmpl || "";
       this.$page_container = this.$el.find(attr.page_container);
-      this.max_page_item = attr.max_page_item || 10;
       this.page_item_placeholder_tmpl = attr.page_item_placeholder_tmpl || "";
       this.page_item_label_tmpl = attr.page_item_label_tmpl || "";
+
+      this.listenTo(this.model, "change:current_page_no change:page_count", this.render);
 
       this.render();
     },
@@ -20,20 +27,20 @@
       var self = this;
       var tmpl = _.template(this.page_item_tmpl);
       var page_item_label_tmpl = _.template(this.page_item_label_tmpl);
-      var pages = _range(this.page_count, this.current_page, this.max_page_item);
+      var pages = _range(this.model.get("page_count"), this.model.get("current_page_no"), this.max_page_item);
 
       this.$page_container.empty();
 
       _.each(pages, function(index){
         self.$page_container.append(tmpl({
           page_index: index, 
-          selected: self.current_page === index ? "active" : ""
+          selected: self.model.get("current_page_no") === index ? "active" : ""
         }));
       });
 
       if(pages[0] > 1) {
         self.$page_container.prepend(this.page_item_placeholder_tmpl).prepend(page_item_label_tmpl({
-          page_index: this.current_page - 1,
+          page_index: this.model.get("current_page_no") - 1,
           page_label: '上一页'
         })).prepend(page_item_label_tmpl({
           page_index: 1,
@@ -41,12 +48,12 @@
         }));
       }
 
-      if(pages[pages.length - 1] < this.page_count) {
+      if(pages[pages.length - 1] < this.model.get("page_count")) {
         self.$page_container.append(this.page_item_placeholder_tmpl).append(page_item_label_tmpl({
-          page_index: this.current_page + 1,
+          page_index: this.model.get("current_page_no") + 1,
           page_label: '下一页'
         })).append(page_item_label_tmpl({
-          page_index: this.page_count,
+          page_index: this.model.get("page_count"),
           page_label: '最旧'
         }));
       }
@@ -75,4 +82,5 @@
   }
 
   window.PaginationView = PaginationView;
+  window.PaginationModel = PaginationModel;
 })(Backbone, jQuery, _);

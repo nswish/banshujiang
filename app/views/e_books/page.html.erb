@@ -17,15 +17,19 @@
 
 <% content_for :footer do %>
 <script>
-  var pagination = new PaginationView({
+  var paginationModel = new PaginationModel({
+    current_page_no: <%=@page_id%>,
+    page_count: <%=@page_count%>
+  });
+
+  var paginationView = new PaginationView({
     el: $(".pagination"),
-    page_count: <%=@page_count%>,
-    current_page: <%=@page_id%>,
-    max_page_item: 10,
+    model: paginationModel,
     page_container: "ul",
     page_item_tmpl: "<li class='{{=selected}}'><a href='/e_books/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>",
     page_item_placeholder_tmpl: "<li class='disabled'><a>...</a></li>",
     page_item_label_tmpl: "<li><a href='/e_books/page/{{=page_index}}'>{{=page_label}}</a></li>",
   });
+
 </script>
 <% end %>
