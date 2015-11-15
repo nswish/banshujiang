@@ -20,7 +20,7 @@
       var self = this;
       var tmpl = _.template(this.page_item_tmpl);
       var page_item_label_tmpl = _.template(this.page_item_label_tmpl);
-      var pages = _range(this.page_count, this.current_page, 10);
+      var pages = _range(this.page_count, this.current_page, this.max_page_item);
 
       this.$page_container.empty();
 

@@ -21,7 +21,7 @@
     el: $(".pagination"),
     page_count: <%=@page_count%>,
     current_page: <%=@page_id%>,
-    max_page_item: 12,
+    max_page_item: 10,
     page_container: "ul",
     page_item_tmpl: "<li class='{{=selected}}'><a href='/e_books/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>",
     page_item_placeholder_tmpl: "<li class='disabled'><a>...</a></li>",
