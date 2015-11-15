@@ -106,10 +106,14 @@ class EBooksController < ApplicationController
     remote_ebook_data = JSON.load res.body
     ebook_data = JSON.load ebook.full_data.to_json
 
-    remote_ebook_data['ebook'].delete 'download_count'
-    ebook_data['ebook'].delete 'download_count'
+    if remote_ebook_data['ebook'] then
+      remote_ebook_data['ebook'].delete 'download_count'
+      ebook_data['ebook'].delete 'download_count'
 
-    render json: { status: !ebook_data.eql?(remote_ebook_data) }
+      render json: { status: !ebook_data.eql?(remote_ebook_data) }
+    else
+      render json: { status: true }
+    end
   end
 
   def search
