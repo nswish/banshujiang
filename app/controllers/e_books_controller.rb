@@ -26,7 +26,7 @@ class EBooksController < ApplicationController
     offset = (@page_id - 1) * LIMIT_PER_PAGE
 
     @title = "第#{@page_id}页"
-    @e_books = EBook.order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
+    @e_books = EBook.order('id desc').limit(LIMIT_PER_PAGE).offset(offset)
     @page_count = (EBook.count / LIMIT_PER_PAGE.to_f).ceil
   end
 
@@ -163,9 +163,13 @@ class EBooksController < ApplicationController
           ebook = EBook.new
         end
 
+        puts in_ebook.inspect
+
         in_ebook.each do |attr|
           ebook[attr[0]] = attr[1]
         end
+
+        puts ebook.inspect
 
         unless ebook.save then raise ebook.errors.messages[:name] end
 
