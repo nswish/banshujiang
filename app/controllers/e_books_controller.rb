@@ -180,7 +180,7 @@ class EBooksController < ApplicationController
           end
 
           in_ebook_attr.each do |attr|
-            ebookattr[attr[0]] = attr[1]
+            ebookattr.send "#{attr[0]}=", attr[1]
           end
 
           unless ebookattr.save then raise ebookattr.errors.messages[:name] end
@@ -195,7 +195,7 @@ class EBooksController < ApplicationController
           end
 
           in_ebook_webstorage_link.each do |attr|
-            link[attr[0]] = attr[1]
+            link.send "#{attr[0]}=", attr[1]
           end
 
           unless link.save then raise link.errors.messages[:name] end
