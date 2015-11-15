@@ -159,17 +159,7 @@ class EBooksController < ApplicationController
       ActiveRecord::Base.transaction do
         
         # ebook
-        if EBook.exists? id then
-          ebook = EBook.find id
-        else
-          ebook = EBook.new
-        end
-
-        in_ebook.each do |attr|
-          ebook.send "#{attr[0]}=", attr[1]
-        end
-
-        unless ebook.save then raise ebook.errors.messages[:name] end
+        _hashToModel(in_ebook, EBook)
 
         # ebook_attrs
         in_ebook_attrs.each do |in_ebook_attr|
@@ -209,6 +199,18 @@ class EBooksController < ApplicationController
   end
     
   private
+  def _hashToModel(hash, model)
+    id = hash[:id]
+      
+    inst = model.exists?(id) ? model.find(id) : model.new
+
+    hash.each do |attr|
+      inst.send "#{attr[0]}=", attr[1]
+    end
+
+    unless inst.save then raise inst.errors.messages[:name] end
+  end
+  
   def _sitemap_rss
     require 'rss'
     the_rss = RSS::Maker::RSS20.make do |maker|
