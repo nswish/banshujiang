@@ -105,7 +105,9 @@ class EBooksController < ApplicationController
 
     remote_ebook_data = JSON.load res.body
     ebook_data = JSON.load ebook.full_data.to_json
-    puts remote_ebook_data, ebook_data, ebook_data.eql?(remote_ebook_data)
+
+    remote_ebook_data['ebook'].delete 'download_count'
+    ebook_data['ebook'].delete 'download_count'
 
     render json: { status: !ebook_data.eql?(remote_ebook_data) }
   end
@@ -163,13 +165,9 @@ class EBooksController < ApplicationController
           ebook = EBook.new
         end
 
-        puts in_ebook.inspect
-
         in_ebook.each do |attr|
-          ebook[attr[0]] = attr[1]
+          ebook.send "#{attr[0]}=", attr[1]
         end
-
-        puts ebook.inspect
 
         unless ebook.save then raise ebook.errors.messages[:name] end
 
