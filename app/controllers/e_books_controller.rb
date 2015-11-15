@@ -153,7 +153,6 @@ class EBooksController < ApplicationController
     in_ebook = params[:ebook]
     in_ebook_attrs = params[:ebook_attrs] || []
     in_ebook_webstorage_links = params[:ebook_webstorage_links] || []
-    id = in_ebook['id']
 
     begin
       ActiveRecord::Base.transaction do
@@ -163,34 +162,14 @@ class EBooksController < ApplicationController
 
         # ebook_attrs
         in_ebook_attrs.each do |in_ebook_attr|
-          if EBookAttr.exists? in_ebook_attr[:id] then
-            ebookattr = EBookAttr.find in_ebook_attr[:id]
-          else
-            ebookattr = EBookAttr.new
-          end
-
-          in_ebook_attr.each do |attr|
-            ebookattr.send "#{attr[0]}=", attr[1]
-          end
-
-          unless ebookattr.save then raise ebookattr.errors.messages[:name] end
+          _hashToModel(in_ebook_attr, EBookAttr)
         end
         
         # ebook_webstorage_links
         in_ebook_webstorage_links.each do |in_ebook_webstorage_link|
-          if WebstorageLink.exists? in_ebook_webstorage_link[:id] then
-            link = WebstorageLink.find in_ebook_webstorage_link[:id]
-          else
-            link = WebstorageLink.new
-          end
-
-          in_ebook_webstorage_link.each do |attr|
-            link.send "#{attr[0]}=", attr[1]
-          end
-
-          unless link.save then raise link.errors.messages[:name] end
+          _hashToModel(in_ebook_webstorage_link, WebstorageLink)
         end
-       end
+      end
 
       render :inline=>'ok'
     rescue Exception=>ex
