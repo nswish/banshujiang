@@ -38,6 +38,7 @@ class EBooksController < ApplicationController
       format.html { 
         @e_book = EBook.find(id)
         @title = view_context.standard_file_name @e_book
+        @keyword = @e_book.keyword
       }
       format.json {
         render json: EBook.exists?(id) ? EBook.find(id).full_data : {}

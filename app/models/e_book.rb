@@ -40,6 +40,10 @@ class EBook < ActiveRecord::Base
     return "点击下载. 语言: #{self.language}; 格式: #{self.format}; 出版年份: #{self.publish_year}; " + attr_desc + " 作者: #{self.author};"
   end
 
+  def keyword
+    [self.name, 'pdf', 'ebook', '电子书', '搬书匠'].join(", ")
+  end
+
   def self.search(search_words)
     require 'rmmseg'
 
