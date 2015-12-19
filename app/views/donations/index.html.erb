@@ -1,5 +1,13 @@
 <h1>Listing donations</h1>
 
+<div style="margin: 15px 0;">
+  总金额: <%=@sum %> &nbsp;
+  <%= link_to 'New Donation', new_donation_path %>
+</div>
+
+<div>
+</div>
+
 <table>
   <tr>
     <th>Name</th>
@@ -24,4 +32,3 @@
 
 <br />
 
-<%= link_to 'New Donation', new_donation_path %>

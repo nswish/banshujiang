@@ -3,6 +3,7 @@ class DonationsController < ApplicationController
   # GET /donations.json
   def index
     @donations = Donation.order('created_at desc').all
+    @sum = Donation.sum('amount')
 
     respond_to do |format|
       format.html # index.html.erb
