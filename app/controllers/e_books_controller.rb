@@ -10,7 +10,7 @@ class EBooksController < ApplicationController
 
   # GET /e_books
   def index
-    @latest_10_books = EBook.order('id desc').limit(8).all
+    @latest_10_books = EBook.order('id desc').limit(8).all.as_json
     @download_10_books = EBook.order('download_count desc').limit(8).all
   end
 
