@@ -27,17 +27,6 @@
         <li><a href="/statistics/index"><i class="icon-list-alt"></i> 统计</a></li>
       </ul>
       <% end %>
-      <% if session[:user_id] then %>
-      <ul class="nav pull-right">
-        <li>
-          <% user = User.find session[:user_id] %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <%=user.name%></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%=link_to '退出', url_for(:controller=>:users, :action=>:logout), :method=>'PUT'%></li>
-          </ul>
-        </li>
-      </ul>
-      <% end %>
       <ul class="nav pull-right">
         <li><div style="margin-top:8px;"><wb:follow-button uid="3198737743" type="gray_2" width="120" height="24" ></wb:follow-button></div></li>
       </ul>
