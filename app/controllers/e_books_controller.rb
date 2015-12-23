@@ -12,14 +12,14 @@ class EBooksController < ApplicationController
 
   # GET /e_books
   def index
-    @latest_10_books = Redis.current.get('latest_8_books')
-    if !@latest_10_books then
-      @latest_10_books = EBook.order('id desc').limit(8).all.to_json
-      Redis.current.set('latest_8_books', @latest_10_books)
-      Redis.current.expire('latest_8_books', 3600)
-    end
-    @latest_10_books = JSON.load @latest_10_books
+    #@latest_10_books = Redis.current.get('latest_8_books')
+    #if !@latest_10_books then
+    #  @latest_10_books = EBook.order('id desc').limit(8).all.to_json
+    #  Redis.current.set('latest_8_books', @latest_10_books)
+    #  Redis.current.expire('latest_8_books', 3600)
+    #end
 
+    @latest_10_books = EBook.order('id desc').limit(8).all.as_json
     @download_10_books = EBook.order('download_count desc').limit(8).all
   end
 
