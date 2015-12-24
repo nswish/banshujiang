@@ -7,7 +7,7 @@ class SupportController < ApplicationController
       if donation.date < '2015.07.13 00:00' then
         donation.name = donation.name[0...-2] + '*' + donation.name[-1]
       else
-        donation.name = donation.name + '(支付宝名)'
+        donation.name = donation.name
       end
 
       donation
