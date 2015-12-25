@@ -66,14 +66,26 @@ class EBook < ActiveRecord::Base
     # 全部匹配
     matched_all_ids = []
     TextForSearchCache.each do |item|
-      matched_words = search_word_array.select { |word| Regexp.new('\b' + word.downcase + '\b') =~ item[:text] }
+      matched_words = search_word_array.select { |word|
+        if word.length == word.bytes.count then
+          Regexp.new('\b' + word.downcase + '\b') =~ item[:text] 
+        else
+          Regexp.new(word.downcase) =~ item[:text] 
+        end
+      }
       matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
 
     # 部分匹配
     matched_parts_ids = []
     TextForSearchCache.each do |item|
-      matched_words = search_word_array.select { |word| Regexp.new('\b' + word.downcase + '\b') =~ item[:text] }
+      matched_words = search_word_array.select { |word| 
+        if word.length == word.bytes.count then
+          Regexp.new('\b' + word.downcase + '\b') =~ item[:text] 
+        else
+          Regexp.new(word.downcase) =~ item[:text] 
+        end
+      }
       matched_parts_ids << item[:id] if matched_words.length > 0
     end
 
