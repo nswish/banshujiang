@@ -66,14 +66,14 @@ class EBook < ActiveRecord::Base
     # 全部匹配
     matched_all_ids = []
     TextForSearchCache.each do |item|
-      matched_words = search_word_array.select { |word| item[:text][word] }
-            matched_all_ids << item[:id] if matched_words.length == search_word_array.length
+      matched_words = search_word_array.select { |word| Regexp.new('\b' + word.downcase + '\b') =~ item[:text] }
+      matched_all_ids << item[:id] if matched_words.length == search_word_array.length
     end
 
     # 部分匹配
     matched_parts_ids = []
     TextForSearchCache.each do |item|
-      matched_words = search_word_array.select { |word| item[:text][word] }
+      matched_words = search_word_array.select { |word| Regexp.new('\b' + word.downcase + '\b') =~ item[:text] }
       matched_parts_ids << item[:id] if matched_words.length > 0
     end
 
@@ -111,11 +111,8 @@ class EBook < ActiveRecord::Base
   end
 
   def self.load_text_for_search_cache
-    EBook.includes(:e_book_attrs).order('id desc').all.collect do |ebook|
-      attrs = ebook.e_book_attrs.collect do |attr|
-        attr.value.downcase
-      end
-      {:id=>ebook.id, :text=>"#{ebook.name.downcase} #{attrs.join ' '}"}
+    EBook.all.collect do |ebook|
+      {:id=>ebook.id, :text=>"#{ebook.name.downcase}"}
     end
   end
 
