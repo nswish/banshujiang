@@ -172,7 +172,7 @@ class EBooksController < ApplicationController
       ActiveRecord::Base.transaction do
         
         # ebook
-        in_ebook.delete[:download_count]
+        in_ebook.delete 'download_count'
         _hashToModel(in_ebook, EBook)
 
         # ebook_attrs
