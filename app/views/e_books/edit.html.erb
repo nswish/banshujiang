@@ -1,6 +1,10 @@
 <% content_for(:footer) do%>
   <script>
     (function(){
+      $("#ebook_fullname").hover(function(){
+        this.select();
+      });
+
       $("#ebook_sync").click(function(){
         var $this = $(this),
             $self = $this;
@@ -57,7 +61,7 @@
   <%=link_to '新增一本', new_e_book_path %> 
   <a id="ebook_sync" style="display:none;" href="javascript:void(0);">| 同步</a>
 </div>
-<input type="text" class="span6" value="[<%=site_name%>#<%=@e_book.id%>]<%=standard_file_name @e_book%>" onclick="select()"></input>
+<input id="ebook_fullname" type="text" class="span6" value="[<%=site_name%>#<%=@e_book.id%>]<%=standard_file_name @e_book%>" onclick="select()"></input>
 <div style="color:blue;"><%= notice %></div>
 <%= render 'form' %>
 
