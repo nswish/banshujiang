@@ -12,6 +12,22 @@
       }).focus(function(){
         $(this).css("border", "");
       });
+
+      function capitalize(str) {
+        return _.map(str.toLowerCase().split(/\s+/), function(str){ 
+          preps=['for','in','with','by','at','on','and','of'];if(_.indexOf(preps, str) > -1) return str; else return str[0].toUpperCase()+str.slice(1);
+        }).join(" ");
+      }
+
+      $("#e_book_name_convert").click(function(){
+        var $ebookname = $("#e_book_name");
+        $ebookname.val(capitalize($ebookname.val()));
+      });
+
+      $("#e_book_author_convert").click(function(){
+        var $ebookauthor = $("#e_book_author");
+        $ebookauthor.val(capitalize($ebookauthor.val()));
+      });
     });
   </script>
 <% end %>
@@ -33,10 +49,12 @@
     <div class="field">
       <%= f.label :name, '书籍名称'%>
       <%= f.text_field :name, :class=>'span5' %>
+      <a id="e_book_name_convert" href="javascript:;">转换</a>
     </div>
     <div class="field">
       <%= f.label :author, '作者' %>
       <%= f.text_field :author, :class=>'span5' %>
+      <a id="e_book_author_convert" href="javascript:;">转换</a>
     </div>
     <div class="field">
       <%= f.label :publish_year, '出版年份' %>
