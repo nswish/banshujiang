@@ -7,19 +7,19 @@ class ValueSetHeader < ActiveRecord::Base
   has_many :value_set_bodies
 
   def name_value_array
-    self.value_set_bodies.collect do |item|
+    self.value_set_bodies.order('value').collect do |item|
       [ item.name, item.value ]
     end
   end
 
   def value_array
-    self.value_set_bodies.collect do |item|
+    self.value_set_bodies.order('value').collect do |item|
       [ item.value ]
     end
   end
 
   def id_value_array
-    self.value_set_bodies.collect do |item|
+    self.value_set_bodies.order('value').collect do |item|
       [ item.id, item.value ]
     end
   end
