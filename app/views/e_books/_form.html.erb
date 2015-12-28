@@ -15,7 +15,7 @@
 
       function capitalize(str) {
         return _.map(str.toLowerCase().split(/\s+/), function(str){ 
-          preps=['for','in','with','by','at','on','and','of'];if(_.indexOf(preps, str) > -1) return str; else return str[0].toUpperCase()+str.slice(1);
+          preps=['for','in','with','by','at','on','and','of', 'from', 'a'];if(_.indexOf(preps, str) > -1) return str; else return str[0].toUpperCase()+str.slice(1);
         }).join(" ");
       }
 
