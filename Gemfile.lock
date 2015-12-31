@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
@@ -57,7 +57,7 @@ GEM
     mime-types (1.23)
     minitest (5.0.5)
     multi_json (1.7.7)
-    mysql2 (0.3.11)
+    mysql2 (0.3.17)
     polyglot (0.3.3)
     qiniu (6.2.4)
       json (~> 1.7)
@@ -92,7 +92,6 @@ GEM
     redis (3.0.7)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rmagick (2.13.2)
     rmmseg-cpp (0.2.9)
     ruby-hmac (0.4.0)
     sass (3.2.9)
@@ -129,11 +128,10 @@ DEPENDENCIES
   httpclient (= 2.6.0.1)
   jquery-rails
   minitest
-  mysql2
+  mysql2 (= 0.3.17)
   qiniu (~> 6.2.1)
   rails (= 3.2.13)
   redis
-  rmagick (~> 2.13.1)
   rmmseg-cpp (~> 0.2.9)
   sass-rails (~> 3.2.3)
   sqlite3
@@ -142,4 +140,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

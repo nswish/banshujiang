@@ -1,13 +1,13 @@
 #source 'http://mirror1.prod.rhcloud.com/mirror/ruby/'
-source 'https://rubygems.org'
-#source 'http://ruby.taobao.org'
+#source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.17'
 gem 'sqlite3'
 gem 'redis'
 
@@ -37,7 +37,7 @@ gem 'thor', '= 0.14.6'
 # This needs to be installed so we can run Rails console on OpenShift directly
 gem 'minitest'
 
-gem "rmagick", "~> 2.13.1"
+#gem "rmagick", "~> 2.13.1"
 gem "rmmseg-cpp", "~> 0.2.9"
 
 gem "thin"
