@@ -17,3 +17,6 @@
 public/assets/
 .sass-cache/
 *.out
+
+# Ignore .idea
+.idea
