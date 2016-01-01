@@ -3,9 +3,6 @@ class EBook < ActiveRecord::Base
   require 'imexportable'
   extend ImExportable
 
-  require 'RMagick'
-  include Magick
-
   ### attributes
   attr_accessible :author, :format, :image_large_file, :image_small, :language, :name, :publish_year, :download_count, :list_id
 
@@ -136,13 +133,15 @@ class EBook < ActiveRecord::Base
 
   private
   def save_upload_image_large
+    require 'httpclient'
+
     if @file_data
       # if self.image_large has value then test the file exist? and delete it
       unless self.image_large.blank?
-        file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+        file_path_large = File.expand_path("../../../public/#{self.image_large}", __FILE__)
         file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
-        File::delete file_path if File::file? file_path
+        File::delete file_path_large if File::file? file_path_large
         File::delete file_path_small if File::file? file_path_small
       end
 
@@ -151,18 +150,26 @@ class EBook < ActiveRecord::Base
       self.image_large = "/#{IMAGE_DIR}/#{id}.#{filename_ext}" 
       self.image_small = "/#{IMAGE_DIR}/#{id}s.#{filename_ext}" 
 
-      file_path = File.expand_path("../../../public/#{self.image_large}", __FILE__)
+      file_path = File.expand_path("../../../public/#{self.image_large}r", __FILE__)
+      file_path_large = File.expand_path("../../../public/#{self.image_large}", __FILE__)
       file_path_small = File.expand_path("../../../public/#{self.image_small}", __FILE__)
 
       File.open(file_path, 'wb') do |f|
         f.write(@file_data.read)
       end
 
-      image_file = ImageList.new(file_path)
-      image_file.resize(420,560).write(file_path)
-      image_file.resize(160,213).write(file_path_small)
+      clnt = HTTPClient.new
+      File.open(file_path) do |file|
+        res = clnt.post('http://www.jiani.info:8083', :body=>{:upload=>file, :size=>'420x560'})
+        File.binwrite file_path_large, res.body
 
-      if upload_to_qiniu file_path, "#{id}.#{filename_ext}" then
+        file.seek 0 # reset file pointer to 0 postion
+
+        res = clnt.post('http://www.jiani.info:8083', :body=>{:upload=>file, :size=>'160x213'})
+        File.binwrite file_path_small, res.body
+      end
+
+      if upload_to_qiniu file_path_large, "#{id}.#{filename_ext}" then
         self.image_large = "http://#{Rails.env == 'production' ? 'imgebook' : 'testebook'}.qiniudn.com/#{id}.#{filename_ext}"
       end
 
