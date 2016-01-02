@@ -1,19 +1,13 @@
 <br/>
 <% @e_books.each_with_index do |e_book, index| %>
-	<%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
+	<%= render :partial => 'single_small', :locals => {:e_book => e_book, :index=>index} %>
 
   <% if index < @e_books.size-1 then %>
     <br />
   <% end %>
 <% end %>
 
-<br />
-
-<div class="center">
-<a href='http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&AllianceID=295804&sid=758273&ouid=&app=0102F00&jumpUrl=http://www.ctrip.com' target='_blank' ><img src='http://pages.ctrip.com/amd/2014/1/3/qz/qu960x80.jpg' border='0' /></a>
-</div>
-
-<div class="pagination center"><ul></ul></div>
+<div class="pagination center" style="margin-top:25px;"><ul></ul></div>
 
 <% content_for :footer do %>
 <script>

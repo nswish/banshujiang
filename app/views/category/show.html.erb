@@ -1,6 +1,6 @@
 <br />
 <% @e_books.each_with_index do |e_book, index| %>
-  <%= render :partial => 'single', :locals => {:e_book => e_book, :index=>index} %>
+  <%= render :partial => 'single_small', :locals => {:e_book => e_book, :index=>index} %>
   
   <% if index == 2 %>
     <br />
@@ -19,8 +19,7 @@
   <% end %>
 <% end %>
 
-<div class="pagination center"><ul></ul></div>
-
+<div class="pagination center" style="margin-top:25px;"><ul></ul></div>
 
 <% content_for :footer do %>
 <script>
