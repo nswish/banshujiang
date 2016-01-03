@@ -100,7 +100,7 @@ class WebstorageLinksController < ApplicationController
     @link = WebstorageLink.find params[:id]
 
     ebook = EBook.find params[:e_book_id] 
-    ebook.download_count = ebook.download_count + 1
+    ebook.download_count = (ebook.download_count || 0) + 1
     ebook.save
     
     # 记录客户端下载时间
