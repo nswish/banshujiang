@@ -120,7 +120,7 @@ class EBooksController < ApplicationController
       remote_ebook_data['ebook'].delete 'download_count'
       ebook_data['ebook'].delete 'download_count'
 
-      render json: { status: !ebook_data.eql?(remote_ebook_data) }
+      render json: { status: !ebook_data.eql?(remote_ebook_data), ebook: ebook_data, remote_ebook: remote_ebook_data }
     else
       render json: { status: true }
     end

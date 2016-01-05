@@ -160,12 +160,12 @@ class EBook < ActiveRecord::Base
 
       clnt = HTTPClient.new
       File.open(file_path) do |file|
-        res = clnt.post('http://www.jiani.info:8083', :body=>{:upload=>file, :size=>'420x560'})
+        res = clnt.post('http://radxa.jiani.info:8083', :body=>{:upload=>file, :size=>'420x560'})
         File.binwrite file_path_large, res.body
 
         file.seek 0 # reset file pointer to 0 postion
 
-        res = clnt.post('http://www.jiani.info:8083', :body=>{:upload=>file, :size=>'160x213'})
+        res = clnt.post('http://radxa.jiani.info:8083', :body=>{:upload=>file, :size=>'160x213'})
         File.binwrite file_path_small, res.body
       end
 
