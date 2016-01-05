@@ -56,7 +56,13 @@ class WebstorageLinksController < ApplicationController
   def show_to_link
     @e_book = EBook.find params[:e_book_id]
     @title = view_context.standard_file_name(@e_book) + '下载链接'
-  
+
+    # 如果没有引用地址或是生产环境的引用地址的url不包含jiani.info,那么一律跳转到详情页
+    if !request.referrer || (request.referrer =~ /jiani\.info/i) == nil && Rails.env == 'production' then
+      redirect_to @e_book
+      return
+    end
+
     # 按客户端屏蔽 显示
     if session[:download_time_array] && session[:download_time_array].length >= DOWNLOAD_COUNT_LIMIT then
       @remain_time = (session[:download_time_array].first - DOWNLOAD_HOUR_LIMIT.hours.ago) * 1000
