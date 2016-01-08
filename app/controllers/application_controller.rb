@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     return unless request.method == 'GET'
 
     if (request.env['SERVER_NAME'] =~ Regexp.new(Regexp.escape(NEW_DOMAIN), true)) == nil
+      puts "http://#{NEW_DOMAIN}#{request.fullpath}"
       redirect_to "http://#{NEW_DOMAIN}#{request.fullpath}", :status => :moved_permanently
     end
   end
