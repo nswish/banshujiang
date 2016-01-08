@@ -58,7 +58,7 @@ class WebstorageLinksController < ApplicationController
     @title = view_context.standard_file_name(@e_book) + '下载链接'
 
     # 如果没有引用地址或是生产环境的引用地址的url不包含jiani.info,那么一律跳转到详情页
-    if !request.referrer || (request.referrer =~ /jiani\.info/i) == nil && Rails.env == 'production' then
+    if !request.referrer || (request.referrer =~ /www\.banshujiang\.cn/i) == nil && Rails.env == 'production' then
       redirect_to @e_book
       return
     end
