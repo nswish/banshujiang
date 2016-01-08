@@ -17,10 +17,7 @@ class ApplicationController < ActionController::Base
 
   # 域名转移
 	def redirect_to_new_domain
-    puts request.env['SERVER_NAME']
-    puts Regexp.new(Regexp.escape(NEW_DOMAIN), true)
-    puts request.method == 'GET' and (request.env['SERVER_NAME'] =~ Regexp.new(Regexp.escape(NEW_DOMAIN), true)) == nil
-    if request.method == 'GET' and (request.env['SERVER_NAME'] =~ Regexp.new(Regexp.escape(NEW_DOMAIN), true)) == nil
+    if request.method == 'GET' && (request.env['SERVER_NAME'] =~ Regexp.new(Regexp.escape(NEW_DOMAIN), true)) == nil
       # redirect_to "http://#{NEW_DOMAIN}#{request.fullpath}", :status => :moved_permanently
     end
   end
