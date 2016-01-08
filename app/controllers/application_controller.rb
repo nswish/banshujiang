@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :check_and_redirect_to_new_domain
 	before_filter :check_session_expiration
 
 	private
@@ -11,4 +12,8 @@ class ApplicationController < ActionController::Base
 
 	def require_login
 	end
+
+	def check_and_redirect_to_new_domain
+    puts request.inspect
+  end
 end
