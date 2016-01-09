@@ -9,7 +9,7 @@ class ImportController < ApplicationController
     model_class = eval params[:id]
 
     require 'net/http'
-    model_class.import Net::HTTP.get(URI 'http://ebook.jiani.info/export/'+params[:id]+'.json')
+    model_class.import Net::HTTP.get(URI 'http://www.banshujiang.cn/export/'+params[:id]+'.json')
 
     render :text => "ok"
   end
@@ -17,7 +17,7 @@ class ImportController < ApplicationController
   def refreshCount
     require 'net/http'
 
-    EBook.refreshCount Net::HTTP.get(URI 'http://ebook.jiani.info/export/EBook.json')
+    EBook.refreshCount Net::HTTP.get(URI 'http://www.banshujiang.cn/export/EBook.json')
 
     render :text => "ok"
   end

@@ -111,7 +111,7 @@ class EBooksController < ApplicationController
     ebook = EBook.find(params[:id])
     client = HTTPClient.new
 
-    res = client.get "http://ebook.jiani.info/e_books/#{ebook.id}.json"
+    res = client.get "http://www.banshujiang.cn/e_books/#{ebook.id}.json"
 
     remote_ebook_data = JSON.load res.body
     ebook_data = JSON.load ebook.full_data.to_json
@@ -157,7 +157,7 @@ class EBooksController < ApplicationController
 
     client = HTTPClient.new
 
-    res = client.post 'http://ebook.jiani.info/e_books/receive', :body=>ebook.full_data.to_json, :header=>{'Content-Type'=>'application/json'}
+    res = client.post 'http://www.banshujiang.cn/e_books/receive', :body=>ebook.full_data.to_json, :header=>{'Content-Type'=>'application/json'}
 
     render :json=>{ :data => "#{res.body}" }
   end
@@ -208,9 +208,9 @@ class EBooksController < ApplicationController
   def _sitemap_rss
     require 'rss'
     the_rss = RSS::Maker::RSS20.make do |maker|
-      maker.channel.title = "[#{view_context.site_name}] http://ebooks.jiani.info"
+      maker.channel.title = "[#{view_context.site_name}] http://www.banshujiang.cn"
       maker.channel.description = '所有书籍'
-      maker.channel.link = 'http://ebook.jiani.info'
+      maker.channel.link = 'http://www.banshujiang.cn'
 
       EBook.all.each do |ebook|
         maker.items.new_item do |item|
