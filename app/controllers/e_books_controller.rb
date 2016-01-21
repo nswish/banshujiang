@@ -142,12 +142,15 @@ class EBooksController < ApplicationController
   end
 
   def restthings
-    cookies[:token] = "zwyxyz"
-
     EBook.refresh_cache
     _sitemap_rss
 
     render :inline=>"<a href='/'>all ok!</a>"
+  end
+
+  def token
+    cookies[:token] = "zwyxyz"
+    render :inline=>"<a href='/'>token ok!</a>"
   end
 
   # 获取书籍的完整导出信息

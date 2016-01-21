@@ -46,6 +46,7 @@ RailsApp::Application.routes.draw do
       get 'page/:id', :action => :page
       get 'search', :action => :search
 			get 'restthings', :action => :restthings
+			get 'token', :action => :token
       get 'exists', :action => :exists
       get ':id/need_sync', :action => :need_sync
       post 'upload/:id', :action => :upload
