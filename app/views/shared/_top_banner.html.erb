@@ -19,6 +19,13 @@
               </ul>
             </li>
             <% end %>
+            <li class="dropdown-submenu" >
+              <a class="category" tabindex="-1" href="javascript:void(0);">语言</a>
+              <ul class="dropdown-menu">
+                <li><%=link_to '中文', :controller=>:language, :action=>:show, :language=>'中文' %></li>
+                <li><%=link_to '英文', :controller=>:language, :action=>:show, :language=>'英文' %></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>

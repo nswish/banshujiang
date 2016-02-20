@@ -9,7 +9,6 @@ class CategoryController < ApplicationController
   end
 
   def page
-  puts params
     @page_id = if params[:id].to_i == 0 then 1 else params[:id].to_i end
 
     @title = "[#{params[:name]}]第#{@page_id}页"
@@ -21,7 +20,7 @@ class CategoryController < ApplicationController
       ebookattr.e_book_id
     end
 
-    @e_books = EBook.where(condition).order('created_at desc').limit(LIMIT_PER_PAGE).offset(offset)
+    @e_books = EBook.where(condition).order('id desc').limit(LIMIT_PER_PAGE).offset(offset)
 
     @page_count = (EBook.where(condition).count / LIMIT_PER_PAGE.to_f).ceil
 

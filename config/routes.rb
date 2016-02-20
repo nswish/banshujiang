@@ -15,6 +15,9 @@ RailsApp::Application.routes.draw do
   match 'category/:category/:name/bbs' => 'category#bbs'
   match 'category/:category/:name/page/:id' => 'category#page'
 
+  match 'language/:language' => 'language#show'
+  match 'language/:language/page/:id' => 'language#page'
+
   match 'support/pay' => 'support#show'
 
   match '/auth/:provider/callback' => 'users#index'

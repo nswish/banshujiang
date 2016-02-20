@@ -1,0 +1,15 @@
+<div class="row shadow-panel" style="margin-left:50px;margin-right:50px; position: relative;">
+	<div class="span2">
+		<%= image_tag e_book.image_small+"?imageView2/2/w/140/h/186/q/100", :class=>"left-img" %>
+	</div>
+  <div class="span8" style="padding: 10px 0 0 10px;">
+    <p class="nowrap-ellipsis"><span style="color:grey;">书名：</span><%=link_to "#{e_book.name}", e_book_url(e_book) %></p>
+    <p class="nowrap-ellipsis"><span style="color:grey;">作者：</span><%= e_book.author %></p>
+    <p><span style="color:grey;">语言：</span><%= e_book.language %></p>
+    <p><span style="color:grey;">出版社：</span><%= publisher = e_book.e_book_attrs.find do |x| true if x.attr_id == 1 end; publisher.value if publisher %></p>
+    <p><span style="color:grey;">出版年份：</span><%= e_book.publish_year %></p>
+  </div>
+  <div style="position:absolute; top: 0; right: 0;" class="immediate-download">
+    <%=link_to '立即下载', e_book_url(e_book) %>
+  </div>
+</div>

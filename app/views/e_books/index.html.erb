@@ -71,7 +71,18 @@
           </div>
         </div>
       </li>
-      <% end %>        
+      <% end %>
+      <li style="margin-bottom:5px;">
+        <div class="row" style="margin-left: -5px;">
+          <div class="span1" style="padding-top:5px;">语言</div>
+          <div class="span11">
+            <ul class="inline category">
+                <li><%=link_to '中文', :controller=>:language, :action=>:show, :language=>'中文' %></li>
+                <li><%=link_to '英文', :controller=>:language, :action=>:show, :language=>'英文' %></li>
+            </ul>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </div>

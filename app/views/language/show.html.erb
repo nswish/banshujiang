@@ -32,9 +32,9 @@
     model: model,
     el: $(".pagination"),
     page_container: "ul",
-    page_item_tmpl: "<li class='{{=selected}}'><a href='<%=url_for(:controller=>'category', :action=>'show')%>/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>",
+    page_item_tmpl: "<li class='{{=selected}}'><a href='<%=url_for(:controller=>'language', :action=>'show')%>/page/{{=page_index}}?<%=request.env['QUERY_STRING'] %>'>{{=page_index}}</a></li>",
     page_item_placeholder_tmpl: "<li class='disabled'><a>...</a></li>",
-    page_item_label_tmpl: "<li><a href='<%=url_for(:controller=>'category', :action=>'show')%>/page/{{=page_index}}'>{{=page_label}}</a></li>"
+    page_item_label_tmpl: "<li><a href='<%=url_for(:controller=>'language', :action=>'show')%>/page/{{=page_index}}'>{{=page_label}}</a></li>"
   });
 </script>
 <% end %>
