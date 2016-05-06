@@ -15,6 +15,10 @@
   <%= @donation.date %>
 </p>
 
+<p>
+  <b>Remark:</b>
+  <%= @donation.remark %>
+</p>
 
 <%= link_to 'Edit', edit_donation_path(@donation) %> |
 <%= link_to 'Back', donations_path %>

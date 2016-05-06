@@ -13,6 +13,7 @@
     <th>Name</th>
     <th>Amount</th>
     <th>Date</th>
+    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,6 +24,7 @@
     <td><%= donation.name %></td>
     <td><%= donation.amount %></td>
     <td><%= donation.date %></td>
+    <td><%= donation.remark %></td>
     <td><%= link_to 'Show', donation %></td>
     <td><%= link_to 'Edit', edit_donation_path(donation) %></td>
     <td><%= link_to 'Destroy', donation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
