@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151030051748) do
+ActiveRecord::Schema.define(:version => 20160506045519) do
 
   create_table "attrs", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20151030051748) do
     t.string   "date"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.string   "remark"
   end
 
   create_table "download_priviledges", :force => true do |t|
