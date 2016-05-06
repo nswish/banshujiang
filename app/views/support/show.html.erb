@@ -1,9 +1,9 @@
 <div style="height:25px;"></div>
-<div class="row shadow-panel" style="margin:0 auto;width:420px;">
-  <div class="span12" style="height:530px;width:420px;margin-left:0;text-align:center;">
+<div class="row shadow-panel" style="margin:0 auto;width:620px;">
+  <div class="span12" style="height:505px;width:620px;margin-left:0;text-align:center;">
     <h3 style="margin:35px 0 25px 0;">支付宝手机扫码捐助</h3>
     <img style="margin:0px;" src="http://imgebook.qiniudn.com/barcodepay.png" />
-    <pre style="margin:30px 20px;line-height:30px;color:grey;font-size:17px;font-weight:bold;">如果您喜欢我分享的电子书，并且愿意通过这个方式让我能喝上一杯咖啡作为鼓励，我在此表示十分的感谢！</pre>
+    <pre style="margin:30px 20px 10px;line-height:30px;color:grey;font-size:17px;font-weight:bold;">如果您喜欢我分享的电子书，并且愿意通过这个方式让我能喝上一杯咖啡作为鼓励，我在此表示十分的感谢！</pre>
   </div>
 
   <table class="table table-striped" style="margin-bottom:0;">
@@ -11,12 +11,18 @@
       <th style="padding-left:20px;">捐赠朋友姓名</th>
       <th>捐赠金额(RMB)</th>
       <th style="text-align:center;">捐赠时间</th>
+      <th style="text-align:center;">捐赠留言</th>
     </tr>
     <% @donations.each do |donation| %>
     <tr>
-      <td width="33%" style="color: #666;font-weight:bold;padding-left:20px;"><%=donation.name%></td>
-      <td width="33%" style='text-align:right; color:green; font-weight:bold; font-size:14px; padding-right:70px;'><%="%0.2f" % donation.amount%></td>
-      <td width="33%" style="color: #666;text-align:center;"><%=donation.date%></td>
+      <td width="20%" style="color: #666;font-weight:bold;padding-left:20px;"><%=donation.name%></td>
+      <td width="20%" class='da'><%="%0.2f" % donation.amount%></td>
+      <td width="23%" style="color: #666;text-align:center;"><%=donation.date%></td>
+      <td width="35%" style="color: #666;">
+        <% if donation.remark then %>
+          “<%=donation.remark%>”
+        <% end %>
+      </td>
     </tr>
     </tr>
     </tr>
