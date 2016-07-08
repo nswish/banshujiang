@@ -16,8 +16,15 @@ class CategoryController < ApplicationController
     offset = (@page_id - 1) * LIMIT_PER_PAGE
 
     condition = {}
-    condition[:id] = Attr.where(:name=>params[:category]).first.e_book_attrs.where(:value=>params[:name]).collect do |ebookattr|
-      ebookattr.e_book_id
+
+    if params[:category] == 'years' then
+      condition[:id] = EBook.where(:publish_year=>params[:name].to_i).collect do |ebook|
+        ebook.id
+      end
+    else
+      condition[:id] = Attr.where(:name=>params[:category]).first.e_book_attrs.where(:value=>params[:name]).collect do |ebookattr|
+        ebookattr.e_book_id
+      end
     end
 
     @e_books = EBook.where(condition).order('id desc').limit(LIMIT_PER_PAGE).offset(offset)

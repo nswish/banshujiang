@@ -83,6 +83,18 @@
           </div>
         </div>
       </li>
+      <li style="margin-bottom:5px;">
+        <div class="row" style="margin-left: -5px;">
+          <div class="span1" style="padding-top:5px;">年份</div>
+          <div class="span11">
+            <ul class="inline category">
+              <% EBook.select('publish_year').where('publish_year is not null').group('publish_year').order('publish_year desc').each do |item|%>
+                <li><%=link_to "#{item.publish_year}", :controller=>:category, :action=>:show, :category=>:years, :name=>item.publish_year %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
