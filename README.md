@@ -11,3 +11,9 @@
 ```
   rake db:migrate RAILS_ENV=production # 指定环境执行Migration
 ```
+
+###查询和修改数据表的自增字段
+```
+mysql> alter table e_books auto_increment = 1881;
+mysql> show table status where name = 'e_books';
+```
