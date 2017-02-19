@@ -41,7 +41,7 @@ RailsApp::Application.configure do
     :from_mail              =>  'nswish_ebook@163.com',
     :address                =>  'smtp.163.com',
     :port                   =>  25,
-    :domain                 =>  'ebook.jiani.info',
+    :domain                 =>  'www.banshujiang.cn',
     :user_name              =>  'nswish_ebook',
     :password               =>  'openshift',
     :authentication         =>  'plain',

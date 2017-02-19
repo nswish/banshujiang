@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
     http_referer = env["HTTP_REFERER"] ? env["HTTP_REFERER"] : " "
 
-    if http_referer =~ /localhost/ && Rails.env == "development" || http_referer =~ /ebook.jiani.info/ && Rails.env == 'production' then
+    if http_referer =~ /localhost/ && Rails.env == "development" || http_referer =~ /www.banshujiang.cn/ && Rails.env == 'production' then
       if flash[:referer].presence then
         flash.keep(:referer)
       else

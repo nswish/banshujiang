@@ -71,7 +71,7 @@ RailsApp::Application.configure do
     :from_mail              =>  'nswish.ebook@gmail.com',
     :address                =>  'smtp.gmail.com',
     :port                   =>  587,
-    :domain                 =>  'ebook.jiani.info',
+    :domain                 =>  'www.banshujiang.cn',
     :user_name              =>  'nswish.ebook',
     :password               =>  'openshift',
     :authentication         =>  'plain',
